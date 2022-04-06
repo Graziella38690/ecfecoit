@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs!{% endblock %}
+
+{% block body %}
+
+<table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+       
+        <th>Mails</th>
+        <th>Pseudo</th>
+        <th>Fisrtname</th>
+        <th>Lastname</th>
+        <th>Role</th>
+        <th>Actions</th>
+        </tr>
+            <tbody>
+                {% for user in user %}
+
+                <tr>
+                <th scope="row justify-content-center">
+                {{ user.email }} </th>
+                 <th scope="row justify-content-center">
+                {{ user.Pseudo }} </th>
+                  <th scope="row justify-content-center">
+                {{ user.Firstname }} </th>
+                <th scope="row justify-content-center">
+                {{ user.Lastname }} </th>
+                 <td>
+                {% for roles in user.roles %}
+                {% if roles == 'ROLE_TEACHERWAIT' %}
+                 Instructeur en attente
+                 {% endif %}
+                {% if roles == 'ROLE_TEACHER' %}
+                 Instructeur
+                {% endif %}
+                {% if roles == 'ROLE_LAERNING' %}
+                Apprenant
+     {% endif %}
+
+    {% endfor %}
+					
+                    </td>
+                   <td>
+                    <a href="{{ path('app_edit_user', {'id': user.id}) }}" class="btn btn-warning" role="button">Modifier</a>
+                    </td>
+			     </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endblock %}
