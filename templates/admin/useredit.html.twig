@@ -1,19 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier la mission{% endblock %}
+{% block title %}Modifier l'utilisateur{% endblock %}
 
 {% block body %}
-	<h1>Modifier l'utilisateur </h1>
-
-
-
-
-
- 
-	
 <div class="row justify-content-center">
 <a href="{{ path('app_list_user') }}" class="btn btn-success" role="button">Retour à la liste des utilisateurs</a>
 </div>
-	{{ include('/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+<div class="p-5">
+<div class="row">
+<div class="col">
+<h2>Fiche utilisateur de : </h2>
+</div>
+</div>
+{% for roles in user.roles %}
+{% if roles == 'ROLE_TEACHERWAIT'%}        
+<p>Prénom : {{ user.Firstname }}</p>
+<p>Nom : {{ user.Lastname }}</p>
+{% endif %}
+{% if roles == 'ROLE_TEACHER' %}        
+<p>Prénom : {{ user.Firstname }}</p>
+<p>Nom : {{ user.Lastname }}</p>
+{% endif %}
+{% if roles == 'ROLE_LAERNING' %}   
+<p>Pseudo : {{ user.Pseudo }}</p>
+
+{% endif %}
+{% endfor %}
+<p>Email : {{ user.Email }}</p>
+
+
+<h3>Modifier le rôle </h3>
+{{ include('/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
 {% endblock %}

@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpParser\Node\Expr\Cast\Int_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,11 +32,23 @@ public function listeuser(UserRepository $repository): Response
         'user'=> $user
     ]);
 }
+#[Route("/admin/profil/user/{id}", name:"app_profil_user")]
+ 
+public function profiluser(UserRepository $repository, int $id): Response
+{
+        $user = $repository -> findBy(['id' => $id]);
+    
+    return $this->render('admin/userprofil.html.twig', [
+        'user'=> $user
+    ]);
+}
+
+
 
 #[Route('/admin/edit/user/{id}', name:'app_edit_user', methods: ['GET', 'POST'])]
-    public function edituser(User $user, Request $request, EntityManagerInterface $manager ): Response 
+    public function edituser(User $user, Request $request, EntityManagerInterface $manager): Response 
     {
-        
+       
         
             $form = $this->createForm(UserType::class,$user);
             $form ->handleRequest($request);
@@ -52,8 +65,7 @@ public function listeuser(UserRepository $repository): Response
         }
 
             return $this ->render('admin/useredit.html.twig',[
-              'form' => $form->createView()
-          ]);
+                'user'=> $user, 'form' => $form->createView()]);
     }
 
 

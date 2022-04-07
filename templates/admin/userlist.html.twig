@@ -9,9 +9,6 @@
         <tr>
        
         <th>Mails</th>
-        <th>Pseudo</th>
-        <th>Fisrtname</th>
-        <th>Lastname</th>
         <th>Role</th>
         <th>Actions</th>
         </tr>
@@ -22,12 +19,7 @@
                 <th scope="row justify-content-center">
                 {{ user.email }} </th>
                  <th scope="row justify-content-center">
-                {{ user.Pseudo }} </th>
-                  <th scope="row justify-content-center">
-                {{ user.Firstname }} </th>
-                <th scope="row justify-content-center">
-                {{ user.Lastname }} </th>
-                 <td>
+               
                 {% for roles in user.roles %}
                 {% if roles == 'ROLE_TEACHERWAIT' %}
                  Instructeur en attente
@@ -44,6 +36,7 @@
                     </td>
                    <td>
                     <a href="{{ path('app_edit_user', {'id': user.id}) }}" class="btn btn-warning" role="button">Modifier</a>
+                    <a href="{{ path('app_profil_user', {'id': user.id}) }}" class="btn btn-warning" role="button">Détails</a>
                     </td>
 			     </tr>
                 {% endfor %}
