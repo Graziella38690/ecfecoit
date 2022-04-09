@@ -66,7 +66,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_wait');
         }
 
-        return $this->render('registration/teacherwait.html.twig', [
+        return $this->render('instructeur/teacherwait.html.twig', [
             'teacherForm' => $form->createView(),
         ]);
     }

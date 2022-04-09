@@ -36,7 +36,7 @@ security:
               
         ROLE_TEACHERWAIT:   ROLE_TEACHERWAIT
         ROLE_LEARNING:      ROLE_LAERNING
-        ROLE_TEACHER:       ROLE_LEARNING
+        ROLE_TEACHER:       ROLE_TEACHER
         ROLE_ADMIN:         ROLE_TEACHER
 
     # Easy way to control access for large sections of your site
