@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TrainingRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TrainingRepository::class)]
@@ -19,17 +21,24 @@ class Training
     #[ORM\Column(type: 'string', length: 255)]
     private $Description;
 
-    #[ORM\Column(type: 'date')]
-    private $creationdate;
 
     #[ORM\Column(type: 'text')]
     private $catchphrase;
 
-    #[ORM\ManyToOne(targetEntity: user::class, inversedBy: 'trainings')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'trainings')]
     private $Creatby;
 
-    #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'trainings')]
-    private $Section;
+ 
+    #[ORM\Column(type: 'date', nullable:true)]
+    private $Datecreate;
+
+    #[ORM\OneToMany(mappedBy: 'training', targetEntity: Section::class,orphanRemoval:true)]
+    private $sections;
+
+    public function __construct()
+    {
+        $this->sections = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,17 +69,7 @@ class Training
         return $this;
     }
 
-    public function getCreationdate(): ?\DateTimeInterface
-    {
-        return $this->creationdate;
-    }
-
-    public function setCreationdate(\DateTimeInterface $creationdate): self
-    {
-        $this->creationdate = $creationdate;
-
-        return $this;
-    }
+  
 
     public function getCatchphrase(): ?string
     {
@@ -96,14 +95,46 @@ class Training
         return $this;
     }
 
-    public function getSection(): ?Section
+  
+
+    public function getDatecreate(): ?\DateTimeInterface
     {
-        return $this->Section;
+        return $this->Datecreate;
     }
 
-    public function setSection(?Section $Section): self
+    public function setDatecreate(\DateTimeInterface $Datecreate): self
     {
-        $this->Section = $Section;
+        $this->Datecreate = $Datecreate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Section>
+     */
+    public function getSections(): Collection
+    {
+        return $this->sections;
+    }
+
+    public function addSection(Section $section): self
+    {
+        if (!$this->sections->contains($section)) {
+            $this->sections[] = $section;
+            $section->setTraining($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSection(Section $section): self
+    {
+        if ($this->sections->removeElement($section)) {
+            // set the owning side to null (unless already changed)
+            if ($section->getTraining() === $this) {
+                $section->setTraining(null);
+            }
+        }
 
         return $this;
     }

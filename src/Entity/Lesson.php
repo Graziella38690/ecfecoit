@@ -19,8 +19,10 @@ class Lesson
     #[ORM\Column(type: 'text')]
     private $textlesson;
 
-    #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'Lesson')]
-    private $Lesson;
+    #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'lessons')]
+    private $section;
+
+   
 
     public function getId(): ?int
     {
@@ -51,15 +53,17 @@ class Lesson
         return $this;
     }
 
-    public function getLesson(): ?Section
+    public function getSection(): ?Section
     {
-        return $this->Lesson;
+        return $this->section;
     }
 
-    public function setLesson(?Section $Lesson): self
+    public function setSection(?Section $section): self
     {
-        $this->Lesson = $Lesson;
+        $this->section = $section;
 
         return $this;
     }
+
+    
 }

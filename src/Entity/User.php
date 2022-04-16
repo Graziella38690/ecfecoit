@@ -47,6 +47,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'Creatby', targetEntity: Training::class)]
     private $trainings;
 
+    #[ORM\Column(type: 'date', nullable:true)]
+    private $Dateinscription;
+
+   
+
     public function __construct()
     {
         $this->trainings = new ArrayCollection();
@@ -208,6 +213,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $training->setCreatby(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateinscription(): ?\DateTimeInterface
+    {
+        return $this->Dateinscription;
+    }
+
+    public function setDateinscription(\DateTimeInterface $Dateinscription): self
+    {
+        $this->Dateinscription = $Dateinscription;
 
         return $this;
     }

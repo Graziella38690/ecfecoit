@@ -18,16 +18,21 @@ class Section
     #[ORM\Column(type: 'string', length: 255)]
     private $Title;
 
-    #[ORM\OneToMany(mappedBy: 'Section', targetEntity: Training::class)]
-    private $trainings;
+    
 
-    #[ORM\OneToMany(mappedBy: 'Lesson', targetEntity: Lesson::class)]
-    private $Lesson;
+    #[ORM\OneToMany(mappedBy: 'section', targetEntity: Lesson::class,orphanRemoval:true)]
+    private $lessons;
+
+    #[ORM\ManyToOne(targetEntity: Training::class, inversedBy: 'sections')]
+    private $training;
+
+   
 
     public function __construct()
     {
         $this->trainings = new ArrayCollection();
         $this->Lesson = new ArrayCollection();
+        $this->lessons = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -47,49 +52,21 @@ class Section
         return $this;
     }
 
-    /**
-     * @return Collection<int, Training>
-     */
-    public function getTrainings(): Collection
-    {
-        return $this->trainings;
-    }
-
-    public function addTraining(Training $training): self
-    {
-        if (!$this->trainings->contains($training)) {
-            $this->trainings[] = $training;
-            $training->setSection($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTraining(Training $training): self
-    {
-        if ($this->trainings->removeElement($training)) {
-            // set the owning side to null (unless already changed)
-            if ($training->getSection() === $this) {
-                $training->setSection(null);
-            }
-        }
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, Lesson>
      */
-    public function getLesson(): Collection
+    public function getLessons(): Collection
     {
-        return $this->Lesson;
+        return $this->lessons;
     }
 
     public function addLesson(Lesson $lesson): self
     {
-        if (!$this->Lesson->contains($lesson)) {
-            $this->Lesson[] = $lesson;
-            $lesson->setLesson($this);
+        if (!$this->lessons->contains($lesson)) {
+            $this->lessons[] = $lesson;
+            $lesson->setSection($this);
         }
 
         return $this;
@@ -97,13 +74,27 @@ class Section
 
     public function removeLesson(Lesson $lesson): self
     {
-        if ($this->Lesson->removeElement($lesson)) {
+        if ($this->lessons->removeElement($lesson)) {
             // set the owning side to null (unless already changed)
-            if ($lesson->getLesson() === $this) {
-                $lesson->setLesson(null);
+            if ($lesson->getSection() === $this) {
+                $lesson->setSection(null);
             }
         }
 
         return $this;
     }
+
+    public function getTraining(): ?Training
+    {
+        return $this->training;
+    }
+
+    public function setTraining(?Training $training): self
+    {
+        $this->training = $training;
+
+        return $this;
+    }
+   
+   
 }

@@ -15,19 +15,39 @@
                 <td> {{ user.email }} </td>
                 </tr>
                 <tr>
-                <th> Pseudo </th>
+                <th> {% for roles in user.roles %}
+                {% if roles == 'ROLE_LAERNING' %}
+                 Pseudo
                 <td> {{ user.Pseudo }} </td>
-                </tr>
-
-                <tr>
-                <th> Prenom </th>
+                 {% endif %}
+                {% if roles == 'ROLE_TEACHER' %}
+                 Prenom
                 <td> {{ user.Firstname }} </td>
+                </th>
                 </tr>
-    
-                <tr>
-                <th> Nom </th>
+                <th>nom</th>
                 <td> {{ user.Lastname }} </td>
                 </tr>
+                 {% endif %}
+                {% if roles == 'ROLE_TEACHERWAIT' %}
+                 Prenom
+                <td> {{ user.Firstname }} </td>
+                </th>
+                </tr>
+                <th>nom</th>
+                <td> {{ user.Lastname }} </td>
+                </tr>
+                 {% endif %}
+
+
+                 {% endfor %}
+
+                <tr>
+                <th> Inscription </th>
+                <td> {{ user.Dateinscription|date('d/m/Y')}}</td>
+                </tr>
+
+              
                 <tr>
                 <th> Rôles </th>
                 <td> {% for roles in user.roles %}
