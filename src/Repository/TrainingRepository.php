@@ -45,6 +45,20 @@ class TrainingRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+      * @return Training[] Returns an array of Formation objects
+      */
+   
+      public function findLastTraining()
+      {
+          return $this->createQueryBuilder('f')
+              ->orderBy('f.id', 'DESC')
+              ->setMaxResults(3)
+              ->getQuery()
+              ->getResult()
+          ;
+      }
+
     // /**
     //  * @return Training[] Returns an array of Training objects
     //  */

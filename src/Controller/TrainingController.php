@@ -1,31 +1,35 @@
 <?php
 
 namespace App\Controller;
-use App\Entity\Section;
+
 use App\Entity\Training;
-use App\Entity\User;
+
 use App\Form\TrainingType;
-use App\Repository\SectionRepository;
 use App\Repository\TrainingRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bridge\Doctrine\RegistryInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use PhpParser\ErrorHandler\Collecting;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 #[Route('/training')]
 class TrainingController extends AbstractController
 {
     #[Route('/', name: 'app_training_index', methods: ['GET'])]
-    public function index(TrainingRepository $trainingRepository): Response
-    {   $this->getUser();
+    public function index(Request $request,TrainingRepository $trainingRepository, PaginatorInterface $paginator): Response
+    {   
+        $Training = $trainingRepository->findAll();
+        $Training = $paginator->paginate(
+            $Training, 
+            $request->query->getInt('page', 1), 
+            limit:6
+        );
         
-        return $this->render('training/index.html.twig', [
-            'trainings' => $trainingRepository->findAll(),
+        return $this->render('training/index2.html.twig', [
+            'trainings' => $Training,
         ]);
     }
 

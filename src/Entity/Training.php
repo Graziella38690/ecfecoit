@@ -26,13 +26,14 @@ class Training
     private $catchphrase;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'trainings')]
+   
     private $Creatby;
 
  
     #[ORM\Column(type: 'date', nullable:true)]
     private $Datecreate;
 
-    #[ORM\OneToMany(mappedBy: 'training', targetEntity: Section::class,orphanRemoval:true)]
+    #[ORM\OneToMany(mappedBy: 'training', targetEntity: Section::class,orphanRemoval:true,cascade:['persist','remove'])]
     private $sections;
 
     public function __construct()

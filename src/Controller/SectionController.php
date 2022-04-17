@@ -42,8 +42,10 @@ class SectionController extends AbstractController
     #[Route('/{id}', name: 'app_section_show', methods: ['GET'])]
     public function show(Section $section): Response
     {
+        $lessons = $section->getLessons();
         return $this->render('section/show.html.twig', [
             'section' => $section,
+            array ('date' => $lessons)
         ]);
     }
 

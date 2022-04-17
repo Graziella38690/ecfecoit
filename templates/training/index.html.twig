@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Training index</h1>
 
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped justify-content-center">
         <thead>
             <tr>
                 <th>Title</th>
@@ -34,7 +34,14 @@
             </tr>
         {% endfor %}
         </tbody>
+         
     </table>
 
-    <a href="{{ path('app_training_new') }}">Create new</a>
+
+      {{ knp_pagination_render(trainings) }}
+      
+       
+        <div class="justify-content-center">
+    <a href="{{ path('app_training_new') }}"class="btn btn-success" role="button">Create new</a>
+    </div>
 {% endblock %}

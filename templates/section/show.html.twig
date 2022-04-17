@@ -17,8 +17,21 @@
             </tr>
             <tr>
                 <th>Training</th>
-                <td>{{ section.Title }}</td>
+                <td>{{ section.Training.Title }}</td>
             </tr>
+
+            <tr>
+              
+                <th> Leçon </th>
+                <td>
+                 {% for Lesson in section.lessons %}
+               <li> {{Lesson.Title}}</li>
+                {% endfor %}
+                
+                </td>
+           
+            </tr>
+
         </tbody>
     </table>
 

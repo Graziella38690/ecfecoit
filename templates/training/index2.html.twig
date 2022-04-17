@@ -1,0 +1,61 @@
+  {% extends 'base.html.twig' %}
+  
+  {% block title %}EcoIT{% endblock %}
+
+{% block body %}
+<main>
+  
+  <aside class="col-3">
+            <div class="row justify-content-center align-items-center">
+              <img class="col-8" >
+            </div>
+          </aside>
+        </section>
+        <section class="row justify-content-center">
+          <img class="col-8" >
+        </section>
+      </div>
+      <div class="container">
+        <section class="row justify-content-center">
+          <div class="col-12 actuformation">
+            <h4> Consulter nos {{trainings. getTotalItemCount }}  formations</h4>
+          </div>
+        </section>
+        <section class="row">
+             {% for training in trainings %}        
+          <div class="col-md-4 g-2 d-flex align-content-stretch flex-wrap ">
+              <div class="card article-formation">
+                  <div class="aligncenter">
+                     
+                               
+                  </div>
+                  <div class="card-body mb-2">
+                      <h5 class="card-title">{{ training.Title }}</h5>
+                      <p class="card-text">
+                      {{ training.catchphrase }}
+                      <br>
+                      <br>
+                      
+                      Publiée le : {{training.Datecreate|date('Y-m-d')}}
+                      </p>                    
+                  </div>
+                  <div class="card-footer d-flex flex-column">                    
+                      <button class="connectbtn ">
+                          {% if app.user %}
+                              <a href={{ path ('app_training_show',{id:training.Id})}}>Détails de la formation</a>
+                          {% else %}
+                              <a href={{ path ('app_register') }} >Détails de la formation</a>
+                          {% endif %}
+                      </button>                            
+                  </div>
+              </div>
+              
+          </div>   
+                              
+        {% endfor %}
+        </section>
+         {{ knp_pagination_render(trainings) }}       
+      </div>
+
+      
+      {% endblock %}

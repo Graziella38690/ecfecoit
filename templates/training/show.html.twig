@@ -28,17 +28,14 @@
                 <th>Datecreate</th>
                 <td>{{training.Datecreate|date('Y-m-d')}}</td>
             </tr>
-            <tr>
-                <th> Crée par </th>
-                <td> {{ training.Creatby.firstname}}  {{ training.Creatby.lastname}}</td>
-            </tr>
+         
          
             <tr>
               
                 <th> Section </th>
                 <td>
                  {% for section in training.sections %}
-               <li> {{section.title}}</li>
+               <li> {{section.Title}}</li>
                 {% endfor %}
                 
                 </td>

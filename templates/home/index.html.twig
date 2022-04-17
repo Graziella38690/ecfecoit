@@ -1,19 +1,127 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}EcoIT{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<main>
+      
+      <div class="container">
+        <section class="row justify-content-center align-items-center">
+          <aside class="col-3">
+            <div class="row justify-content-center">
+              <img class="col-8" >
+            </div>
+          </aside>
+          <h1 class="col-lg-12 justify-content-center ">Apprendre à coder facilement et devenir un développeur web eco-responsable !</h1>
+          <p class="col-lg-12 presentation">C’est un fait, la crise écologique est devenue une urgence majeure. La sixième extinction massive 
+            a déjà commencé et le changement climatique se fait de plus en plus ressentir au fil des années. 
+            Mais qu’en est-il d’internet ?<br>
+            En matière d’émissions de CO2, il pollue 1.5 fois plus que le transport aérien. D’ailleurs, en 
+            20 ans, le poids d’une page web a été multiplié par 115 (source : https://www.greenit.fr/)<br> 
+            Face à ce constat, ECOIT un organisme de formation a été fondé en 2017. Notre objectif est d’être 
+            une plateforme d’éducation permettant à tout instructeur expert en accessibilité et en éco-conception 
+            web de présenter des modules de cours. <br>
+            À terme, EcoIT désire devenir la référence française pour les développeurs soucieux de leur impact 
+            digital. Et pourquoi pas délivrer enfin un label officiel pour classer les sites web selon leur 
+            empreinte numérique. </p>
+          <aside class="col-3">
+            <div class="row justify-content-center align-items-center">
+              <img class="col-8" >
+            </div>
+          </aside>
+        </section>
+        <section class="row justify-content-center">
+          <img class="col-8" >
+        </section>
+      </div>
+      <div class="container">
+        <section class="row justify-content-center">
+          <div class="col-12 actuformation">
+            <h4>Nos dernières formations</h4>
+          </div>
+        </section>
+        <section class="row">
+             {% for training in trainings %}        
+          <div class="col-md-4 g-2 ">
+              <div class="card article-formation">
+                  <div class="aligncenter">
+                     
+                               
+                  </div>
+                  <div class="card-body mb-2">
+                      <h5 class="card-title">{{ training.Id }}{{ training.Title }}</h5>
+                     
+                      <p class="card-text">{{ training.catchphrase }}</p>                    
+                  </div>
+                  <div class="card-footer ">                    
+                      <button class="connectbtn ">
+                          {% if app.user %}
+                              <a href={{ path ('app_training_show',{id:training.Id})}}>Détails de la formation</a>
+                          {% else %}
+                              <a href={{ path ('app_register') }} >Détails de la formation</a>
+                          {% endif %}
+                      </button>                            
+                  </div>
+              </div>
+          </div>                              
+        {% endfor %}
+        </section>
+      </div>
 
-<div class="example-wrapper">
-{% if is_granted('ROLE_TEACHER') %}
-    <H1> Bonjour {{app.user.lastname}} {{app.user.firstname}} </h1>
-{% endif %}
-    {% if is_granted('ROLE_LAERNING') %}
-    <H1> Bonjour  {{app.user.pseudo}}</h1>
-{% endif %}
-</div>
+      <div class="container">
+        <section class="row justify-content-center">
+          <div class="col-12 actuformation">
+            <h4>S'inscrire</h4>
+          </div>
+        </section>
+        <section class="row">
+            
+          <div class="col-md-6 g-2 ">
+              <div class="card article-formation">
+                  <div class="aligncenter">          
+                  </div>
+                  <div class="card-body mb-2">
+                      <h5 class="card-title">Devenir apprenant</h5>
+                     
+                      <p class="card-text">
+                      Pour suivre une formation vous devez vous enregistrer en tant qu'apprenant
+                      
+                      </p>                    
+                  </div>
+                  <div class="card-footer ">                    
+                      <button class="connectbtn ">
+                      <a href={{ path ('app_register') }} >S'inscrire</a>
+                         
+                      </button>                            
+                  </div>
+              </div>
+          </div>                              
+        <div class="col-md-6 g-2 ">
+              <div class="card article-formation">
+                  <div class="aligncenter">          
+                  </div>
+                  <div class="card-body mb-2">
+                      <h5 class="card-title">Devenir Instructeur</h5>
+                     
+                      <p class="card-text">
+                      Envie de partager votre savoir , de proposer vos formation postuler pour devenir instructeur.
+                      </p>                    
+                  </div>
+                  <div class="card-footer ">                    
+                      <button class="connectbtn ">
+                       <a href={{ path ('app_teacher') }} >Postuler</a>
+                         
+                      </button>                            
+                  </div>
+              </div>
+          </div>                              
+        </section>
+      </div>
+   
+
+    </main>
+
+
+
+
 {% endblock %}
