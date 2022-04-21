@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
-use App\Form\TeacherwaitFormType;
+use App\Form\TeacherFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +22,7 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         $user->setRoles(['ROLE_LAERNING']);
+        $user->setIsVerified('1');
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -43,13 +44,14 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/teacher', name: 'app_teacher')]
+    #[Route('/teacherregistration', name: 'app_teacher')]
     public function registerteacher(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
-        $form = $this->createForm(TeacherwaitFormType::class, $user);
+        $form = $this->createForm(TeacherFormType::class, $user);
         $form->handleRequest($request);
-        $user->setRoles(['ROLE_TEACHERWAIT']);
+        $user->setRoles(['ROLE_TEATCHER']);
+        $user->setIsVerified('0');
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -63,10 +65,10 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_wait');
+            return $this->redirectToRoute('app_home');
         }
 
-        return $this->render('instructeur/teacherwait.html.twig', [
+        return $this->render('registration/teacherregister.html.twig', [
             'teacherForm' => $form->createView(),
         ]);
     }

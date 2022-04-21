@@ -3,18 +3,22 @@
 {% block title %}Liste des utilisateurs!{% endblock %}
 
 {% block body %}
-
+<div class="container text-center">
 <table class="table table-bordered table-striped">
         <thead>
         <tr>
        
         <th>Mails</th>
         <th>Inscription</th>
+         <th>Actif/Inactif</th>
         <th>Role</th>
         <th>Actions</th>
         </tr>
             <tbody>
                 {% for user in user %}
+
+
+                
 
                 <tr>
                 <th scope="row justify-content-center">
@@ -22,25 +26,46 @@
                 <th scope="row justify-content-center">
                    {{ user.Dateinscription|date('d/m/Y')}}
                     </th>
+
                  <th scope="row justify-content-center">
-               
+                  
+                   {% if user.isVerified == false %}
+                 Inactif
+                      {% endif %}
+                     {% if user.isVerified == true %}
+                  Actif
+                  {% endif %}
+                 
+                    </th>
+
+
+
+                 <th scope="row justify-content-center">
+
                 {% for roles in user.roles %}
-                {% if roles == 'ROLE_TEACHERWAIT' %}
-                 Instructeur en attente
-                 {% endif %}
+                     {% if roles == 'ROLE_ADMIN' %}
+                Administrateur
+     {% endif %}
+            
                 {% if roles == 'ROLE_TEACHER' %}
                  Instructeur
                 {% endif %}
                 {% if roles == 'ROLE_LAERNING' %}
                 Apprenant
      {% endif %}
+     </div>
+{% endfor %}
 
-    {% endfor %}
+               
+
+
+
+    
 					
                     </td>
                    <td>
-                    <a href="{{ path('app_edit_user', {'id': user.id}) }}" class="btn btn-warning" role="button">Modifier</a>
-                    <a href="{{ path('app_profil_user', {'id': user.id}) }}" class="btn btn-warning" role="button">Détails</a>
+                    <a href="{{ path('app_edit_user', {'id': user.id}) }}" class="btn btn-primary" role="button">Modifier</a>
+             
                     </td>
 			     </tr>
                 {% endfor %}

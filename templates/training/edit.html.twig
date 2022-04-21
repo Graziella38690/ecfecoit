@@ -3,11 +3,72 @@
 {% block title %}Edit Training{% endblock %}
 
 {% block body %}
+<div class="container ">
     <h1>Edit Training</h1>
+<div class="container">  
 
-    {{ include('training/_form.html.twig', {'button_label': 'Update'}) }}
+    {{  form_start(form)}}
+    
+
+            <div class="formcreat">{{ form_row(form. Title) }}</div>
+              <div class="formcreat">{{ form_row(form. catchphrase) }}</div>
+            <div class="formcreat">{{ form_row(form. Description) }}</div>
+          
+
+ <div id="Sections" data-prototype="{{form_row(form.Sections.vars.prototype)|e('html_attr')}}">
+
+    {{ form_row(form.Sections) }}
+     <span></span>
+     </div>
+    {{ form_end(form)}}
+
+
+    
+     
+     </div>
+    {{ form_end(form)}}
+   
 
     <a href="{{ path('app_training_index') }}">back to list</a>
 
     {{ include('training/_delete_form.html.twig') }}
+    </div>
 {% endblock %}
+{% block javascripts %}
+    <script>
+        let collection, boutonAjout, span;
+        window.onload = () => {
+            collection = document.querySelector("#Sections");
+            span = collection.querySelector("span");
+            boutonAjout = document.createElement("button");
+            boutonAjout.className = "ajout-departement btn secondary";
+            boutonAjout.innerText = "Ajouter une section";
+            let nouveauBouton = span.append(boutonAjout);
+            collection.dataset.index = collection.querySelectorAll("input").length;
+            boutonAjout.addEventListener("click", function(){
+                addButton(collection, nouveauBouton);
+            });
+        }
+        function addButton(collection, nouveauBouton){
+            let prototype = collection.dataset.prototype;
+            let index = collection.dataset.index;
+            prototype = prototype.replace(/__name__/g, index);
+            let content = document.createElement("html");
+            content.innerHTML = prototype;
+            let newForm = content.querySelector("div");
+            let boutonSuppr = document.createElement("button");
+            boutonSuppr.type = "button";
+            boutonSuppr.className = "btn red";
+            boutonSuppr.id = "delete-Sections-" + index;
+            boutonSuppr.innerText = "Supprimer cette section";
+            newForm.append(boutonSuppr);
+            collection.dataset.index++;
+            let boutonAjout = collection.querySelector(".ajout-sections");
+            span.insertBefore(newForm, boutonAjout);
+            boutonSuppr.addEventListener("click", function(){
+                this.previousElementSibling.parentElement.remove();
+            })
+        }
+    </script>
+
+   {% endblock %}

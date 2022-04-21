@@ -18,7 +18,7 @@ class Training
     #[ORM\Column(type: 'string', length: 255)]
     private $Title;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'text')]
     private $Description;
 
 

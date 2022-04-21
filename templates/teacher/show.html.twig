@@ -1,26 +1,15 @@
-  {% extends 'base.html.twig' %}
-  
-  {% block title %}EcoIT{% endblock %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Formations {% endblock %}
 
 {% block body %}
-<main>
-  
-  <aside class="col-3">
-            <div class="row justify-content-center align-items-center">
-              <img class="col-8" >
-            </div>
-          </aside>
-        </section>
-        <section class="row justify-content-center">
-          <img class="col-8" >
-        </section>
-      </div>
-      <div class="container">
+
+<div class="container">
         <section class="row justify-content-center">
           <div class="col-12 actuformation">
-            <h4> Consulter nos {{trainings. getTotalItemCount }}  formations</h4>
-          </div>
-        </section>
+    <h1>Liste de mes Formations</h1>
+    </div>
+  </section>
         <section class="row">
              {% for training in trainings %}        
           <div class="col-md-4 g-2 d-flex align-content-stretch flex-wrap ">
@@ -29,18 +18,21 @@
                      
                                
                   </div>
-                  <div class="card-body mb-2">
-                      <h5 class="card-title">{{ training.Title }}</h5>
-                      <p class="card-text">
+                  <div class="card-body mb-2 text-center">
+                      <img src="{{ asset('picture/Logo_ecoit.png') }}" class="card-img-top" alt="...">
+
+   <h5 class="card-title">{{ training.Title }}</h5>
+                   
                       {{ training.catchphrase }}
                       <br>
+                    
                       <br>
-                      
-                      Publiée le : {{training.Datecreate|date('Y-m-d')}}
+                      le : {{training.Datecreate|date('Y-m-d')}}
+
                       </p>                    
                   </div>
                   <div class="card-footer d-flex flex-column">                    
-                      <button class="connectbtn ">
+                      <button class="btn-primary ">
                           {% if app.user %}
                               <a href={{ path ('app_training_show',{id:training.Id})}}>Détails de la formation</a>
                           {% else %}
@@ -53,9 +45,17 @@
           </div>   
                               
         {% endfor %}
-        </section>
-         {{ knp_pagination_render(trainings) }}       
-      </div>
 
-      
-      {% endblock %}
+
+
+
+
+     
+
+</main>
+{% endblock %}
+
+
+
+
+ 

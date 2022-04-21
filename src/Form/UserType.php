@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 
 class UserType extends AbstractType
@@ -15,18 +16,27 @@ class UserType extends AbstractType
     {
         $builder
             
+
+
+        ->add('is_verified', CheckboxType::class, [
+            'label'    => ' activer le compte',
+            'required' => false,
+        ])
+
+
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Apprenant' => 'ROLE_LAERNING',
                     'Instructeur' => 'ROLE_TEACHER',
-                    'Instructeur en attente' => 'ROLE_TEACHERWAIT'
+                    'Administrateur' => 'ROLE_ADMIN',
+                   
                 ],
                 'expanded' => true,
                 'multiple' => true,
                 'label' => 'Rôles' 
             ])
-    
         ;
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void

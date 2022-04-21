@@ -22,6 +22,9 @@ class Lesson
     #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'lessons')]
     private $section;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'lessons')]
+    private $creatby;
+
    
 
     public function getId(): ?int
@@ -61,6 +64,18 @@ class Lesson
     public function setSection(?Section $section): self
     {
         $this->section = $section;
+
+        return $this;
+    }
+
+    public function getCreatby(): ?user
+    {
+        return $this->creatby;
+    }
+
+    public function setCreatby(?user $creatby): self
+    {
+        $this->creatby = $creatby;
 
         return $this;
     }

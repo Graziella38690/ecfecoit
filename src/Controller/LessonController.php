@@ -15,20 +15,27 @@ class LessonController extends AbstractController
 {
     #[Route('/', name: 'app_lesson_index', methods: ['GET'])]
     public function index(LessonRepository $lessonRepository): Response
+
+
+    
     {
         return $this->render('lesson/index.html.twig', [
-            'lessons' => $lessonRepository->findAll(),
+
+            'lessons' => $lessonRepository->findBy(['creatby' => $this->getuser()], ['id' => 'asc']),
+            
         ]);
     }
 
     #[Route('/new', name: 'app_lesson_new', methods: ['GET', 'POST'])]
     public function new(Request $request, LessonRepository $lessonRepository): Response
-    {
+    {   
         $lesson = new Lesson();
         $form = $this->createForm(LessonType::class, $lesson);
         $form->handleRequest($request);
-
+       
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->getUser();
+            $lesson->setCreatby($this->getUser());
             $lessonRepository->add($lesson);
             return $this->redirectToRoute('app_lesson_index', [], Response::HTTP_SEE_OTHER);
         }

@@ -50,11 +50,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'date', nullable:true)]
     private $Dateinscription;
 
+    #[ORM\Column(type: 'boolean')]
+    private $is_verified= false;
+
+    #[ORM\OneToMany(mappedBy: 'creatby', targetEntity: Lesson::class)]
+    private $lessons;
+
+    #[ORM\OneToMany(mappedBy: 'creatby', targetEntity: Section::class)]
+    private $sections;
+
    
 
     public function __construct()
     {
         $this->trainings = new ArrayCollection();
+        $this->lessons = new ArrayCollection();
+        $this->sections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -225,6 +236,78 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDateinscription(\DateTimeInterface $Dateinscription): self
     {
         $this->Dateinscription = $Dateinscription;
+
+        return $this;
+    }
+
+    public function getIsVerified(): ?bool
+    {
+        return $this->is_verified;
+    }
+
+    public function setIsVerified(bool $is_verified): self
+    {
+        $this->is_verified = $is_verified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lesson>
+     */
+    public function getLessons(): Collection
+    {
+        return $this->lessons;
+    }
+
+    public function addLesson(Lesson $lesson): self
+    {
+        if (!$this->lessons->contains($lesson)) {
+            $this->lessons[] = $lesson;
+            $lesson->setCreatby($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesson(Lesson $lesson): self
+    {
+        if ($this->lessons->removeElement($lesson)) {
+            // set the owning side to null (unless already changed)
+            if ($lesson->getCreatby() === $this) {
+                $lesson->setCreatby(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Section>
+     */
+    public function getSections(): Collection
+    {
+        return $this->sections;
+    }
+
+    public function addSection(Section $section): self
+    {
+        if (!$this->sections->contains($section)) {
+            $this->sections[] = $section;
+            $section->setCreatby($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSection(Section $section): self
+    {
+        if ($this->sections->removeElement($section)) {
+            // set the owning side to null (unless already changed)
+            if ($section->getCreatby() === $this) {
+                $section->setCreatby(null);
+            }
+        }
 
         return $this;
     }

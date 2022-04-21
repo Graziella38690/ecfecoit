@@ -1,38 +1,47 @@
-<nav class="container navbar navbar-expand-lg mb-4">
-
-  <a class="navbar-brand" href="{{path('app_home')}}">Ecoit</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
- 
   
-
-	<li class="nav-item">
-      <a class="nav-link" href="{{path('app_admin')}}">Administration</a>
-      </li>
-  <li class="nav-item">
-      <a class="nav-link" href="{{path('app_training_index')}}">Formation</a>
-      </li>
-
-	 <li class="nav-item">
-        <a class="nav-link" href="{{path('app_register')}}">S'incrire</a>
-      </li>
-     
-     <li class="nav-item">
-        <a class="nav-link" href="{{path('app_teacher')}}">Devenir instructeur</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{path('app_login')}}">Se connecter</a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="{{path('app_logout')}}">Se deconecter</a>
-      </li>
-     
-       
-    </ul>
-  </div>
+    
 
 
-   
-   
-</nav>
+          <nav class=" navbar navbar-expand-lg navbar-light ">
+            <div class="container-fluid">
+              
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{path('app_home')}}">ACCUEIL</a>
+                        </li>
+                        
+                     
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{path('app_training_index')}}">NOS FORMATIONS</a>
+                        </li>
+                     
+                    </ul>
+                    
+                    
+
+                    <div class="text-end">
+                      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        Bonjour {{app.user.lastname}} {{app.user.firstname}}
+                                  <a href="{{path('app_teacher_index')}}"><button type="button" class="btn btn-primary me-2">ESPACE INSTRUCTEUR</button></a>
+                                  <a href="{{path('app_list_user')}}"><button type="button" class="btn btn-primary me-2">ADMINISTRATION</button></a>
+                                  <a href="{{path('app_logout')}}"><button type="button" class="btn btn-primary me-2">DECONECTION</button></a>
+                                   
+                                 
+                        {% else %}
+                          <a href="{{path('app_login')}}"><button type="button" class="btn btn-primary me-2">Login</button></a>
+                              <a href="{{path('app_register')}}"><button type="button" class="btn btn-primary me-2">Sign-up</button></a>
+                               
+                               
+                        {% endif %}
+                   
+
+                       
+                    </div>
+                </div>
+           
+        </nav>

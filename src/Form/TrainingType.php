@@ -2,13 +2,14 @@
 
 namespace App\Form;
 
+use App\Entity\section;
 use App\Entity\Training;
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 
 
@@ -18,8 +19,9 @@ class TrainingType extends AbstractType
     {
         $builder
             ->add('Title')
-            ->add('Description')
             ->add('catchphrase')
+            ->add('Description')
+          
             ->add('Sections', CollectionType::class, array(
                 'entry_type' => SectionType::class,
                 'by_reference'=> false,

@@ -4,11 +4,18 @@
 
 {% block body %}
     <h1>Ajouter une formation</h1>
-
+<div class="container">  
 
     {{  form_start(form)}}
     
-<div id="Sections" data-prototype="{{form_row(form.Sections.vars.prototype)|e('html_attr')}}">
+
+            <div class="formcreat">{{ form_row(form. Title) }}</div>
+            <div class="formcreat">{{ form_row(form. Description) }}</div>
+            <div class="formcreat">{{ form_row(form. catchphrase) }}</div>
+
+
+
+    <div id="Sections" data-prototype="{{form_row(form.Sections.vars.prototype)|e('html_attr')}}">
 
     {{ form_row(form.Sections) }}
      <span></span>
@@ -17,6 +24,7 @@
 
 
     <a href="{{ path('app_training_index') }}">back to list</a>
+    </div>
    {% endblock %}
 
 {% block javascripts %}
@@ -26,7 +34,7 @@
             collection = document.querySelector("#Sections");
             span = collection.querySelector("span");
             boutonAjout = document.createElement("button");
-            boutonAjout.className = "ajout-departement btn secondary";
+            boutonAjout.className = "btn-primary";
             boutonAjout.innerText = "Ajouter une section";
             let nouveauBouton = span.append(boutonAjout);
             collection.dataset.index = collection.querySelectorAll("input").length;
@@ -43,7 +51,7 @@
             let newForm = content.querySelector("div");
             let boutonSuppr = document.createElement("button");
             boutonSuppr.type = "button";
-            boutonSuppr.className = "btn red";
+            boutonSuppr.className = "btn-danger";
             boutonSuppr.id = "delete-Sections-" + index;
             boutonSuppr.innerText = "Supprimer cette section";
             newForm.append(boutonSuppr);

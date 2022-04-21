@@ -3,15 +3,13 @@
 {% block title %}Modifier l'utilisateur{% endblock %}
 
 {% block body %}
-<div class="row justify-content-center">
-<a href="{{ path('app_list_user') }}" class="btn btn-success" role="button">Retour à la liste des utilisateurs</a>
-</div>
-<div class="p-5">
-<div class="row">
-<div class="col">
-<h2>Fiche utilisateur de : </h2>
-</div>
-</div>
+
+<div class="container text-center">
+<a href="{{ path('app_list_user') }}" class="btn btn-primary" role="button">Retour à la liste des utilisateurs</a>
+
+
+<h2>Fiche utilisateur </h2>
+
 {% for roles in user.roles %}
 {% if roles == 'ROLE_TEACHERWAIT'%}        
 <p>Prénom : {{ user.Firstname }}</p>
@@ -28,8 +26,23 @@
 {% endfor %}
 <p>Email : {{ user.Email }}</p>
 
+Role:
+{% for roles in user.roles %}
+                {% if roles == 'ROLE_TEACHERWAIT' %}
+                 Instructeur en attente
+                 {% endif %}
+                {% if roles == 'ROLE_TEACHER' %}
+                 Instructeur
+                {% endif %}
+                {% if roles == 'ROLE_LAERNING' %}
+                Apprenant
+     {% endif %}
+{% endfor %}
+</div>
 
-<h3>Modifier le rôle </h3>
+<h3>Action</h3>
+  
+
 {{ include('/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
 {% endblock %}

@@ -29,16 +29,7 @@
                 <td> {{ user.Lastname }} </td>
                 </tr>
                  {% endif %}
-                {% if roles == 'ROLE_TEACHERWAIT' %}
-                 Prenom
-                <td> {{ user.Firstname }} </td>
-                </th>
-                </tr>
-                <th>nom</th>
-                <td> {{ user.Lastname }} </td>
-                </tr>
-                 {% endif %}
-
+                
 
                  {% endfor %}
 
@@ -51,8 +42,8 @@
                 <tr>
                 <th> Rôles </th>
                 <td> {% for roles in user.roles %}
-                {% if roles == 'ROLE_TEACHERWAIT' %}
-                 Instructeur en attente
+                {% if roles == 'ROLE_ADMIN' %}
+                 Administrateur
                  {% endif %}
                 {% if roles == 'ROLE_TEACHER' %}
                  Instructeur

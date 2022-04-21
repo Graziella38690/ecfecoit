@@ -1,47 +1,64 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Training index{% endblock %}
+  {% extends 'base.html.twig' %}
+  
+  {% block title %}EcoIT{% endblock %}
 
 {% block body %}
-    <h1>Training index</h1>
+<main>
+  
+  <aside class="col-3">
+            <div class="row justify-content-center align-items-center">
+              <img class="col-8" >
+            </div>
+          </aside>
+        </section>
+        <section class="row justify-content-center">
+          <img class="col-8" >
+        </section>
+      </div>
+      <div class="container">
+        <section class="row justify-content-center">
+          <div class="col-12 actuformation">
+            <h4> Consulter nos {{trainings. getTotalItemCount }}  formations</h4>
+          </div>
+        </section>
+        <section class="row">
+             {% for training in trainings %}        
+          <div class="col-md-4 g-2 d-flex align-content-stretch flex-wrap ">
+              <div class="card article-formation">
+                  <div class="aligncenter">
+                     
+                               
+                  </div>
+                  <div class="card-body mb-2 text-center">
+                      <img src="{{ asset('picture/Logo_ecoit.png') }}" class="card-img-top" alt="...">
+                      
+                      <h5 class="card-title">{{ training.Title }}</h5>
+                   
+                      {{ training.catchphrase }}
+                      <br>
+                      Publier par {{ training.Creatby.firstname }}  {{ training.Creatby.lastname }}
+                      <br>
+                      le : {{training.Datecreate|date('Y-m-d')}}
 
-    <table class="table table-bordered table-striped justify-content-center">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Catchphrase</th>
-                <th>Datecreate</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for training in trainings %}
-            <tr>
-            
-                <td>{{ training.Title }}</td>
-                <td>{{ training.Description }}</td>
-                <td>{{ training.catchphrase }}</td>
-                <td>{{ training.Datecreate|date('Y-m-d')}}</td>
-                <td>
-                    <a href="{{ path('app_training_show', {'id': training.id}) }}">show</a>
-                    <a href="{{ path('app_training_edit', {'id': training.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
+                      </p>                    
+                  </div>
+                  <div class="card-footer d-flex flex-column">                    
+                      <button class="btn-primary ">
+                          {% if app.user %}
+                              <a href={{ path ('app_training_show',{id:training.Id})}}>Détails de la formation</a>
+                          {% else %}
+                              <a href={{ path ('app_register') }} >Détails de la formation</a>
+                          {% endif %}
+                      </button>                            
+                  </div>
+              </div>
+              
+          </div>   
+                              
         {% endfor %}
-        </tbody>
-         
-    </table>
+        </section>
+         {{ knp_pagination_render(trainings) }}       
+      </div>
 
-
-      {{ knp_pagination_render(trainings) }}
       
-       
-        <div class="justify-content-center">
-    <a href="{{ path('app_training_new') }}"class="btn btn-success" role="button">Create new</a>
-    </div>
-{% endblock %}
+      {% endblock %}

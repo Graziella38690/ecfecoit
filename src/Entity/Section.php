@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: SectionRepository::class)]
 class Section
 {
@@ -25,6 +26,9 @@ class Section
 
     #[ORM\ManyToOne(targetEntity: Training::class, inversedBy: 'sections')]
     private $training;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'sections')]
+    private $creatby;
 
    
 
@@ -92,6 +96,18 @@ class Section
     public function setTraining(?Training $training): self
     {
         $this->training = $training;
+
+        return $this;
+    }
+
+    public function getCreatby(): ?user
+    {
+        return $this->creatby;
+    }
+
+    public function setCreatby(?User $creatby): self
+    {
+        $this->creatby = $creatby;
 
         return $this;
     }

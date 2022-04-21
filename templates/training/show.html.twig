@@ -3,59 +3,40 @@
 {% block title %}Training{% endblock %}
 
 {% block body %}
- <div class="conteneur">
-    <h1>Training</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ training.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ training.Title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ training.Description }}</td>
-            </tr>
-            <tr>
-                <th>Catchphrase</th>
-                <td>{{ training.catchphrase }}</td>
-            </tr>
-            <tr>
-                <th>Datecreate</th>
-                <td>{{training.Datecreate|date('Y-m-d')}}</td>
-            </tr>
-         
-         
-            <tr>
-              
-                <th> Section </th>
-                <td>
-                 {% for section in training.sections %}
-               <li> {{section.Title}}</li>
-                {% endfor %}
-                
-                </td>
+<div class="container text-center">
            
-            </tr>
+                     <img src="{{ asset('picture/R.png') }}" class="formimg" alt="...">
+                      <h2>{{ training.Title }}</h2>
+                        Crée le :{{training.Datecreate|date('Y-m-d')}} </br>
+                     
+                        <h3>Descriptif de la formation</h3>
+                        {{ training.Description }} </br>
+                         
+                         <h4>Contenue de la formation</h4>
 
- 
-
-
-         
-			   
- 
+        {% for section in training.sections %}
+                       <ul><h4>{{section.Title}}</h4></ul>
+                     
+               
+                 {% endfor %}
+                  {% if is_granted('ROLE_TEACHER') %}
+                      
+                   
+                          <a href="{{ path('app_training_edit',{'id': training.id})}}"class="btn btn-primary" role="button">Modifier</a>
+                          {{ include('training/_delete_form.html.twig') }}
+                                            
+                 {% endif %}
+                
+              </div>
+          
         </tbody>
-    </table>
+   
 
     <a href="{{ path('app_training_index') }}">back to list</a>
 
-    <a href="{{ path('app_training_edit', {'id': training.id}) }}">edit</a>
+   
 
-    {{ include('training/_delete_form.html.twig') }}
+    
     </div>
 {% endblock %}
  

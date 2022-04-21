@@ -59,11 +59,13 @@ class TrainingRepository extends ServiceEntityRepository
           ;
       }
 
-    // /**
-    //  * @return Training[] Returns an array of Training objects
-    //  */
-    /*
-    public function findByExampleField($value)
+
+
+     /**
+      * @return Training[] Returns an array of Training objects
+     */
+    
+    public function findByUser($value)
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.exampleField = :val')
@@ -74,7 +76,7 @@ class TrainingRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Training

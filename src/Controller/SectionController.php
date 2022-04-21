@@ -17,7 +17,7 @@ class SectionController extends AbstractController
     public function index(SectionRepository $sectionRepository): Response
     {
         return $this->render('section/index.html.twig', [
-            'sections' => $sectionRepository->findAll(),
+            'sections' => $sectionRepository->findBy(['creatby' => $this->getuser()], ['id' => 'asc']),
         ]);
     }
 
@@ -27,8 +27,10 @@ class SectionController extends AbstractController
         $section = new Section();
         $form = $this->createForm(SectionType::class, $section);
         $form->handleRequest($request);
-
+       
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->getUser();
+            $section->setCreatby($this->getUser());
             $sectionRepository->add($section);
             return $this->redirectToRoute('app_section_index', [], Response::HTTP_SEE_OTHER);
         }
