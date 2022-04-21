@@ -33,19 +33,19 @@
         </section>
         <section class="row ">
 
-             {% for training in trainings %}        
+             {% for Training in trainings %}        
           <div class="col-md-4 g-2 d-flex align-content-stretch flex-wrap">
               <div class="card text-center article-formation ">
                   <div class="card-body mb-2">
                      <img src="{{ asset('picture/Logo_ecoit.png') }}" class="card-img-top" alt="...">
-                      <h5 class="card-title text-center">{{ training.Id }}{{ training.Title }}</h5>
-                      <p class="card-text">{{ training.catchphrase }}</p>     
-                     Publier par {{ training.Creatby.firstname }}  {{ training.Creatby.lastname }}         
+                      <h5 class="card-title text-center">{{ Training.Id }}{{ Training.Title }}</h5>
+                      <p class="card-text">{{ Training.catchphrase }}</p>     
+                     Publier par {{ Training.Creatby.firstname }}  {{ Training.Creatby.lastname }}         
                   </div>
                   <div class="card-footer text-center ">                    
                       <button class="btn btn-primary ">
                          {% if app.user %}
-                             <a href={{ path ('app_training_show',{id:training.Id})}}>Détails de la formation</a>
+                             <a href={{ path ('app_training_show',{id:Training.Id})}}>Détails de la formation</a>
                            {% else %}
                              <a href="{{ path ('app_register') }}" class="btn btn-primary">Détails de la formation</a>
                          {% endif %} 

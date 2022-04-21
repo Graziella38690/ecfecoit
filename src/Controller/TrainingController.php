@@ -20,9 +20,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class TrainingController extends AbstractController
 {  
     #[Route('/', name: 'app_training_index', methods: ['GET'])]
-    public function index(Request $request,TrainingRepository $trainingRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request,TrainingRepository $TrainingRepository, PaginatorInterface $paginator): Response
     {   
-        $Training = $trainingRepository->findAll();
+        $Training = $TrainingRepository->findAll();
         $Training = $paginator->paginate(
             $Training, 
             $request->query->getInt('page', 1), 
@@ -36,7 +36,7 @@ class TrainingController extends AbstractController
   
     #[Security("is_granted('ROLE_TEACHER')", statusCode: 404)]
     #[Route('/new', name: 'app_training_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TrainingRepository $trainingRepository): Response
+    public function new(Request $request, TrainingRepository $TrainingRepository): Response
     {
         $Training = new Training();
         
@@ -49,7 +49,7 @@ class TrainingController extends AbstractController
             $this->getUser();
             $Training->setCreatby($this->getUser());
          
-            $trainingRepository->add($Training);
+            $TrainingRepository->add($Training);
             return $this->redirectToRoute('app_teacher_show', [], Response::HTTP_SEE_OTHER);
         }
         return $this->renderForm('training/new.html.twig', [
@@ -74,13 +74,13 @@ class TrainingController extends AbstractController
    
     #[Security("is_granted('ROLE_TEACHER')", statusCode: 404)]
     #[Route('/{id}/edit', name: 'app_training_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Training $Training, TrainingRepository $trainingRepository): Response
+    public function edit(Request $request, Training $Training, TrainingRepository $TrainingRepository): Response
     {
         $form = $this->createForm(TrainingType::class, $Training);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $trainingRepository->add($Training);
+            $TrainingRepository->add($Training);
             return $this->redirectToRoute('app_training_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -91,10 +91,10 @@ class TrainingController extends AbstractController
     }
     #[Security("is_granted('ROLE_TEACHER')", statusCode: 404)]
     #[Route('/{id}', name: 'app_training_delete', methods: ['POST'])]
-    public function delete(Request $request, Training $training, TrainingRepository $trainingRepository): Response
+    public function delete(Request $request, Training $Training, TrainingRepository $TrainingRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$training->getId(), $request->request->get('_token'))) {
-            $trainingRepository->remove($training);
+        if ($this->isCsrfTokenValid('delete'.$Training->getId(), $request->request->get('_token'))) {
+            $TrainingRepository->remove($Training);
         }
 
         return $this->redirectToRoute('app_teacher_index', [], Response::HTTP_SEE_OTHER);

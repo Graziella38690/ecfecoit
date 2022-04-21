@@ -21,12 +21,12 @@ class TeacherController extends AbstractController
    
 #[Route('/', name: 'app_teacher_index', methods: ['GET'])]
  
-public function details(TrainingRepository $trainingRepository): Response
+public function details(TrainingRepository $TrainingRepository): Response
 {
     /** @var User $user */
     $user = $this->getUser();
     return $this->render('teacher/index.html.twig', [
-        'training' => $trainingRepository->findBy(['Creatby' => $this->getuser()], ['id' => 'asc']),
+        'training' => $TrainingRepository->findBy(['Creatby' => $this->getuser()], ['id' => 'asc']),
         
         
     ]);
@@ -36,10 +36,10 @@ public function details(TrainingRepository $trainingRepository): Response
 
     #[Route('/show', name: 'app_teacher_show', methods: ['GET'])]
 
-    public function index(TrainingRepository $trainingRepository): Response
+    public function index(TrainingRepository $TrainingRepository): Response
     {
         return $this->render('teacher/show.html.twig', [
-            'trainings' => $trainingRepository->findBy(['Creatby' => $this->getuser()], ['id' => 'asc']),
+            'trainings' => $TrainingRepository->findBy(['Creatby' => $this->getuser()], ['id' => 'asc']),
         ]);
     }
 }
