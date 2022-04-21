@@ -38,54 +38,54 @@ class TrainingController extends AbstractController
     #[Route('/new', name: 'app_training_new', methods: ['GET', 'POST'])]
     public function new(Request $request, TrainingRepository $trainingRepository): Response
     {
-        $training = new Training();
+        $Training = new Training();
         
        
-        $form = $this->createForm(TrainingType::class, $training);
+        $form = $this->createForm(TrainingType::class, $Training);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             
             $this->getUser();
-            $training->setCreatby($this->getUser());
+            $Training->setCreatby($this->getUser());
          
-            $trainingRepository->add($training);
+            $trainingRepository->add($Training);
             return $this->redirectToRoute('app_teacher_show', [], Response::HTTP_SEE_OTHER);
         }
         return $this->renderForm('training/new.html.twig', [
-            'training' => $training,
+            'training' => $Training,
             'form' => $form,
         ]);
     }
     #[Security("is_granted('ROLE_LAERNING')", statusCode: 404)]
     #[Route('/{id}', name: 'app_training_show', methods: ['GET'])]
    
-    public function show(training $training ): Response
+    public function show(training $Training ): Response
     {  
 
-        $sections = $training->getSections();
+        $sections = $Training->getSections();
 
         return $this->render('training/show.html.twig',
          [
-            'training' => $training,
+            'training' => $Training,
             array ('date' => $sections)
         ]);
     }
    
     #[Security("is_granted('ROLE_TEACHER')", statusCode: 404)]
     #[Route('/{id}/edit', name: 'app_training_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Training $training, TrainingRepository $trainingRepository): Response
+    public function edit(Request $request, Training $Training, TrainingRepository $trainingRepository): Response
     {
-        $form = $this->createForm(TrainingType::class, $training);
+        $form = $this->createForm(TrainingType::class, $Training);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $trainingRepository->add($training);
+            $trainingRepository->add($Training);
             return $this->redirectToRoute('app_training_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('training/edit.html.twig', [
-            'training' => $training,
+            'training' => $Training,
             'form' => $form,
         ]);
     }
