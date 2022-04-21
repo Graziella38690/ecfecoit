@@ -19,6 +19,14 @@
         "watch": "encore dev --watch",
         "build": "encore production --progress"
     },
+
+    "engines": {
+        "node": "^16.14.2",
+        "npm":"^8.6.0"
+        
+    },
+
+
     "dependencies": {
         "autoprefixer": "^10.4.4",
         "bootstrap": "^5.1.3",
