@@ -51,7 +51,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $Dateinscription;
 
     #[ORM\Column(type: 'boolean')]
-    private $is_verified= false;
+    private $is_verified= 0;
 
     #[ORM\OneToMany(mappedBy: 'creatby', targetEntity: Lesson::class)]
     private $lessons;
