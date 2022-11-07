@@ -47,7 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'Creatby', targetEntity: Training::class)]
     private $trainings;
 
-    #[ORM\Column(type: 'datetime_immutable', options: ['default' =>'CURRENT_TIMESTAMP'])]
+    #[ORM\Column(type: 'date', nullable:true)]
     private $Dateinscription;
 
     #[ORM\Column(type: 'boolean')]
@@ -228,12 +228,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDateinscription(): ?\DateTimeImmutable
+    public function getDateinscription(): ?\DateTimeInterface
     {
         return $this->Dateinscription;
     }
 
-    public function setDateinscription(\DateTimeImmutable $Dateinscription): self
+    public function setDateinscription(\DateTimeInterface $Dateinscription): self
     {
         $this->Dateinscription = $Dateinscription;
 
