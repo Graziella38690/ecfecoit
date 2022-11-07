@@ -14,7 +14,7 @@ class HomeController extends AbstractController
     {   
         $this->getUser();
         return $this->render('home/index.html.twig', [
-            'trainings' => $TrainingRepository->findLastTraining(),
+            'Trainings' => $TrainingRepository->findLastTraining(),
         ]);
     }
 
