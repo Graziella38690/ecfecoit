@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/lesson')]
+
 class LessonController extends AbstractController
 {
-    #[Route('/', name: 'app_lesson_index', methods: ['GET'])]
+    #[Route('/lesson/index', name: 'app_lesson_index', methods: ['GET'])]
     public function index(LessonRepository $lessonRepository): Response
 
 
@@ -26,7 +26,7 @@ class LessonController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_lesson_new', methods: ['GET', 'POST'])]
+    #[Route('/lesson/new', name: 'app_lesson_new', methods: ['GET', 'POST'])]
     public function new(Request $request, LessonRepository $lessonRepository): Response
     {   
         $lesson = new Lesson();
@@ -46,7 +46,7 @@ class LessonController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_lesson_show', methods: ['GET'])]
+    #[Route('lesson/show/{id}', name: 'app_lesson_show', methods: ['GET'])]
     public function show(Lesson $lesson): Response
     {
         return $this->render('lesson/show.html.twig', [
@@ -54,7 +54,7 @@ class LessonController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_lesson_edit', methods: ['GET', 'POST'])]
+    #[Route('lesson/{id}/edit', name: 'app_lesson_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Lesson $lesson, LessonRepository $lessonRepository): Response
     {
         $form = $this->createForm(LessonType::class, $lesson);
@@ -71,7 +71,7 @@ class LessonController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_lesson_delete', methods: ['POST'])]
+    #[Route('lesson/delete/{id}', name: 'app_lesson_delete', methods: ['POST'])]
     public function delete(Request $request, Lesson $lesson, LessonRepository $lessonRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$lesson->getId(), $request->request->get('_token'))) {
