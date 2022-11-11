@@ -36,6 +36,9 @@ class Training
     #[ORM\OneToMany(mappedBy: 'training', targetEntity: Section::class,orphanRemoval:true,cascade:['persist','remove'])]
     private $sections;
 
+    #[ORM\ManyToOne(inversedBy: 'formation')]
+    private ?Section $section = null;
+
     public function __construct()
     {
         $this->sections = new ArrayCollection();
@@ -136,6 +139,18 @@ class Training
                 $section->setTraining(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSection(): ?Section
+    {
+        return $this->section;
+    }
+
+    public function setSection(?Section $section): self
+    {
+        $this->section = $section;
 
         return $this;
     }

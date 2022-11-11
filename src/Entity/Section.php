@@ -25,11 +25,14 @@ class Section
     private $lessons;
 
     #[ORM\ManyToOne(targetEntity: Training::class, inversedBy: 'sections')]
-    #[ORM\JoinColumn(nullable: false)]
+   
     private $training;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'sections')]
     private $Creatby;
+
+    #[ORM\OneToMany(mappedBy: 'section', targetEntity: training::class)]
+    private Collection $formation;
 
    
 
@@ -38,6 +41,7 @@ class Section
         $this->trainings = new ArrayCollection();
         $this->Lesson = new ArrayCollection();
         $this->lessons = new ArrayCollection();
+        $this->formation = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +113,36 @@ class Section
     public function setCreatby(?User $Creatby): self
     {
         $this->creatby = $Creatby;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, training>
+     */
+    public function getFormation(): Collection
+    {
+        return $this->formation;
+    }
+
+    public function addFormation(training $formation): self
+    {
+        if (!$this->formation->contains($formation)) {
+            $this->formation->add($formation);
+            $formation->setSection($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormation(training $formation): self
+    {
+        if ($this->formation->removeElement($formation)) {
+            // set the owning side to null (unless already changed)
+            if ($formation->getSection() === $this) {
+                $formation->setSection(null);
+            }
+        }
 
         return $this;
     }
