@@ -88,12 +88,12 @@ class Section
         return $this;
     }
 
-    public function getTraining(): ?training
+    public function getTraining(): ?Training
     {
         return $this->training;
     }
 
-    public function setTraining(?training $training): self
+    public function setTraining(?Training $training): self
     {
         $this->training = $training;
 
