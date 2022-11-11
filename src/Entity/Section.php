@@ -25,10 +25,10 @@ class Section
     private $lessons;
 
     #[ORM\ManyToOne(targetEntity: Training::class, inversedBy: 'sections')]
-    private $training;
+    private $Training;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'sections')]
-    private $creatby;
+    private $Creatby;
 
    
 
@@ -90,24 +90,24 @@ class Section
 
     public function getTraining(): ?Training
     {
-        return $this->training;
+        return $this->Training;
     }
 
-    public function setTraining(?Training $training): self
+    public function setTraining(?Training $Training): self
     {
-        $this->training = $training;
+        $this->training = $Training;
 
         return $this;
     }
 
     public function getCreatby(): ?user
     {
-        return $this->creatby;
+        return $this->Creatby;
     }
 
-    public function setCreatby(?User $creatby): self
+    public function setCreatby(?User $Creatby): self
     {
-        $this->creatby = $creatby;
+        $this->creatby = $Creatby;
 
         return $this;
     }
