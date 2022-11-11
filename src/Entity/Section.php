@@ -25,6 +25,7 @@ class Section
     private $lessons;
 
     #[ORM\ManyToOne(targetEntity: Training::class, inversedBy: 'sections')]
+    #[ORM\JoinColumn(nullable: false)]
     private $training;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'sections')]
