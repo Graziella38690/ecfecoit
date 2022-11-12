@@ -13,6 +13,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 
+
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
@@ -22,7 +23,7 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         $user->setRoles(['ROLE_LAERNING']);
-        $user->setIsVerified('1');
+        
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -50,8 +51,8 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(TeacherFormType::class, $user);
         $form->handleRequest($request);
-        $user->setRoles(['ROLE_TEATCHER']);
-        $user->setIsVerified('0');
+        $user->setRoles(['ROLE_TEACHERWAIT']);
+    
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -65,7 +66,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_teacher_index');
         }
 
         return $this->render('registration/teacherregister.html.twig', [

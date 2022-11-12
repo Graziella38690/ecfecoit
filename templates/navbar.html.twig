@@ -26,15 +26,15 @@
 
                     <div class="text-end">
                       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        Bonjour {{app.user.lastname}} {{app.user.firstname}}
+                     Connecte en tant que {{app.user.pseudo}}
                                   <a href="{{path('app_teacher_index')}}"><button type="button" class="btn btn-primary me-2">ESPACE INSTRUCTEUR</button></a>
                                   <a href="{{path('app_list_user')}}"><button type="button" class="btn btn-primary me-2">ADMINISTRATION</button></a>
                                   <a href="{{path('app_logout')}}"><button type="button" class="btn btn-primary me-2">DECONECTION</button></a>
                                    
                                  
                         {% else %}
-                          <a href="{{path('app_login')}}"><button type="button" class="btn btn-primary me-2">Login</button></a>
-                              <a href="{{path('app_register')}}"><button type="button" class="btn btn-primary me-2">Sign-up</button></a>
+                          <a href="{{path('app_login')}}"><button type="button" class="btn btn-primary me-2">Connexion</button></a>
+                              <a href="{{path('app_register')}}"><button type="button" class="btn btn-primary me-2">S'inscrire</button></a>
                                
                                
                         {% endif %}

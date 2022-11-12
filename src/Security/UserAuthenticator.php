@@ -51,8 +51,8 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
-        if (in_array('ROLE_TEACHERWAIT', $user->getRoles())) {
-            return new RedirectResponse($this->urlGenerator->generate('app_wait'));
+        if (in_array('',$user->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('app_teacher_index'));
         }
       
         

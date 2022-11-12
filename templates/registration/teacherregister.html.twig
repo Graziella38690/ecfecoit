@@ -6,20 +6,31 @@
 <div class="container ">
     <h1>Register</h1>
 {{ form_start(teacherForm) }}
-      
-        {{ form_row(teacherForm.firstname) }}
-        {{ form_row(teacherForm.lastname)   }}
-      
-    
-    
-      
-        {{ form_row(teacherForm.email) }}
-        {{ form_row(teacherForm.plainPassword, {
-            label: 'Password'
+      {{ form_row(teacherForm.pseudo,{
+            label:'Pseudo'
         }) }}
-        {{ form_row(teacherForm.agreeTerms) }}
+        {{ form_row(teacherForm.firstname,{
+            label:'Prenom'
+        }) }}
+        {{ form_row(teacherForm.lastname,{
+            label:'Nom'
+           }) }}
+      
+        {{ form_row(teacherForm.email,{
+            label:'E-mail'
+           }) }}
+        {{ form_row(teacherForm.plainPassword, {
+            label: 'Mot de passe'
+        }) }}
+
+        {{ form_row(teacherForm.agreeTerms, {
+            
+        label:'En m\'inscrivany à ce site j\'accepte...'
+        }) }}
+
  
-        <button type="submit" class="btn">Register</button>
+        <button class="btn btn-lg btn-primary" type="submit">Postuler
     {{ form_end(teacherForm) }}
     </div>
 {% endblock %}
+

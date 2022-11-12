@@ -16,10 +16,10 @@
                 </tr>
                 <tr>
                 <th> {% for roles in user.roles %}
-                {% if roles == 'ROLE_LAERNING' %}
+                
                  Pseudo
                 <td> {{ user.Pseudo }} </td>
-                 {% endif %}
+                 
                 {% if roles == 'ROLE_TEACHER' %}
                  Prenom
                 <td> {{ user.Firstname }} </td>
@@ -44,6 +44,9 @@
                 <td> {% for roles in user.roles %}
                 {% if roles == 'ROLE_ADMIN' %}
                  Administrateur
+                 {% endif %}
+                  {% if roles == 'ROLE_TEACHERWAIT' %}
+                 Instructeur en attente
                  {% endif %}
                 {% if roles == 'ROLE_TEACHER' %}
                  Instructeur

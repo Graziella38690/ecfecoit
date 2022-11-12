@@ -29,14 +29,11 @@
         </div>
        
        
-              {% if is_granted('ROLE_TEACHER') %}
-              
+              {% if is_granted('ROLE_TEACHER')%}
+                   
                  <a href="{{ path('app_teacher_show') }}"class="btn btn-primary">Voir mes formations</a></button>
                    <a href="{{ path('app_training_new') }}"class="btn btn-primary">Creer une formation</a></button>
                     <a href="{{ path('app_lesson_new') }}"class="btn btn-primary">Creer une lesson</a></button>
-                  
-           
-           
                    
               {% endif %}
         </div>

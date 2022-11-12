@@ -26,6 +26,7 @@ class UserType extends AbstractType
 
             ->add('roles', ChoiceType::class, [
                 'choices' => [
+                    'Instructeur en attente' => 'ROLE_TEACHERWAIT',
                     'Apprenant' => 'ROLE_LAERNING',
                     'Instructeur' => 'ROLE_TEACHER',
                     'Administrateur' => 'ROLE_ADMIN',
