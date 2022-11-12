@@ -51,8 +51,8 @@ class TrainingRepository extends ServiceEntityRepository
    
       public function findLastTraining()
       {
-          return $this->createQueryBuilder('f')
-              ->orderBy('f.id', 'DESC')
+          return $this->createQueryBuilder('t')
+              ->orderBy('t.id', 'DESC')
               ->setMaxResults(3)
               ->getQuery()
               ->getResult()
