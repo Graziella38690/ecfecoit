@@ -18,10 +18,7 @@ class UserType extends AbstractType
             
 
 
-        ->add('is_verified', CheckboxType::class, [
-            'label'    => ' activer le compte',
-            'required' => false,
-        ])
+       
 
 
             ->add('roles', ChoiceType::class, [
