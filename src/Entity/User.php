@@ -50,9 +50,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime_immutable', options:['default' => 'CURRENT_TIMESTAMP'])]
     private $Dateinscription;
 
-    #[ORM\Column(type: 'boolean')]
-    private $is_verified= 0;
-
     #[ORM\OneToMany(mappedBy: 'creatby', targetEntity: Lesson::class)]
     private $lessons;
 
@@ -241,17 +238,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getIsVerified(): ?bool
-    {
-        return $this->is_verified;
-    }
-
-    public function setIsVerified(bool $is_verified): self
-    {
-        $this->is_verified = $is_verified;
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, Lesson>

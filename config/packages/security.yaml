@@ -37,8 +37,9 @@ security:
 
     role_hierarchy:
               
-        ROLE_TEACHERWAIT:   ROLE_TEACHERWAIT
+       
         ROLE_LEARNING:      ROLE_LAERNING
+        ROLE_TEACHERWAIT:   ROLE_TEACHERWAIT
         ROLE_TEACHER:       ROLE_LAERNING,ROLE_TEACHERWAIT
         ROLE_ADMIN:         ROLE_TEACHER
 
