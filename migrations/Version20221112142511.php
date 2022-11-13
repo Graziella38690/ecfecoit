@@ -20,6 +20,7 @@ final class Version20221112142511 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
+        
         $this->addSql('ALTER TABLE user CHANGE dateinscription dateinscription DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT \'(DC2Type:datetime_immutable)\'');
     }
 

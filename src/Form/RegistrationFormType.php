@@ -27,15 +27,12 @@ class RegistrationFormType extends AbstractType
                 ],
                 'label' => 'Pseudo'
             ])
-
             ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'form-control'
                 ],
                 'label' => 'E-mail'
             ])
-
-
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

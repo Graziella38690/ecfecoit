@@ -12,7 +12,7 @@ class HomeController extends AbstractController
     #[Route('/index', name: 'app_home')]
     public function index(TrainingRepository $TrainingRepository): Response
     {   
-        $this->getUser();
+       
         return $this->render('home/index.html.twig', [
             'Trainings' => $TrainingRepository->findLastTraining(),
         ]);

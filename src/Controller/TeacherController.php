@@ -14,12 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-#[Route('/teacher')]
+
 
 class TeacherController extends AbstractController
 {
    
-#[Route('/', name: 'app_teacher_index', methods: ['GET'])]
+#[Route('/teacher', name: 'app_teacher_index', methods: ['GET'])]
  
 public function details(TrainingRepository $TrainingRepository): Response
 {
