@@ -1,5 +1,3 @@
-
-   
 {% extends 'base.html.twig' %}
 
 {% block title %}Mon compte{% endblock %}
@@ -33,6 +31,7 @@
                    
                  <a href="{{ path('app_teacher_show') }}"class="btn btn-primary">Voir mes formations</a></button>
                    <a href="{{ path('app_training_new') }}"class="btn btn-primary">Creer une formation</a></button>
+                   <a href="{{ path('app_section_new') }}"class="btn btn-primary">Creer une section</a></button>
                     <a href="{{ path('app_lesson_new') }}"class="btn btn-primary">Creer une lesson</a></button>
                    
               {% endif %}

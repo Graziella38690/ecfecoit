@@ -75,7 +75,7 @@ class Lesson
 
     public function setCreatby(?user $Creatby): self
     {
-        $this->creatby = $Creatby;
+        $this->Creatby = $Creatby;
 
         return $this;
     }

@@ -52,7 +52,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
         if (in_array('',$user->getRoles())) {
-            return new RedirectResponse($this->urlGenerator->generate('app_teacher_index'));
+            return new RedirectResponse($this->urlGenerator->generate('app_home'));
         }
       
         

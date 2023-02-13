@@ -78,7 +78,9 @@ class TrainingRepository extends ServiceEntityRepository
         ;
     }
     
+  
 
+  
     /*
     public function findOneBySomeField($value): ?Training
     {

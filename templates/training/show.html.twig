@@ -3,40 +3,52 @@
 {% block title %}Training{% endblock %}
 
 {% block body %}
-<div class="container text-center">
-           
-                     <img src="{{ asset('picture/R.png') }}" class="formimg" alt="...">
-                      <h2>{{ training.Title }}</h2>
-                        Crée le :{{training.Datecreate|date('Y-m-d')}} </br>
-                     
-                        <h3>Descriptif de la formation</h3>
-                        {{ training.Description }} </br>
-                         
-                         <h4>Contenue de la formation</h4>
 
-        {% for section in training.sections %}
-                       <ul><h4>{{section.Title}}</h4></ul>
-                     
-               
-                 {% endfor %}
-                  {% if is_granted('ROLE_TEACHER') %}
-                      
-                   
-                          <a href="{{ path('app_training_edit',{'id': training.id})}}"class="btn btn-primary" role="button">Modifier</a>
-                          {{ include('training/_delete_form.html.twig') }}
-                                            
-                 {% endif %}
-                
-              </div>
-          
-        </tbody>
+
+<div class="container text-center">
+
+      <div class="col-md-12" id="title">
+        <h1>Détail de la formation</h1>
+      </div>
+    
+      <div class="col-xs-5 ">
+       <img src="{{ asset('uploads/images/'  ~ training.picture) }}" class="img-training" alt="..." height="250" width="250">
+      </div>
    
 
-    <a href="{{ path('app_training_index') }}">back to list</a>
+    <div class="row">
+      <div class="col-xs-12">
+        Résumer:{{ training.description }}
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="col-xs-12">
+         <h3>Contenue de la formation</h3>
+                  {% for section in training.sections %}
+            <ul><h4>{{section.Title}}</h4></ul>
+                 {% endfor %}   
+      </div>
+      <div class="col-xs-12">
+         Publier par {{ training.Creatby.firstname }}  {{ training.Creatby.lastname }} 
+                     Crée le :{{training.Datecreate|date('Y-m-d')}}       
+      </div>
+      <div class="col-xs-12">
+       {% if is_granted('ROLE_TEACHER') %}
+                          <a href="{{ path('app_training_edit',{'id': training.id})}}"class="btn btn-primary" role="button">Modifier</a>
+                          {{ include('training/_delete_form.html.twig') }}                                           
+                 {% endif %}         
+      </div>
+    </div>
+    
    
 
     
-    </div>
+       
+                      
+                
+      
+    
+
 {% endblock %}
  

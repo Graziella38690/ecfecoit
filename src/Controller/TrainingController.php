@@ -1,21 +1,17 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\Training;
-
 use App\Form\TrainingType;
-use App\Repository\SectionRepository;
 use App\Repository\TrainingRepository;
-use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\FileUploader;
+use DateTimeImmutable;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
-
-
 
 class TrainingController extends AbstractController
 {  
@@ -31,30 +27,38 @@ class TrainingController extends AbstractController
         
         return $this->render('training/index.html.twig', [
             'trainings' => $Training,
+            
+            'user' => $this->getUser()
         ]);
     }
   
     #[Security("is_granted('ROLE_TEACHER')", statusCode: 404)]
     #[Route('training/new', name: 'app_training_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TrainingRepository $TrainingRepository): Response
+    public function new(Request $request, TrainingRepository $TrainingRepository,FileUploader $FileUploader): Response
     {
         $Training = new Training();
-        
-       
         $form = $this->createForm(TrainingType::class, $Training);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            $this->getUser();
             $Training->setCreatby($this->getUser());
-         
+            
+            if ($form->get('isPublished')->getData()) {
+                $Training->setDatecreate(new DateTimeImmutable());
+            }
+            
+            $pictureFile = $form->get('picture')->getData();
+            if ($pictureFile) {
+                $pictureFileName = $FileUploader->UploadFile($pictureFile);
+                $Training->setPicture($pictureFileName);
+            }
             $TrainingRepository->add($Training);
             return $this->redirectToRoute('app_teacher_show', [], Response::HTTP_SEE_OTHER);
         }
         return $this->renderForm('training/new.html.twig', [
             'training' => $Training,
             'form' => $form,
+           
         ]);
     }
     #[Security("is_granted('ROLE_LAERNING')", statusCode: 404)]
@@ -80,6 +84,8 @@ class TrainingController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->getUser();
+            $Training->setCreatby($this->getUser());
             $TrainingRepository->add($Training);
             return $this->redirectToRoute('app_training_index', [], Response::HTTP_SEE_OTHER);
         }

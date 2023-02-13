@@ -22,11 +22,8 @@ class Training
     private $Description;
 
 
-    #[ORM\Column(type: 'text')]
-    private $catchphrase;
-
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'trainings')]
    
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'trainings')]
     private $Creatby;
 
  
@@ -38,6 +35,12 @@ class Training
 
     #[ORM\ManyToOne(inversedBy: 'formation')]
     private ?Section $section = null;
+
+    #[ORM\Column]
+    private ?bool $isPublished = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $picture = null;
 
     public function __construct()
     {
@@ -75,17 +78,7 @@ class Training
 
   
 
-    public function getCatchphrase(): ?string
-    {
-        return $this->catchphrase;
-    }
-
-    public function setCatchphrase(string $catchphrase): self
-    {
-        $this->catchphrase = $catchphrase;
-
-        return $this;
-    }
+    
 
     public function getCreatby(): ?user
     {
@@ -98,6 +91,8 @@ class Training
 
         return $this;
     }
+   
+     
 
   
 
@@ -112,6 +107,7 @@ class Training
 
         return $this;
     }
+    
 
     /**
      * @return Collection<int, Section>
@@ -123,11 +119,13 @@ class Training
 
     public function addSection(Section $section): self
     {
-        if (!$this->sections->contains($section)) {
+        
+        if (!$this->sections->contains($section)){
             $this->sections[] = $section;
             $section->setTraining($this);
+            
         }
-
+        
         return $this;
     }
 
@@ -151,6 +149,30 @@ class Training
     public function setSection(?Section $section): self
     {
         $this->section = $section;
+
+        return $this;
+    }
+
+    public function isIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

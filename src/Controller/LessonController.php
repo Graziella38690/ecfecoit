@@ -9,36 +9,41 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 class LessonController extends AbstractController
 {
-    #[Route('/lesson/index', name: 'app_lesson_index', methods: ['GET'])]
+    #[Route('/lesson/index', name: 'app_lesson_index', methods: ['GET', 'POST'])]
     public function index(LessonRepository $lessonRepository): Response
-
-
     
     {
+       
         return $this->render('lesson/index.html.twig', [
 
-            'lessons' => $lessonRepository->findBy(['creatby' => $this->getuser()], ['id' => 'asc']),
+            'lessons' => $lessonRepository->findBy(['Creatby' => $this->getuser()], ['id' => 'asc']),
             
         ]);
     }
-
+    #[Security("is_granted('ROLE_TEACHER')", statusCode: 404)]
     #[Route('/lesson/new', name: 'app_lesson_new', methods: ['GET', 'POST'])]
     public function new(Request $request, LessonRepository $lessonRepository): Response
     {   
         $lesson = new Lesson();
+
         $form = $this->createForm(LessonType::class, $lesson);
         $form->handleRequest($request);
        
         if ($form->isSubmitted() && $form->isValid()) {
+
             $this->getUser();
             $lesson->setCreatby($this->getUser());
+
             $lessonRepository->add($lesson);
             return $this->redirectToRoute('app_lesson_index', [], Response::HTTP_SEE_OTHER);
         }
+
+        
 
         return $this->renderForm('lesson/new.html.twig', [
             'lesson' => $lesson,
@@ -47,10 +52,10 @@ class LessonController extends AbstractController
     }
 
     #[Route('lesson/show/{id}', name: 'app_lesson_show', methods: ['GET'])]
-    public function show(Lesson $lesson): Response
+    public function show(lessonRepository $lessonRepository): Response
     {
         return $this->render('lesson/show.html.twig', [
-            'lesson' => $lesson,
+            'lessons' => $lessonRepository->findBy(['Creatby' => $this->getuser()], ['id' => 'asc']),
         ]);
     }
 

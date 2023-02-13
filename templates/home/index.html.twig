@@ -32,14 +32,14 @@
           </div>
         </section>
         <section class="row ">
-
+                
              {% for Training in Trainings %}        
           <div class="col-md-4 g-2 d-flex align-content-stretch flex-wrap">
               <div class="card text-center article-formation ">
                   <div class="card-body mb-2">
-                     <img src="{{ asset('picture/Logo_ecoit.png') }}" class="card-img-top" alt="...">
-                      <h5 class="card-title text-center">{{ Training.Id }}{{ Training.Title }}</h5>
-                      <p class="card-text">{{ Training.catchphrase }}</p>     
+                     <img src="{{ asset('uploads/images/'  ~ Training.picture) }}" class="card-img-top" alt="...">
+                      <h5 class="card-title text-center">{{ Training.Title }}</h5>
+                      <p class="card-text">{{ Training.description }}</p>     
                      Publier par {{ Training.Creatby.firstname }}  {{ Training.Creatby.lastname }}         
                   </div>
                   <div class="card-footer text-center ">                    

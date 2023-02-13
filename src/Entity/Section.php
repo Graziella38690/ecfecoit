@@ -32,16 +32,16 @@ class Section
     private $Creatby;
 
     #[ORM\OneToMany(mappedBy: 'section', targetEntity: training::class)]
-    private Collection $formation;
+    private Collection $trainings;
 
    
 
     public function __construct()
     {
         $this->trainings = new ArrayCollection();
-        $this->Lesson = new ArrayCollection();
+      
         $this->lessons = new ArrayCollection();
-        $this->formation = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -112,35 +112,40 @@ class Section
 
     public function setCreatby(?User $Creatby): self
     {
-        $this->creatby = $Creatby;
+        $this->Creatby = $Creatby;
 
         return $this;
     }
 
+ 
+    
+        
+
+
     /**
      * @return Collection<int, training>
      */
-    public function getFormation(): Collection
+    public function getTrainings(): Collection
     {
-        return $this->formation;
+        return $this->trainings;
     }
 
-    public function addFormation(training $formation): self
+    public function addFormation(training $training): self
     {
-        if (!$this->formation->contains($formation)) {
-            $this->formation->add($formation);
-            $formation->setSection($this);
+        if (!$this->trainings->contains($training)) {
+            $this->trainings->add($training);
+            $training->setSection($this);
         }
 
         return $this;
     }
 
-    public function removeFormation(training $formation): self
+    public function removeTraining(training $training): self
     {
-        if ($this->formation->removeElement($formation)) {
+        if ($this->trainings->removeElement($training)) {
             // set the owning side to null (unless already changed)
-            if ($formation->getSection() === $this) {
-                $formation->setSection(null);
+            if ($training->getSection() === $this) {
+                $training->setSection(null);
             }
         }
 

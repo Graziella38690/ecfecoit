@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Section{% endblock %}
+{% block title %}Nouvelle section{% endblock %}
 
 {% block body %}
-    <h1>Create new Section</h1>
+    <div class="container-fluid container-lg">
+        <h1>Nouvelle section</h1>
 
-    {{ include('section/_form.html.twig') }}
+        {{ include('section/_form.html.twig') }}
 
-    <a href="{{ path('app_section_index') }}">back to list</a>
+        <a href="{{ path('app_section_index') }}" class="btn btn-french-lilac my-2">Retour</a>
+    </div>
 {% endblock %}
