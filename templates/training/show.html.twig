@@ -25,7 +25,7 @@
     <div class="row">
       <div class="col-xs-12">
          <h3>Contenue de la formation</h3>
-                  {% for section in training.sections %}
+                  {% for sectionsContained in training %}
             <ul><h4>{{section.Title}}</h4></ul>
                  {% endfor %}   
       </div>

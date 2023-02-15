@@ -7,7 +7,6 @@
   
 
 
-
   <aside class="col-3">
             <div class="row justify-content-center align-items-center">
               <img class="col-8" >
@@ -22,7 +21,7 @@
         <section class="row justify-content-center">
         
           <div class="col-12 actuformation">
-            <h4> Consulter nos {{trainings. getTotalItemCount }}  formations</h4>
+          
           </div>
         </section>
         <section class="row">
@@ -61,16 +60,13 @@
                               
         {% endfor %}
         </section>
-         {{ knp_pagination_render(trainings) }}       
+     {{ knp_pagination_render(trainings) }}     
       </div>
 
       
       {% endblock %}
 {% block javascripts %}
-    <script>
-     
-          
-    </script>
+   
 
    {% endblock %}
 

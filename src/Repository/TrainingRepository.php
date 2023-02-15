@@ -7,6 +7,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use App\Model\SearchData;
 
 /**
  * @method Training|null find($id, $lockMode = null, $lockVersion = null)
@@ -46,9 +48,22 @@ class TrainingRepository extends ServiceEntityRepository
     }
 
     /**
-      * @return Training[] Returns an array of Formation objects
+      * @return Training[] Returns an array of Training objects
       */
    
+      public function findPublished()
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.isPublished = :val')
+            ->setParameter('val', 1)
+            ->orderBy('t.Creatby', 'DESC')
+            
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
       public function findLastTraining()
       {
           return $this->createQueryBuilder('t')
@@ -59,6 +74,9 @@ class TrainingRepository extends ServiceEntityRepository
               ->getResult()
           ;
       }
+
+
+
 
 
 
@@ -77,8 +95,31 @@ class TrainingRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    
-  
+
+
+
+
+   /* public function findBySearch(SearchData $SearchData): PaginationInterface
+    {
+        $data = $this ->createQueryBuilder('t')
+        ->Where('t.state LIKE :state')
+        ->setParameters('state','%STATE_PUBLISHED%');
+
+        if(!empty($SearchData->q)){
+            $data = $data
+            ->andWhere('t.title LIKE :q')
+            ->setParameter('t',"%{$SearchData ->q}%");
+        }
+        $data = $data
+                 ->getQuery()
+                ->getResult();
+
+$Training = $this->paginatorInterface->paginate ($data, $SearchData ->page,9);
+return $Training;
+}
+ */
+
+}
 
   
     /*
@@ -92,4 +133,4 @@ class TrainingRepository extends ServiceEntityRepository
         ;
     }
     */
-}
+

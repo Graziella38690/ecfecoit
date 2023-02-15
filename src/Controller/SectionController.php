@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Section;
 use App\Form\SectionType;
 use App\Repository\SectionRepository;

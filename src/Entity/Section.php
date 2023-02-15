@@ -21,26 +21,28 @@ class Section
 
     
 
-    #[ORM\OneToMany(mappedBy: 'section', targetEntity: Lesson::class,orphanRemoval:true)]
-    private $lessons;
+    #[ORM\OneToMany(mappedBy: 'containedIn', targetEntity: Lesson::class,)]
+    private $lessonsContained;
 
-    #[ORM\ManyToOne(targetEntity: Training::class, inversedBy: 'sections')]
-   
-    private $training;
+    
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'sections')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'sectionsCreated')]
+    #[ORM\JoinColumn(nullable:false)]
     private $Creatby;
 
-    #[ORM\OneToMany(mappedBy: 'section', targetEntity: training::class)]
-    private Collection $trainings;
+    
+
+    #[ORM\ManyToOne(targetEntity: Training::class,inversedBy: 'sectionsContained')]
+    #[ORM\JoinColumn(nullable:false)]
+    private $containedIn;
 
    
 
     public function __construct()
     {
-        $this->trainings = new ArrayCollection();
+       
       
-        $this->lessons = new ArrayCollection();
+        $this->lessonsContained = new ArrayCollection();
         
     }
 
@@ -61,50 +63,6 @@ class Section
         return $this;
     }
 
-    
-
-    /**
-     * @return Collection<int, Lesson>
-     */
-    public function getLessons(): Collection
-    {
-        return $this->lessons;
-    }
-
-    public function addLesson(Lesson $lesson): self
-    {
-        if (!$this->lessons->contains($lesson)) {
-            $this->lessons[] = $lesson;
-            $lesson->setSection($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLesson(Lesson $lesson): self
-    {
-        if ($this->lessons->removeElement($lesson)) {
-            // set the owning side to null (unless already changed)
-            if ($lesson->getSection() === $this) {
-                $lesson->setSection(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getTraining(): ?Training
-    {
-        return $this->training;
-    }
-
-    public function setTraining(?Training $training): self
-    {
-        $this->training = $training;
-
-        return $this;
-    }
-
     public function getCreatby(): ?user
     {
         return $this->Creatby;
@@ -118,39 +76,54 @@ class Section
     }
 
  
-    
-        
-
-
-    /**
-     * @return Collection<int, training>
-     */
-    public function getTrainings(): Collection
+    public function getContainedIn(): ?Training
     {
-        return $this->trainings;
+        return $this->containedIn;
     }
 
-    public function addFormation(training $training): self
+    public function setContainedIn(?Training $containedIn): self
     {
-        if (!$this->trainings->contains($training)) {
-            $this->trainings->add($training);
-            $training->setSection($this);
+        $this->containedIn = $containedIn;
+
+        return $this;
+    }
+
+    
+
+     /**
+     * @return Collection<int, Lesson>
+     */
+    public function getLessons(): Collection
+    {
+        return $this->lessonsContained;
+    }
+
+    public function addLessonContained(Lesson $lessonsContained): self
+    {
+        if (!$this->lessonsContained->contains($lessonsContained)) {
+            $this->lessonsContained[] = $lessonsContained;
+            $lessonsContained->setContainedIn($this);
         }
 
         return $this;
     }
 
-    public function removeTraining(training $training): self
+    public function removeLesson(Lesson $lessonsContained): self
     {
-        if ($this->trainings->removeElement($training)) {
+        if ($this->lessonsContained->removeElement($lessonsContained)) {
             // set the owning side to null (unless already changed)
-            if ($training->getSection() === $this) {
-                $training->setSection(null);
+            if ($lessonsContained->getContainedIn() === $this) {
+                $lessonsContained->setContainedIn(null);
             }
         }
 
         return $this;
     }
+
+
+        
+
+   
    
    
 }

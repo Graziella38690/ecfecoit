@@ -23,18 +23,13 @@ class Training
 
 
    
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'trainings')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'trainingsCreated')]
     private $Creatby;
 
  
     #[ORM\Column(type: 'date', nullable:true)]
     private $Datecreate;
 
-    #[ORM\OneToMany(mappedBy: 'training', targetEntity: Section::class,orphanRemoval:true,cascade:['persist','remove'])]
-    private $sections;
-
-    #[ORM\ManyToOne(inversedBy: 'formation')]
-    private ?Section $section = null;
 
     #[ORM\Column]
     private ?bool $isPublished = null;
@@ -42,9 +37,14 @@ class Training
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
+    #[ORM\OneToMany(mappedBy: 'containedIn', targetEntity: Section::class)]
+    private $sectionsContained;
+
     public function __construct()
     {
-        $this->sections = new ArrayCollection();
+        $this->sectionsContained = new ArrayCollection();
+        
+       
     }
 
     public function getId(): ?int
@@ -109,50 +109,6 @@ class Training
     }
     
 
-    /**
-     * @return Collection<int, Section>
-     */
-    public function getSections(): Collection
-    {
-        return $this->sections;
-    }
-
-    public function addSection(Section $section): self
-    {
-        
-        if (!$this->sections->contains($section)){
-            $this->sections[] = $section;
-            $section->setTraining($this);
-            
-        }
-        
-        return $this;
-    }
-
-    public function removeSection(Section $section): self
-    {
-        if ($this->sections->removeElement($section)) {
-            // set the owning side to null (unless already changed)
-            if ($section->getTraining() === $this) {
-                $section->setTraining(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getSection(): ?Section
-    {
-        return $this->section;
-    }
-
-    public function setSection(?Section $section): self
-    {
-        $this->section = $section;
-
-        return $this;
-    }
-
     public function isIsPublished(): ?bool
     {
         return $this->isPublished;
@@ -176,4 +132,37 @@ class Training
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Section>
+     */
+    
+     public function getSectionsContained(): Collection
+     {
+         return $this->sectionsContained;
+
+     }
+ 
+     public function addSectionsContained(Section $sectionsContained): self
+     {
+         if (!$this->sectionsContained->contains($sectionsContained)) {
+             $this->sectionsContained[] = $sectionsContained;
+             $sectionsContained->setContainedIn($this);
+         }
+ 
+         return $this;
+     }
+ 
+     public function removeSectionsContained(Section $sectionsContained): self
+     {
+         if ($this->sectionsContained->removeElement($sectionsContained)) {
+             // set the owning side to null (unless already changed)
+             if ($sectionsContained->getContainedIn() === $this) {
+                 $sectionsContained->setContainedIn(null);
+             }
+         }
+ 
+         return $this;
+     }
 }
+

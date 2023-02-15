@@ -45,24 +45,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $Pseudo;
 
     #[ORM\OneToMany(mappedBy: 'Creatby', targetEntity: Training::class)]
-    private $trainings;
+    private $trainingsCreated;
 
     #[ORM\Column(type: 'datetime_immutable', options:['default' => 'CURRENT_TIMESTAMP'])]
     private $Dateinscription;
 
-    #[ORM\OneToMany(mappedBy: 'creatby', targetEntity: Lesson::class)]
-    private $lessons;
+    #[ORM\OneToMany(mappedBy: 'Creatby', targetEntity: Lesson::class)]
+    private $lessonsCreated;
 
-    #[ORM\OneToMany(mappedBy: 'creatby', targetEntity: Section::class)]
-    private $sections;
+    #[ORM\OneToMany(mappedBy: 'Creatby', targetEntity: Section::class)]
+    private $sectionsCreated;
 
    
 
     public function __construct()
     {
-        $this->trainings = new ArrayCollection();
-        $this->lessons = new ArrayCollection();
-        $this->sections = new ArrayCollection();
+        $this->trainingsCreated = new ArrayCollection();
+        $this->lessonsCreated = new ArrayCollection();
+        $this->sectionsCreated = new ArrayCollection();
         $this->Dateinscription = new \DateTimeImmutable();
     }
 
@@ -201,25 +201,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getTrainings(): Collection
     {
-        return $this->trainings;
+        return $this->trainingsCreated;
     }
 
-    public function addTraining(Training $training): self
+    public function addTrainingCreated(Training $trainingCreated): self
     {
-        if (!$this->trainings->contains($training)) {
-            $this->trainings[] = $training;
-            $training->setCreatby($this);
+        if (!$this->trainingsCreated->contains($trainingCreated)) {
+            $this->trainingsCreated[] = $trainingCreated;
+            $trainingCreated->setCreatby($this);
         }
 
         return $this;
     }
 
-    public function removeTraining(Training $training): self
+    public function removeTraining(Training $trainingsCreated): self
     {
-        if ($this->trainings->removeElement($training)) {
+        if ($this->trainingsCreated->removeElement($trainingsCreated)) {
             // set the owning side to null (unless already changed)
-            if ($training->getCreatby() === $this) {
-                $training->setCreatby(null);
+            if ($trainingsCreated->getCreatby() === $this) {
+                $trainingsCreated->setCreatby(null);
             }
         }
 
@@ -243,27 +243,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Lesson>
      */
-    public function getLessons(): Collection
+    public function getLessonsCreated(): Collection
     {
-        return $this->lessons;
+        return $this->lessonsCreated;
     }
 
-    public function addLesson(Lesson $lesson): self
+    public function addLesson(Lesson $lessonCreated): self
     {
-        if (!$this->lessons->contains($lesson)) {
-            $this->lessons[] = $lesson;
-            $lesson->setCreatby($this);
+        if (!$this->lessonsCreated->contains($lessonCreated)) {
+            $this->lessonsCreated[] = $lessonCreated;
+            $lessonCreated->setCreatby($this);
         }
 
         return $this;
     }
 
-    public function removeLesson(Lesson $lesson): self
+    public function removeLessonCreated(Lesson $lessonCreated): self
     {
-        if ($this->lessons->removeElement($lesson)) {
+        if ($this->lessonsCreated->removeElement($lessonCreated)) {
             // set the owning side to null (unless already changed)
-            if ($lesson->getCreatby() === $this) {
-                $lesson->setCreatby(null);
+            if ($lessonCreated->getCreatby() === $this) {
+                $lessonCreated->setCreatby(null);
             }
         }
 
@@ -273,27 +273,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Section>
      */
-    public function getSections(): Collection
+    public function getSectionsCreated(): Collection
     {
-        return $this->sections;
+        return $this->getSectionsCreated();
     }
 
-    public function addSection(Section $section): self
+    public function addSectionsCreated(Section $sectionsCreated): self
     {
-        if (!$this->sections->contains($section)) {
-            $this->sections[] = $section;
-            $section->setCreatby($this);
+        if (!$this->sectionsCreated->contains($sectionsCreated)) {
+            $this->sectionsCreated[] = $sectionsCreated;
+            $sectionsCreated->setCreatby($this);
         }
 
         return $this;
     }
 
-    public function removeSection(Section $section): self
+    public function removeSectionsCreated(Section $sectionsCreated): self
     {
-        if ($this->sections->removeElement($section)) {
+        if ($this->sectionsCreated->removeElement($sectionsCreated)) {
             // set the owning side to null (unless already changed)
-            if ($section->getCreatby() === $this) {
-                $section->setCreatby(null);
+            if ($sectionsCreated->getCreatby() === $this) {
+                $sectionsCreated->setCreatby(null);
             }
         }
 

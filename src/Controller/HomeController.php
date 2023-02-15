@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use Knp\Component\Pager\PaginatorInterface;
 use app\Entity\User;
 use App\Repository\TrainingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -3,34 +3,65 @@ namespace App\Controller;
 
 use App\Entity\Training;
 use App\Form\TrainingType;
+use App\Form\SearchType;
+use App\Model\SearchData;
 use App\Repository\TrainingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
+
+
 use App\Service\FileUploader;
 use DateTimeImmutable;
-use Knp\Component\Pager\PaginatorInterface;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
+
+
 
 class TrainingController extends AbstractController
 {  
+
     #[Route('training/index', name: 'app_training_index', methods: ['GET'])]
-    public function index(Request $request,TrainingRepository $TrainingRepository, PaginatorInterface $paginator): Response
+    public function index(TrainingRepository $TrainingRepository,PaginatorInterface $paginatorInterface,Request $request): Response
     {   
-        $Training = $TrainingRepository->findAll();
-        $Training = $paginator->paginate(
-            $Training, 
-            $request->query->getInt('page', 1), 
-            limit:6
+        $Training = $TrainingRepository->findPublished();
+        $Training = $paginatorInterface ->paginate(
+            $Training,
+            $request->query->getInt('page',1),
+            3
         );
+
+        
+        /* $searchData = new SearchData();
+        $form = $this ->createForm(SearchType::class,$searchData);
+
+        $form->handleRequest($Request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $searchData->page=$Request->query->getInt('page',1);
+            $Training = $TrainingRepository ->findBySearch($searchData);
+
+
+            return $this->render('search.html.twig', [
+                'form' => $form,
+                'Training' => $Training
+        ]);
+            
+    }    */
+        
         
         return $this->render('training/index.html.twig', [
-            'trainings' => $Training,
+           
+            'trainings' => $Training
             
-            'user' => $this->getUser()
         ]);
     }
+
+
+
+    
   
     #[Security("is_granted('ROLE_TEACHER')", statusCode: 404)]
     #[Route('training/new', name: 'app_training_new', methods: ['GET', 'POST'])]
@@ -67,12 +98,12 @@ class TrainingController extends AbstractController
     public function show(training $Training ): Response
     {  
 
-        $sections = $Training->getSections();
+      
 
         return $this->render('training/show.html.twig',
          [
             'training' => $Training,
-            array ('date' => $sections)
+           
         ]);
     }
    

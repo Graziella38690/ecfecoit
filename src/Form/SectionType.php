@@ -31,7 +31,7 @@ private $user;
             ->add('Title')
            
          
-            ->add('Training', EntityType::class, [
+            ->add('containedIn', EntityType::class, [
                 'label' => 'Attachée à la formation:',
                 'class' => Training::class,
                 'query_builder' => function (EntityRepository $er) use ($userId) {

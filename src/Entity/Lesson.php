@@ -19,10 +19,13 @@ class Lesson
     #[ORM\Column(type: 'text')]
     private $textlesson;
 
-    #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'lessons')]
-    private $section;
+    #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'lessonsContained')]
+    #[ORM\JoinColumn(nullable:false)]
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'lessons')]
+    private $containedIn;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'lessonsCreated')]
+    #[ORM\JoinColumn(nullable:false)]
     private $Creatby;
 
    
@@ -56,14 +59,14 @@ class Lesson
         return $this;
     }
 
-    public function getSection(): ?Section
+    public function getContainedIn(): ?Section
     {
-        return $this->section;
+        return $this->containedIn;
     }
 
-    public function setSection(?Section $section): self
+    public function setContainedIn(?Section $scontainedIn): self
     {
-        $this->section = $section;
+        $this->containedIn = $scontainedIn;
 
         return $this;
     }
