@@ -100,8 +100,11 @@ class TrainingController extends AbstractController
 
       
 
+
         return $this->render('training/show.html.twig',
          [
+            
+            
             'training' => $Training,
            
         ]);

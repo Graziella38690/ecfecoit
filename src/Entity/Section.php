@@ -123,7 +123,10 @@ class Section
 
         
 
-   
+    public function __toString()
+    {
+        return $this->Title;
+    }
    
    
 }

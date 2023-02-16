@@ -26,7 +26,7 @@ class LessonType extends AbstractType
             ->add('Title')
             ->add('textlesson')
             
-            ->add('Section', EntityType::class, [
+            ->add('containedIn', EntityType::class, [
                 'label' => 'Attachée à la section:',
                 'class' => Section::class,
                 'query_builder' => function (EntityRepository $er) use ($userId) {

@@ -16,12 +16,12 @@
                 <td>{{ section.Title }}</td>
             </tr>
             <tr>
-                <th>Training</th>
-                <td>{{ section.Training.Title }}</td>
+                <th>Lesson</th>
+                 {% for lessonsContained in section %}
+            <ul><h4>{{lesson.Title}}</h4></ul>
+                 {% endfor %}    
             </tr>
-
-            
-
+  
         </tbody>
     </table>
 

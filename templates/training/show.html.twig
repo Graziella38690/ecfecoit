@@ -4,41 +4,54 @@
 
 {% block body %}
 
-
-<div class="container text-center">
-
-      <div class="col-md-12" id="title">
+<div class="container-fluid container-lg text-center">
+<div class="row">
+      <div class="col-xs-12" id="title">
         <h1>Détail de la formation</h1>
       </div>
-    
-      <div class="col-xs-5 ">
+      </div>
+    <div class="row">
+      <div class="col-xs-12 ">
        <img src="{{ asset('uploads/images/'  ~ training.picture) }}" class="img-training" alt="..." height="250" width="250">
       </div>
-   
+      </div>
 
-    <div class="row">
+   <div class="row">
       <div class="col-xs-12">
-        Résumer:{{ training.description }}
+       <h2>{{ training.title }}</h2>
       </div>
     </div>
 
     <div class="row">
       <div class="col-xs-12">
-         <h3>Contenue de la formation</h3>
-                  {% for sectionsContained in training %}
-            <ul><h4>{{section.Title}}</h4></ul>
-                 {% endfor %}   
+       <h4> Résumer</h4>{{ training.description }}
       </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+      <h3>Sommaire</h3>
+     
+    {% for sectionsContained in training.sectionsContained %}
+    <a href="{{ path('app_section_show',{'id': sectionsContained.id})}}"> <li> {{ sectionsContained.title }}</li></a>
+      
+    {% endfor %}
+     </div>
+      </div>
+      
+      
       <div class="col-xs-12">
          Publier par {{ training.Creatby.firstname }}  {{ training.Creatby.lastname }} 
                      Crée le :{{training.Datecreate|date('Y-m-d')}}       
       </div>
+
       <div class="col-xs-12">
        {% if is_granted('ROLE_TEACHER') %}
                           <a href="{{ path('app_training_edit',{'id': training.id})}}"class="btn btn-primary" role="button">Modifier</a>
                           {{ include('training/_delete_form.html.twig') }}                                           
                  {% endif %}         
       </div>
+
     </div>
     
    
