@@ -112,22 +112,44 @@ class TrainingController extends AbstractController
    
     #[Security("is_granted('ROLE_TEACHER')", statusCode: 404)]
     #[Route('training/{id}/edit', name: 'app_training_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Training $Training, TrainingRepository $TrainingRepository): Response
+    public function edit(Request $request, Training $Training, TrainingRepository $TrainingRepository,FileUploader $FileUploader): Response
     {
+
+        if ($Training->getCreatby() === $this->getUser()) {
         $form = $this->createForm(TrainingType::class, $Training);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getUser();
-            $Training->setCreatby($this->getUser());
+            
+            if ($form->get('isPublished')->getData() and $Training->getDatecreate() !== null) {
+                $Training->setDatecreate(new DateTimeImmutable());
+            }
+            $pictureFile = $form->get('picture')->getData();
+            if ($pictureFile) {
+                $pictureFileName = $FileUploader->UploadFile($pictureFile);
+                $Training->setPicture($pictureFileName);
+            }
             $TrainingRepository->add($Training);
             return $this->redirectToRoute('app_training_index', [], Response::HTTP_SEE_OTHER);
         }
+
+
 
         return $this->renderForm('training/edit.html.twig', [
             'training' => $Training,
             'form' => $form,
         ]);
+
+
+    } else {
+        return $this->render('home/index.html.twig', [
+            'Training' => $TrainingRepository->getLastPublishedCourses(),
+            
+        ]);
+    }
+
+
+
     }
     #[Security("is_granted('ROLE_TEACHER')", statusCode: 404)]
     #[Route('training/delete/{id}', name: 'app_training_delete', methods: ['POST'])]

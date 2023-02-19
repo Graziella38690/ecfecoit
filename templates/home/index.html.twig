@@ -3,14 +3,12 @@
 {% block title %}EcoIT{% endblock %}
 
 {% block body %}
-<main>
-      
-      <div class="container justify">
-        <section class="row justify">
-          
-          <h1 class="col-md-12 ">Apprendre à coder facilement et devenir un développeur web eco-responsable !</h1>
 
-          <p class="--bs-blue">C’est un fait, la crise écologique est devenue une urgence majeure. La sixième extinction massive 
+<div class="container-fluid container-lg">
+  <div class="row">
+    <div class="d-flex flex-column">
+      <h1 class="col-md-12 ">Apprendre à coder facilement et devenir un développeur web eco-responsable !</h1>
+      <p class="--bs-blue">C’est un fait, la crise écologique est devenue une urgence majeure. La sixième extinction massive 
             a déjà commencé et le changement climatique se fait de plus en plus ressentir au fil des années. 
             Mais qu’en est-il d’internet ?<br>
             En matière d’émissions de CO2, il pollue 1.5 fois plus que le transport aérien. D’ailleurs, en 
@@ -21,40 +19,36 @@
             À terme, EcoIT désire devenir la référence française pour les développeurs soucieux de leur impact 
             digital. Et pourquoi pas délivrer enfin un label officiel pour classer les sites web selon leur 
             empreinte numérique. </p>
-          
-        </section>
-        
-      </div>
-      <div class="container text-center">
-        <section class="row ">
-          <div class="col-12 ">
-            <h2>Nos dernières formations</h2>
-          </div>
-        </section>
-        <section class="row ">
-                
-             {% for Training in Trainings %}        
-          <div class="col-md-4 g-2 d-flex align-content-stretch flex-wrap">
-              <div class="card text-center article-formation ">
-                  <div class="card-body mb-2">
-                     <img src="{{ asset('uploads/images/'  ~ Training.picture) }}" class="card-img-top" alt="...">
-                      <h5 class="card-title text-center">{{ Training.Title }}</h5>
-                      <p class="card-text">{{ Training.description }}</p>     
-                     Publier par {{ Training.Creatby.firstname }}  {{ Training.Creatby.lastname }}         
-                  </div>
-                  <div class="card-footer text-center ">                    
-                      <button class="btn btn-primary ">
+       
+    </div> 
+  </div>      
+  <div class="row d-flex justify-content-evenly align-items-center overflow-auto">
+  {% for Training in Trainings %}      
+   <div class="col-lg-3">
+      <div class="card mx-4 my-5">
+        <div class="taining Card text-center">   
+          <img src="{{ asset('uploads/images/'  ~ Training.picture) }}" class="card-img-top" alt="...">
+          <div class="card-body col trainingCardText d-flex flex-column justify-content-between">
+            <h5 class="card-title text-center">{{ Training.Title }}</h5>
+            <p class="card-text overflow-auto">{{ Training.description }}</p>    
+            <p class="card-text overflow-auto">Publier par {{ Training.Creatby.firstname }}{{ Training.Creatby.lastname }}  </p>  
+          <div class="card-footer text-center ">          
+                <button class="btn btn-Vine ">
                          {% if app.user %}
                              <a href={{ path ('app_training_show',{id:Training.Id})}}>Détails de la formation</a>
                            {% else %}
-                             <a href="{{ path ('app_register') }}" class="btn btn-primary">Détails de la formation</a>
+                             <a href="{{ path ('app_register') }}" class="btn btn-Vine">Détails de la formation</a>
                          {% endif %} 
-                      </button>                            
+                      </button>        
+                            
+                               
+                        </div>
+                         </div>                       
                   </div>
               </div>
           </div>                              
         {% endfor %}
-        </section>
+          </div>
       </div>
 
 
@@ -81,7 +75,7 @@
       <p class="card-text">Pour suivre une formation vous devez vous enregistrer en tant qu'apprenant</p>
     </div>
     <div class="card-footer">
-      <a href="{{ path ('app_register') }}" class="btn btn-primary">S'inscrire</a>
+      <a href="{{ path ('app_register') }}" class="btn btn-Vine">S'inscrire</a>
    
     </div>
   </div>
@@ -89,10 +83,10 @@
     <div class="card-body">
     <img src="{{ asset('picture/teacher.png') }}" class="card-img-top" alt="...">
       <h5 class="card-title">Devenir instructeur</h5>
-      <p class="card-text">Envie de partager votre savoir , de proposer vos formation postuler pour devenir instructeur.</p>
+      <p class="card-text">Envie de partager votre savoir .Postuler pour devenir instructeur.</p>
     </div>
     <div class="card-footer">
-       <a href="{{ path ('app_teacher') }}" class="btn btn-primary ">Postuler</a>
+       <a href="{{ path ('app_teacher') }}" class="btn btn-Vine ">Postuler</a>
     </div>
   </div>
  

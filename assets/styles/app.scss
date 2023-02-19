@@ -1,6 +1,13 @@
 @import "~bootstrap/scss/bootstrap";
 
 
+/* SCSS RGB */
+$vert-cyan: rgba(89,116,108,1);
+$Vine: rgba(14,164,122,1);
+$Sigma: rgba(239,251,245,1);
+$blue-green: rgb(47,191,176,1);
+
+
 h1,
 h2,
 h3,
@@ -10,3 +17,40 @@ h6 {
   font-family:  'Babylonica', cursive;
 }
 
+.card-img-top
+{
+  max-width: 200px;
+  max-height: 200px;
+}
+.img-icon{
+  max-width:  30px;
+  max-height: 30px;
+}
+
+.btn-Vine,.btn btn-Vine,button.btn.btn-Vine{
+  color:$Sigma;
+  background-color: $Vine;
+  border-color: $Vine;
+}
+a,a:link, a:visited,a:hover,a:active {
+  text-decoration:none;
+  color: $Sigma;
+}
+
+a.btn.btn-Vine
+{
+  text-decoration:none;
+  color: $Sigma;
+}
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  
+  color: $vert-cyan;
+}

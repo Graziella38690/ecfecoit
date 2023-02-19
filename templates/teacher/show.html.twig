@@ -19,8 +19,7 @@
                                
                   </div>
                   <div class="card-body mb-2 text-center">
-                      <img src="{{ asset('picture/Logo_ecoit.png') }}" class="card-img-top" alt="...">
-
+                       <img src="{{ asset('uploads/images/'  ~ Training.picture) }}" class="card-img-top" alt="...">
    <h5 class="card-title">{{ Training.Title }}</h5>
                    
                       
@@ -32,13 +31,13 @@
                       </p>                    
                   </div>
                   <div class="card-footer d-flex flex-column">                    
-                      <button class="btn-primary ">
+                    
                           {% if app.user %}
-                              <a href={{ path ('app_training_show',{id:Training.Id})}}>Détails de la formation</a>
+                        <a href="{{ path ('app_training_show',{id:Training.Id})}}"class="btn btn-Vine " role="button">Détails de la formation</a>
                           {% else %}
-                              <a href={{ path ('app_register') }} >Détails de la formation</a>
+                              <a href={{ path ('app_register')}} class="btn btn-Vine " role="button">Détails de la formation</a>
                           {% endif %}
-                      </button>                            
+                                             
                   </div>
               </div>
               

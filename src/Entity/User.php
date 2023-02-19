@@ -56,7 +56,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'Creatby', targetEntity: Section::class)]
     private $sectionsCreated;
 
-   
+
+    #[ORM\Column]
+    private ?bool $isValidated = false;
 
     public function __construct()
     {
@@ -302,6 +304,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         return $this->email;
+    }
+
+    public function isIsValidated(): ?bool
+    {
+        return $this->isValidated;
+    }
+
+    public function setIsValidated(bool $isValidated): self
+    {
+        $this->isValidated = $isValidated;
+
+        return $this;
     }
 
     

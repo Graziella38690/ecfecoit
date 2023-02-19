@@ -5,13 +5,14 @@
 {% block body %}
 
 <div class="container text-center">
-<a href="{{ path('app_list_user') }}" class="btn btn-primary" role="button">Retour à la liste des utilisateurs</a>
+
+<a href="{{ path('app_admin') }}" class="btn btn-Vine" role="button">Retour à la liste des utilisateurs</a>
 
 
 <h2>Fiche utilisateur </h2>
 
 {% for roles in user.roles %}
-{% if roles == 'ROLE_TEACHERWAIT'%}        
+{% if roles == 'ROLE_TEACHER'%}        
 <p>Prénom : {{ user.Firstname }}</p>
 <p>Nom : {{ user.Lastname }}</p>
 {% endif %}
@@ -28,9 +29,7 @@
 
 Role:
 {% for roles in user.roles %}
-                {% if roles == 'ROLE_TEACHERWAIT' %}
-                 Instructeur en attente
-                 {% endif %}
+                
                 {% if roles == 'ROLE_TEACHER' %}
                  Instructeur
                 {% endif %}
@@ -38,11 +37,11 @@ Role:
                 Apprenant
      {% endif %}
 {% endfor %}
-</div>
+
 
 <h3>Action</h3>
   
 
 {{ include('/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-
+</div>
 {% endblock %}

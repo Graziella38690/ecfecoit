@@ -168,5 +168,8 @@ class Training
     {
         return $this->Title;
     }
+
+
+    
 }
 

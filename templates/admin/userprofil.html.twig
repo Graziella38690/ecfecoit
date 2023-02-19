@@ -42,10 +42,7 @@
                 <tr>
                 <th> Rôles </th>
                 <td> {% for roles in user.roles %}
-                {% if roles == 'ROLE_ADMIN' %}
-                 Administrateur
-                 {% endif %}
-                  {% if roles == 'ROLE_TEACHERWAIT' %}
+                {% if roles == 'ROLE_TEACHERWAIT' %}
                  Instructeur en attente
                  {% endif %}
                 {% if roles == 'ROLE_TEACHER' %}
@@ -53,11 +50,12 @@
                 {% endif %}
                 {% if roles == 'ROLE_LAERNING' %}
                 Apprenant
-     {% endif %}</td>
+     {% endif %}
+{% endfor %}</td>
     {% endfor %}     
    
 
-    <a href="{{ path('app_edit_user', {'id': user.id}) }}" class="btn btn-warning" role="button">Modifier</a>      
+    <a href="{{ path('app_edit_user', {'id': user.id}) }}" class="btn btn-Vine" role="button">Modifier</a>      
     {% endfor %}
                
             </tbody>

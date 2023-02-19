@@ -21,16 +21,30 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route("/admin/list/user", name:"app_list_user")]
+    #[Route("/admin/list/teacher", name:"app_list_teacher")]
  
-public function listeuser(UserRepository $repository): Response
+    public function listteacher(UserRepository $repository): Response
 {
-        $user = $repository -> findAll();
+        $user = $repository -> getAllTeacher();
     
-    return $this->render('admin/userlist.html.twig', [
+    return $this->render('admin/teacherlist.html.twig', [
         'user'=> $user
     ]);
 }
+
+#[Route("/admin/list/laerning", name:"app_list_laerning")]
+ 
+    public function listlaerning(UserRepository $repository): Response
+{
+        $user = $repository -> getAllLaerning();
+    
+    return $this->render('admin/laerninglist.html.twig', [
+        'user'=> $user
+    ]);
+}
+
+
+
 #[Route("/admin/profil/user/{id}", name:"app_profil_user")]
  
 public function profiluser(UserRepository $repository, int $id): Response
@@ -60,7 +74,7 @@ public function profiluser(UserRepository $repository, int $id): Response
                     'Félicitation',
                     'Votre utilisateur a été modifié avec succès !'
                 );
-            return $this->redirectToRoute('app_list_user');
+            return $this->redirectToRoute('app_admin');
         }
 
             return $this ->render('admin/useredit.html.twig',[

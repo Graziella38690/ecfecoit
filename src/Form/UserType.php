@@ -16,47 +16,31 @@ class UserType extends AbstractType
     {
         $builder
             
-        ->add('Pseudo',TextType::class, [
-            'attr' => [
-                'class' => 'form-control'
-            ],
-            'label' => 'Pseudo'
-        ])
+        ->add('isValidated', ChoiceType::class, [
+            'choices'  => [
+                'Non' => false,
+                'Oui' => true,
 
-        ->add('Firstname',TextType::class, [
-            'attr' => [
-                'class' => 'form-control'
             ],
-            'label' => 'Prenom'
+            'label' => 'Valider le compte'
         ])
-        ->add('Lastname',TextType::class, [
-            'attr' => [
-                'class' => 'form-control'
+        
+        ->add('roles', ChoiceType::class, [
+            'choices' => [
+                'Instructeur en attente' => 'ROLE_TEACHERWAIT',
+                'Apprenant' => 'ROLE_LAERNING',
+                'Instructeur' => 'ROLE_TEACHER',
+                'Administrateur' => 'ROLE_ADMIN',
+               
             ],
-            'label' => 'Nom'
+            'expanded' => true,
+            'multiple' => true,
+            'label' => 'Rôles' 
         ])
+    ;
 
-        ->add('email', EmailType::class, [
-            'attr' => [
-                'class' => 'form-control'
-            ],
-            'label' => 'E-mail'
-        ])
-
-
-            ->add('roles', ChoiceType::class, [
-                'choices' => [
-                    'Instructeur en attente' => 'ROLE_TEACHERWAIT',
-                    'Apprenant' => 'ROLE_LAERNING',
-                    'Instructeur' => 'ROLE_TEACHER',
-                    'Administrateur' => 'ROLE_ADMIN',
-                   
-                ],
-                'expanded' => true,
-                'multiple' => true,
-                'label' => 'Rôles' 
-            ])
-        ;
+           
+        
         
     }
 

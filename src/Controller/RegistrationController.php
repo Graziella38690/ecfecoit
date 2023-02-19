@@ -23,7 +23,7 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         $user->setRoles(['ROLE_LAERNING']);
-        
+        $user->setIsValidated(true);
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -51,8 +51,8 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(TeacherFormType::class, $user);
         $form->handleRequest($request);
-        $user->setRoles(['ROLE_TEACHERWAIT']);
-    
+        $user->setRoles(['ROLE_TEACHER']);
+        $user->setIsValidated(false);
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
