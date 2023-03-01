@@ -5,41 +5,41 @@
 {% block body %}
 <main class="container">
   <div class="connexion">
-    <h2>Mon Compte</h2>
-  </div>
-  <section class="row justify-content-center">
-    <aside class="col-4">
-      <div class="row justify-content-center">
-        <img class="col-8" src="{{ asset('assets/ressources/abstract.jpg') }}" alt="">              
-      </div>
-    </aside>
-    <div class="col-lg-4">
-      <div class="row justify-content-center align-items-center">                  
-        <div class="col-12 connexion">
-          <div class="pageco">
-            <h4>Mon profil</h4>
-            <div>Nom :{{app.user.lastname}} {{app.user.firstname}}</div>
+    <h2>Mon espace instructeur</h2>
+     <div>Nom :{{app.user.lastname}} {{app.user.firstname}}</div>
             <div>Email : {{app.user.email}}</div>
-            {% if app.user.photo != null %}
-            <div><img class="img-profil" src="{{ asset('upload/photoprofil/') }}{{ app.user.photo }}"></div>
-            {% endif %}
           </div>
-        </div>
+  </div>
+  <h4>Gestion de mes formations</h4>
+           
+           
+
+<a href="{{ path('app_teacher_show') }}"class="btn btn-Vine">Mes formations</a></button>
+<a href="{{ path('app_section_index') }}"class="btn btn-Vine">Mes sections</a></button>
+<a href="{{ path('app_lesson_index') }}"class="btn btn-Vine">Mes lessons</a></button>
+
+
+
+
+  
+           
+    
        
        
               {% if is_granted('ROLE_TEACHER')%}
-                   
-                 <a href="{{ path('app_teacher_show') }}"class="btn btn-Vine">Voir mes formations</a></button>
+                   {% if app.user.isvalidated == true %}
+              
                    <a href="{{ path('app_training_new') }}"class="btn btn-Vine">Creer une formation</a></button>
                    <a href="{{ path('app_section_new') }}"class="btn btn-Vine">Creer une section</a></button>
                     <a href="{{ path('app_lesson_new') }}"class="btn btn-Vine">Creer une lesson</a></button>
-                   
+                    {% else %}
+                    <p> Votre compte n'est pas validé , vous ne pouvez pas creer de formation. </p>
+                    {% endif %}
               {% endif %}
-        </div>
-      </div>
-    </div>
+
+     
   
-  </section>
+
 </main>
 
 {% endblock %}

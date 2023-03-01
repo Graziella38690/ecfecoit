@@ -3,11 +3,13 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-<div class="container ">
+<div class="container-fluid lg-container">
+    <div class="row vh-100 d-flex justify-content-center align-items-center">
+        <div class="col-10 col-lg-4" id="registerForm">
     <h1>Register</h1>
 {{ form_start(teacherForm) }}
 
-        {{ form_row(teacherForm.photo) }}
+   
         {{ form_row(teacherForm.pseudo,{
             label:'Pseudo'
         }) }}
@@ -25,6 +27,11 @@
             label: 'Mot de passe'
         }) }}
 
+        {{ form_row(teacherForm.photo, {
+            label: 'Photo'
+        }) }}
+
+
         {{ form_row(teacherForm.agreeTerms, {
             
         label:'En m\'inscrivany à ce site j\'accepte...'
@@ -33,6 +40,8 @@
  
         <button class="btn btn-lg btn-vine" type="submit">Postuler
     {{ form_end(teacherForm) }}
+        </div>
     </div>
+</div>
 {% endblock %}
 

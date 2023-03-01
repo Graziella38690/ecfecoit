@@ -30,22 +30,7 @@ class TrainingType extends AbstractType
                     'maxlength' => 255
                 ],
             ])
-            ->add('picture', FileType::class, [
-                'label' => 'Image',
-                'label_attr' => [
-                    'class' => 'old-rose ',
-                ],
-                'mapped' => false,
-                'constraints' => [
-                    new File([
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                        ],
-                        'mimeTypesMessage' => 'Le fichier doit être au format jpeg, jpg ou png.',
-                    ])
-                ],
-            ])
+            
             ->add('isPublished', ChoiceType::class, [
                 'choices'  => [
                     'Non' => false,

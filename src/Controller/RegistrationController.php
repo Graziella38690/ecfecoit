@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\FileUploader;
 
 
 
@@ -46,7 +47,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/teacherregistration', name: 'app_teacher')]
-    public function registerteacher(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function registerteacher(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager,FileUploader $fileUploader): Response
     {
         $user = new User();
         $form = $this->createForm(TeacherFormType::class, $user);
@@ -59,8 +60,15 @@ class RegistrationController extends AbstractController
             $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
-                )
+            )
             );
+
+                $photoFile = $form->get('photo')->getData();
+                if ($photoFile) {
+                    $photoFileName = $fileUploader->uploadFile($photoFile);
+                    $user->setPhoto($photoFileName);
+                }
+            
 
             $entityManager->persist($user);
             $entityManager->flush();

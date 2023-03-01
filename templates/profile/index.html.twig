@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+
+  <div class="connexion">
+    <h2>Mon Compte</h2>
+  </div>
+  <section class="row justify-content-center">
+    <aside class="col-3">
+      <div class="row justify-content-center">
+               {% if app.user.photo != NULL %}
+            <div><img src="{{ asset('uploads/images/'~ app.user.Photo) }}" class="img-user" alt="..." height="200" width="200"> 
+            <div> <a href="{{ path('app_profile_edit_photo',{id : app.user.id})}}"class="btn btn-Vine" role="button">Modifier ma photo</a></div>
+            </div>
+            {% endif %} 
+            {% if app.user.photo == NULL %}
+            
+           
+            <div> <a href="{{ path('app_profile_edit_photo',{id : app.user.id})}}"class="btn btn-Vine" role="button">Ajouter une photo</a></div>
+           
+            {% endif %} 
+
+      </div>
+    </aside>
+    <div class="col-lg-8">
+      <div class="row justify-content-center align-items-center">                  
+        <div class="col-12 ">
+          <div class="pageco">
+            <h4>Mon profil</h4>
+            {% if is_granted('ROLE_TEACHER') %} 
+            <div>Nom :{{app.user.lastname}} </div>
+            <div>Prenom:{{app.user.firstname}}</div>
+            <div>Email : {{app.user.email}}</div>
+            <div>Specialitées : 
+            <p>{{app.user.specialities}} </p></div>
+            <div> Role: Instructeur </div>
+           {% endif %} 
+            {% if is_granted('ROLE_LAERNING') %} 
+            <div>Pseudo :{{app.user.pseudo}} </div>
+            <div>Email : {{app.user.email}}</div>
+            <div> Role: Etudiant </div>
+           {% endif %} 
+           <div>Date d'inscription : {{app.user.Dateinscription|date('d-m-y')}}</div>
+            {% if app.user.isvalidated == true %} 
+            Compte:validé
+            {% endif %}
+             {% if app.user.isvalidated == false %} 
+            Compte:En attente de validation
+            {% endif %}    
+            {% if is_granted('ROLE_ADMIN') %} 
+            <div>Nom :{{app.user.lastname}} </div>
+            <div>Prenom:{{app.user.firstname}}</div>
+            <div>Email : {{app.user.email}}</div>
+            <div>Specialitées : 
+            <p>{{app.user.specialities}} </p></div>
+            <div> Role: Admin </div>
+           {% endif %} 
+
+          </div>
+          {% if is_granted('ROLE_TEACHER') %}    
+         <div> <a href="{{ path('app_profile_editt',{id : app.user.id})}}"class="btn btn-Vine" role="button">Modifier mes informations</a></div>
+         {% endif %}
+        {% if is_granted('ROLE_LEARNING') %}  
+        <div> <a href="{{ path('app_profile_editl',{id : app.user.id})}}"class="btn btn-Vine" role="button">Modifier mes informations</a></div>
+        </div> {% endif %}
+       
+        
+
+
+
+        </div>
+      </div>
+    </div>
+  
+  </section>
+
+
+{% endblock %}
+

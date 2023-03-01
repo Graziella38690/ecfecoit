@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification{% endblock %}
+
+{% block body %}
+    <div class="container-fluid container-lg">
+   <div class="col-xs-12 text-center ">
+        <h1>Modification</h1>
+        <div class="row">
+      <div class="col-xs-12 ">
+       <img src="{{ asset('uploads/images/'  ~ training.picture) }}" class="img-training" alt="..." height="250" width="250">
+ 
+      
+      </div>
+      </div>
+        {{ include('training/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+        {{ include('training/_delete_form.html.twig') }}
+
+        <a href="{{ path('app_training_index') }}" class="btn btn-Vine">Retour</a>
+    </div>
+    </div>
+{% endblock %}

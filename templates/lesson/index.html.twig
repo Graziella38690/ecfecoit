@@ -3,15 +3,18 @@
 {% block title %}Lesson index{% endblock %}
 
 {% block body %}
-<div class="container-fluid container-lg">
-    <h1>Lesson index</h1>
 
+<div class="container-fluid container-lg">
+    <h1>Mes Leçons</h1>
+<a href="{{ path('app_lesson_new') }}"class="btn btn-Vine" role="button">Ajouter une leçon</a>
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
-                <th>Textlesson</th>
+                <th>Titre</th>
+                <th>Résumé</th>
+                <th>Documents</th>
+                <th>Section</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -21,9 +24,11 @@
                 <td>{{ lesson.id }}</td>
                 <td>{{ lesson.Title }}</td>
                 <td>{{ lesson.textlesson }}</td>
+                 <td>{{ lesson.ressources ? lesson.ressources|join(', ') : '' }}</td>
+                 <td>{{ lesson.containedIn }}</td>
                 <td>
-                    <a href="{{ path('app_lesson_show', {'id': lesson.id}) }}">show</a>
-                    <a href="{{ path('app_lesson_edit', {'id': lesson.id}) }}">edit</a>
+                    <a href="{{ path('app_lesson_show', {'id': lesson.id}) }}"class="btn btn-Vine" role="button">voir</a>
+                    <a href="{{ path('app_lesson_edit', {'id': lesson.id}) }}"class="btn btn-Vine" role="button">modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -34,5 +39,5 @@
         </tbody>
     </table>
  </div>
-    <a href="{{ path('app_lesson_new') }}">Create new</a>
+    
 {% endblock %}

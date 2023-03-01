@@ -11,6 +11,8 @@
 
 <h2>Fiche utilisateur </h2>
 
+       <img src="{{ asset('uploads/images/'~ app.user.Photo) }}" class="img-user" alt="..." height="250" width="250">
+      
 {% for roles in user.roles %}
 {% if roles == 'ROLE_TEACHER'%}        
 <p>Prénom : {{ user.Firstname }}</p>

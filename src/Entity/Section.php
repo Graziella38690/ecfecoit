@@ -93,7 +93,7 @@ class Section
      /**
      * @return Collection<int, Lesson>
      */
-    public function getLessons(): Collection
+    public function getLessonsContained(): Collection
     {
         return $this->lessonsContained;
     }

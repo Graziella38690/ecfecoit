@@ -3,11 +3,13 @@
 {% block title %}Nouvelle formation{% endblock %}
 
 {% block body %}
-     <div class="container-fluid container-lg">
+    <div class="row vh-100 d-flex justify-content-center align-items-center">
+    <div class="col-10 col-lg-4" id="registerForm">
         <h1>Nouvelle formation</h1>
 
         {{ include('training/_form.html.twig') }}
 
-        <a href="{{ path('app_training_index') }}" class="btn btn-Vine">Retour</a>
+        <a href="{{ path('app_training_index') }}" class="btn btn-Vine">retour</a>
     </div>
+     </div>
 {% endblock %}

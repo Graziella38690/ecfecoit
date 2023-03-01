@@ -29,6 +29,22 @@
  
   
     {{ include('navbar.html.twig') }}
+
+
+{% if is_granted('ROLE_TEACHER')%}
+                   {% if app.user.isvalidated == true %}
+                   
+               {{ include('navbarteacher.html.twig') }}
+                 
+                    {% else %}
+                    <p> Votre compte n'est pas validé , vous ne pouvez pas creer de formation. </p>
+                    {% endif %}
+              {% endif %}
+
+
+
+
+     
     <div class="container text-center">
      
     </div>

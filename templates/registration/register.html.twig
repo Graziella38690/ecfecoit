@@ -3,8 +3,10 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-<div class="container ">
-    <h1>S'inscrire</h1>
+<div class="container-fluid lg-container">
+    <div class="row vh-100 d-flex justify-content-center align-items-center">
+        <div class="col-10 col-lg-4" id="registerForm">
+            <h1>S'inscrire</h1>
 
     {{ form_start(registrationForm) }}
          {{ form_row(registrationForm.Pseudo) }}
@@ -17,7 +19,9 @@
         {{ form_row(registrationForm.agreeTerms) }}
         
 
-<button type="submit" class="btn btn-Vine">M'inscrire</button>
-    {{ form_end(registrationForm) }}
+                <button type="submit" class="btn btn-Vine">M'inscrire</button>
+                    {{ form_end(registrationForm) }}
+        </div>
     </div>
+</div>
 {% endblock %}

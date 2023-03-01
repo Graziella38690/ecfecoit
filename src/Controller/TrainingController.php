@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Entity\Training;
 use App\Form\TrainingType;
+use App\Form\TrainingimgType;
 use App\Form\SearchType;
 use App\Model\SearchData;
 use App\Repository\TrainingRepository;
@@ -25,36 +26,18 @@ class TrainingController extends AbstractController
 {  
 
     #[Route('training/index', name: 'app_training_index', methods: ['GET'])]
-    public function index(TrainingRepository $TrainingRepository,PaginatorInterface $paginatorInterface,Request $request): Response
+    public function index(TrainingRepository $TrainingRepository,Request $request): Response
     {   
-        $Training = $TrainingRepository->findPublished();
-        $Training = $paginatorInterface ->paginate(
-            $Training,
-            $request->query->getInt('page',1),
-            3
-        );
+       
+       
+          
 
-        
-        /* $searchData = new SearchData();
-        $form = $this ->createForm(SearchType::class,$searchData);
-
-        $form->handleRequest($Request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $searchData->page=$Request->query->getInt('page',1);
-            $Training = $TrainingRepository ->findBySearch($searchData);
+                  
 
 
-            return $this->render('search.html.twig', [
-                'form' => $form,
-                'Training' => $Training
-        ]);
-            
-    }    */
-        
-        
         return $this->render('training/index.html.twig', [
            
-            'trainings' => $Training
+            'trainings' => $TrainingRepository->findPublished( $request->query->getInt('page',1),)
             
         ]);
     }
@@ -84,7 +67,7 @@ class TrainingController extends AbstractController
                 $Training->setPicture($pictureFileName);
             }
             $TrainingRepository->add($Training);
-            return $this->redirectToRoute('app_teacher_show', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_section_new', [], Response::HTTP_SEE_OTHER);
         }
         return $this->renderForm('training/new.html.twig', [
             'training' => $Training,
@@ -92,21 +75,14 @@ class TrainingController extends AbstractController
            
         ]);
     }
-    #[Security("is_granted('ROLE_LAERNING')", statusCode: 404)]
+    
     #[Route('training/show/{id}', name: 'app_training_show', methods: ['GET'])]
    
     public function show(training $Training ): Response
     {  
-
-      
-
-
         return $this->render('training/show.html.twig',
          [
-            
-            
             'training' => $Training,
-           
         ]);
     }
    
@@ -124,11 +100,7 @@ class TrainingController extends AbstractController
             if ($form->get('isPublished')->getData() and $Training->getDatecreate() !== null) {
                 $Training->setDatecreate(new DateTimeImmutable());
             }
-            $pictureFile = $form->get('picture')->getData();
-            if ($pictureFile) {
-                $pictureFileName = $FileUploader->UploadFile($pictureFile);
-                $Training->setPicture($pictureFileName);
-            }
+         
             $TrainingRepository->add($Training);
             return $this->redirectToRoute('app_training_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -143,14 +115,53 @@ class TrainingController extends AbstractController
 
     } else {
         return $this->render('home/index.html.twig', [
-            'Training' => $TrainingRepository->getLastPublishedCourses(),
+            'Training' => $TrainingRepository->findLastTraining(),
             
         ]);
     }
 
+    }
 
+    #[Security("is_granted('ROLE_TEACHER')", statusCode: 404)]
+    #[Route('training/{id}/editimage', name: 'app_training_editimage', methods: ['GET', 'POST'])]
+    public function editimage(Request $request, Training $Training, TrainingRepository $TrainingRepository,FileUploader $FileUploader): Response
+    {
+
+        if ($Training->getCreatby() === $this->getUser()) {
+        $form = $this->createForm(TrainingimgType::class, $Training);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            
+            $pictureFile = $form->get('picture')->getData();
+            if ($pictureFile) {
+                $pictureFileName = $FileUploader->UploadFile($pictureFile);
+                $Training->setPicture($pictureFileName);
+            }
+            $TrainingRepository->add($Training);
+            return $this->redirectToRoute('app_training_edit', ['id'=>$Training->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        
+
+        return $this->renderForm('training/editimg.html.twig', [
+            'training' => $Training,
+            'form' => $form,
+        ]);
+
+
+    } else {
+        return $this->render('home/index.html.twig', [
+            'Training' => $TrainingRepository->findLastTraining(),
+            
+        ]);
+    }
 
     }
+
+
+
     #[Security("is_granted('ROLE_TEACHER')", statusCode: 404)]
     #[Route('training/delete/{id}', name: 'app_training_delete', methods: ['POST'])]
     public function delete(Request $request, Training $Training, TrainingRepository $TrainingRepository): Response

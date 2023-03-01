@@ -3,31 +3,45 @@
 {% block title %}Section{% endblock %}
 
 {% block body %}
-    <h1>Section</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ section.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ section.Title }}</td>
-            </tr>
-            <tr>
-                <th>Lesson</th>
-                 {% for lessonsContained in section %}
-            <ul><h4>{{lesson.Title}}</h4></ul>
-                 {% endfor %}    
-            </tr>
-  
-        </tbody>
-    </table>
+<div class="container-fluid container-lg text-center">
+<div class="row">
+      <div class="col-xs-12" id="title">
+      <a href="{{ path('app_section_index') }}"class="btn btn-Vine" role="button">Retour</a>
+        <h1>Détail de la section n° {{ section.id }}</h1>
+      </div>
+      </div>
+    <div class="row">
+      <div class="col-xs-12">
+       <h2> titre</h2>{{ section.Title }}</h2>
+      </div>
+    </div>
 
-    <a href="{{ path('app_section_index') }}">back to list</a>
 
-    <a href="{{ path('app_section_edit', {'id': section.id}) }}">edit</a>
+<div class="row">
+      <div class="col-xs-12">
+       <h3>Fait partit de la formation:
+       {{ section.containedIn }}</h3>
+      </div>
+    </div>
 
-    {{ include('section/_delete_form.html.twig') }}
+    <div class="row">
+      <div class="col-xs-12">
+      <h3>Lessons contenues dans cette section</h3>
+     {% for lessonsContained in section.lessonsContained %}
+            <a href="{{ path('app_lesson_show',{'id': lessonsContained.id})}}"> <li>{{lessonsContained.title}}<li>
+                 {% endfor %}
+    
+     </div>
+     <div class="row">
+     <div class="col-xs-12">
+    <a href="{{ path('app_section_edit', {'id': section.id}) }}"class="btn btn-Vine" role="button">Modifier</a>
+ {{ include('section/_delete_form.html.twig') }}
+   
+      </div>
+    </div>
+   </div>
+   </div>
+
+   
 {% endblock %}

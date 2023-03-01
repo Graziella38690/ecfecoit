@@ -45,16 +45,6 @@ class AdminController extends AbstractController
 
 
 
-#[Route("/admin/profil/user/{id}", name:"app_profil_user")]
- 
-public function profiluser(UserRepository $repository, int $id): Response
-{
-        $user = $repository -> findBy(['id' => $id]);
-    
-    return $this->render('admin/userprofil.html.twig', [
-        'user'=> $user
-    ]);
-}
 
 
 
@@ -76,6 +66,9 @@ public function profiluser(UserRepository $repository, int $id): Response
                 );
             return $this->redirectToRoute('app_admin');
         }
+
+          
+            
 
             return $this ->render('admin/useredit.html.twig',[
                 'user'=> $user, 'form' => $form->createView()]);

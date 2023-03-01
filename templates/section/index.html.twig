@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Section index{% endblock %}
+{% block title %}Mes Section{% endblock %}
 
 {% block body %}
-    <h1>Section index</h1>
-
+  
+<div class="container-fluid container-lg">
+    <h1>Mes sections</h1>
+<a href="{{ path('app_section_new') }}"class="btn btn-Vine" role="button">Ajouter une section</a>
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
+                <th>Titre</th>
+                <th>Formation</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,9 +21,10 @@
             <tr>
                 <td>{{ section.id }}</td>
                 <td>{{ section.Title }}</td>
+                <td>{{ section.containedIn }}</td>
                 <td>
-                    <a href="{{ path('app_section_show', {'id': section.id}) }}">show</a>
-                    <a href="{{ path('app_section_edit', {'id': section.id}) }}">edit</a>
+                    <a href="{{ path('app_section_show', {'id': section.id}) }}"class="btn btn-Vine" role="button">Voir</a>
+                    <a href="{{ path('app_section_edit', {'id': section.id}) }}"class="btn btn-Vine" role="button">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -29,7 +33,8 @@
             </tr>
         {% endfor %}
         </tbody>
+         <a href="{{ path('app_section_new') }}">Create new</a>
     </table>
-
-    <a href="{{ path('app_section_new') }}">Create new</a>
+</div>
+   
 {% endblock %}

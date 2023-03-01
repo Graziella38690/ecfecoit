@@ -9,6 +9,8 @@ use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Model\SearchData;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+
 
 /**
  * @method Training|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,9 +20,12 @@ use App\Model\SearchData;
  */
 class TrainingRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry,
+    private PaginatorInterface $paginatorInterface)
     {
+
         parent::__construct($registry, Training::class);
+
     }
 
     /**
@@ -47,22 +52,36 @@ class TrainingRepository extends ServiceEntityRepository
         }
     }
 
+
+  
+
     /**
-      * @return Training[] Returns an array of Training objects
+      *@param int $page
+      *@return PaginationInterface
       */
    
-      public function findPublished()
+      public function findPublished(int $page):PaginationInterface
     {
-        return $this->createQueryBuilder('t')
+        $data = $this->createQueryBuilder('t')
             ->andWhere('t.isPublished = :val')
             ->setParameter('val', 1)
             ->orderBy('t.Creatby', 'DESC')
-            
             ->getQuery()
             ->getResult();
+
+        $Training = $this-> paginatorInterface ->paginate ($data,$page,6);
+        return $Training;
     }
 
+/**
+ * @param int $page
+ * @param SearchData $searchData
+ * @return PaginationInterface
+ */
 
+  
+ 
+    
 
       public function findLastTraining()
       {
@@ -97,40 +116,33 @@ class TrainingRepository extends ServiceEntityRepository
     }
 
 
-
-
-   /* public function findBySearch(SearchData $SearchData): PaginationInterface
+    public function getAllTrainingByDate()
     {
-        $data = $this ->createQueryBuilder('t')
-        ->Where('t.state LIKE :state')
-        ->setParameters('state','%STATE_PUBLISHED%');
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.isPublished = :val')
+            ->setParameter('val', 1)
+            ->orderBy('t.title', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
-        if(!empty($SearchData->q)){
-            $data = $data
-            ->andWhere('t.title LIKE :q')
-            ->setParameter('t',"%{$SearchData ->q}%");
-        }
-        $data = $data
-                 ->getQuery()
-                ->getResult();
 
-$Training = $this->paginatorInterface->paginate ($data, $SearchData ->page,9);
-return $Training;
-}
- */
+    public function searchTrainings($word)
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.title LIKE :val OR c.description LIKE :val')
+            ->andWhere('t.isPublished = :publishedVal')
+            ->setParameters(array('val' => '%' . $word . '%', 'publishedVal' => 1))
+            ->orderBy('t.title', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+   
 
 }
 
   
-    /*
-    public function findOneBySomeField($value): ?Training
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+    
 

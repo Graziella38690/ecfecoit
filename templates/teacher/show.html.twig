@@ -1,60 +1,32 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Liste des Formations {% endblock %}
+{% block title %}EcoIT{% endblock %}
 
 {% block body %}
+<div class="container-fluid container-lg">
+ <h1>Mes formations</h1>
+<a href="{{ path('app_training_new') }}"class="btn btn-Vine" role="button">Ajouter une formation</a>
+  <div class="row d-flex justify-content-center align-items-center" id="allCardsPage">
+{% for Training in trainings %}        
+    <div class="col-xs-12 col-lg-4">
+      <div class="card mx-4 my-5">
+        <div class="trainingCard text-center">
+        <img src="{{ asset('uploads/images/'  ~ Training.picture) }}" class="card-img-top" alt="...">
+        <div class="card-body col trainingCardText d-flex flex-column justify-content-between"> 
+          <h5 class="card-title text-center">{{ Training.Title }}</h5>
+            <p class="card-text overflow-auto">{{ Training.Description }}</p>
+            Publier par {{ Training.Creatby.firstname }}  {{ Training.Creatby.lastname }}                
+            le : {{Training.Datecreate|date('Y-m-d')}}             
+    {% if app.user %}
+      <a href="{{ path ('app_training_show',{id:Training.Id})}}"class="btn btn-Vine" role="button"> Détail de la formation </a>
+    {% else %}
+      <h6><em>Connecter vous pour acceder au détails de la formation</em></h6>
+    {% endif %}                   
+          </div>
+        </div>
+      </div>
+    </div>              
+    {% endfor %}                
 
-<div class="container">
-        <section class="row justify-content-center">
-          <div class="col-12 actuformation">
-    <h1>Liste de mes Formations</h1>
-    </div>
-  </section>
-        <section class="row">
-             {% for Training in trainings %}        
-          <div class="col-md-4 g-2 d-flex align-content-stretch flex-wrap ">
-              <div class="card article-formation">
-                  <div class="aligncenter">
-                     
-                               
-                  </div>
-                  <div class="card-body mb-2 text-center">
-                       <img src="{{ asset('uploads/images/'  ~ Training.picture) }}" class="card-img-top" alt="...">
-   <h5 class="card-title">{{ Training.Title }}</h5>
-                   
-                      
-                      <br>
-                    
-                      <br>
-                      le : {{Training.Datecreate|date('Y-m-d')}}
-
-                      </p>                    
-                  </div>
-                  <div class="card-footer d-flex flex-column">                    
-                    
-                          {% if app.user %}
-                        <a href="{{ path ('app_training_show',{id:Training.Id})}}"class="btn btn-Vine " role="button">Détails de la formation</a>
-                          {% else %}
-                              <a href={{ path ('app_register')}} class="btn btn-Vine " role="button">Détails de la formation</a>
-                          {% endif %}
-                                             
-                  </div>
-              </div>
-              
-          </div>   
-                              
-        {% endfor %}
-
-
-
-
-
-     
-
-</main>
-{% endblock %}
-
-
-
-
- 
+  </div>
+</div>
+{% endblock %}        

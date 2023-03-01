@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\LessonRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LessonRepository::class)]
@@ -27,6 +28,9 @@ class Lesson
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'lessonsCreated')]
     #[ORM\JoinColumn(nullable:false)]
     private $Creatby;
+
+    #[ORM\Column( type:'array', nullable: true)]
+    private $ressources = [];
 
    
 
@@ -79,6 +83,18 @@ class Lesson
     public function setCreatby(?user $Creatby): self
     {
         $this->Creatby = $Creatby;
+
+        return $this;
+    }
+
+    public function getRessources(): array
+    {
+        return $this->ressources;
+    }
+
+    public function setRessources(?array $ressources): self
+    {
+        $this->ressources = $ressources;
 
         return $this;
     }

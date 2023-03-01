@@ -36,7 +36,7 @@ class SectionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $section->setCreatby($this->getUser());
             $sectionRepository->add($section);
-           return $this->redirectToRoute('app_section_index', [], Response::HTTP_SEE_OTHER);
+           return $this->redirectToRoute('app_lesson_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('section/new.html.twig', [
@@ -50,7 +50,7 @@ class SectionController extends AbstractController
     #[Route('/{id}', name: 'app_section_show', methods: ['GET'])]
     public function show(Section $section): Response
     {
-        $lessons = $section->getLessons();
+        $lessons = $section->getLessonsContained();
         return $this->render('section/show.html.twig', [
             'section' => $section,
             array ('date' => $lessons)

@@ -5,6 +5,7 @@ class SearchData
 {
     /** @var init */
     public $page= 1;
-/** @var string */
+
+    /** @var string */
     public string $q = '';
 }

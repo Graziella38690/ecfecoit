@@ -2,11 +2,27 @@
 
 {% block title %}Modification de l'utilisateur{% endblock %}
 
-{% block body %}
+{% block body %}  
+
 <div class = "container">
-<h1 class= "mt-4" >Formulaire de modification des information de l'utilisateur</h1>
-
-
+<h1 class= "mt-4" >Modifier mes informations</h1>
+<div class="row">
+<div class="col-xs-12 ">
+<div class="col-xs-12 text-center ">
+{% if app.user.photo != NULL %}
+<div><img src="{{ asset('uploads/images/'~ app.user.Photo) }}" class="img-user" alt="..." height="200" width="200"> 
 </div>
-{{ include('/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+{% endif %} 
+{% if app.user.photo == NULL %}
+<div><img src="{{ asset('picture/blankprofile.png') }}" class="card-img-top" alt="..." height="200" width="200"> </div> 
+{% endif %} 
+
+ {{ include('/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
 {% endblock %}
