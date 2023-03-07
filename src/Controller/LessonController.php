@@ -62,10 +62,14 @@ class LessonController extends AbstractController
     #[Route('lesson/show/{id}', name: 'app_lesson_show', methods: ['GET'])]
     public function show(lesson $lesson): Response
     {
+        $section = $lesson->getContainedIn();
         return $this->render('lesson/show.html.twig', [
             'lesson' => $lesson,
+            'section' => $section
         ]);
     }
+
+
 
     #[Route('lesson/{id}/edit', name: 'app_lesson_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Lesson $lesson, LessonRepository $lessonRepository,TrainingRepository $trainingRepository, ResourcesUploader $ResourcesUploader): Response

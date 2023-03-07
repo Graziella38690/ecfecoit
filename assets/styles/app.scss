@@ -39,7 +39,13 @@ h6 {
   background-color: $Vine;
   border-color: $Vine;
 }
-a,a:link, a:visited,a:hover,a:active {
+
+li {
+  text-decoration:none;
+  color: $vert-cyan;
+}
+
+a:link, a:visited,a:hover,a:active {
   text-decoration:none;
   color: $Sigma;
 }
@@ -50,7 +56,10 @@ a.btn.btn-Vine
   color: $Sigma;
 }
 
-
+#LegalNotice,#termsOfUse{
+  text-decoration:none;
+  color: $vert-cyan;
+}
 
 h1,
 h2,

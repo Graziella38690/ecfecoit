@@ -7,56 +7,31 @@
   <meta name="description" content="Plateforme d’éducation éco-responsable dont les cours sont dispensés par des experts en accessibilité et en éco-conception web." />
         <link rel="shortcut icon" type="image/ico" href="picture/favicon.ico"/>
        
-       
-    
-
-
-       
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
-      
-
         {% endblock %}
       
-        {% block javascripts %}
-       
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-        
     </head>
     <body class="d-flex flex-column vh-100">
- 
-  
     {{ include('navbar.html.twig') }}
-
-
 {% if is_granted('ROLE_TEACHER')%}
                    {% if app.user.isvalidated == true %}
-                   
                {{ include('navbarteacher.html.twig') }}
-                 
+                
                     {% else %}
                     <p> Votre compte n'est pas validé , vous ne pouvez pas creer de formation. </p>
                     {% endif %}
               {% endif %}
 
-
-
-
-     
-    <div class="container text-center">
-     
-    </div>
-    
-    
-       
         {% block body %}
          
 
   
         {% endblock %}
-       
+       <div class="mt-auto ">
+    {{  include ('footer.html.twig') }}
+    </div>
 </body>
     </body>
 

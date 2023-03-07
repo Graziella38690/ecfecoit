@@ -1,11 +1,13 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Lesson;
 use App\Entity\Training;
 use App\Form\TrainingType;
 use App\Form\TrainingimgType;
 use App\Form\SearchType;
 use App\Model\SearchData;
+use App\Repository\LessonRepository;
 use App\Repository\TrainingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -78,11 +80,15 @@ class TrainingController extends AbstractController
     
     #[Route('training/show/{id}', name: 'app_training_show', methods: ['GET'])]
    
-    public function show(training $Training ): Response
-    {  
+    public function show(training $Training ,LessonRepository $lessonRepository): Response
+    {   $section =$Training->getSectionsContained();
+       
+        $lesson = $lessonRepository->findBySection($section);
         return $this->render('training/show.html.twig',
-         [
+         [ 
+            'section'=> $section,
             'training' => $Training,
+            'lessons'=>$lesson,
         ]);
     }
    

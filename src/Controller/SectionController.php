@@ -51,12 +51,17 @@ class SectionController extends AbstractController
     public function show(Section $section): Response
     {
         $lessons = $section->getLessonsContained();
+        $training = $section->getContainedIn();
         return $this->render('section/show.html.twig', [
+            'training' => $training,
             'section' => $section,
             array ('date' => $lessons)
+            
         ]);
     }
 
+
+    #[Security("is_granted('ROLE_TEACHER')", statusCode: 404)]
     #[Route('/{id}/edit', name: 'app_section_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Section $section, SectionRepository $sectionRepository): Response
     {
@@ -81,7 +86,7 @@ class SectionController extends AbstractController
         ]);
     }
     }
-
+    #[Security("is_granted('ROLE_TEACHER')", statusCode: 404)]
     #[Route('/{id}', name: 'app_section_delete', methods: ['POST'])]
     public function delete(Request $request, Section $section, SectionRepository $sectionRepository): Response
     {
