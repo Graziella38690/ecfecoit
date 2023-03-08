@@ -1,24 +1,25 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\Lesson;
+
 use App\Entity\Training;
+
 use App\Form\TrainingType;
 use App\Form\TrainingimgType;
-use App\Form\SearchType;
-use App\Model\SearchData;
+
 use App\Repository\LessonRepository;
 use App\Repository\TrainingRepository;
+use App\Repository\SectionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Knp\Component\Pager\PaginatorInterface;
+
 
 
 use App\Service\FileUploader;
 use DateTimeImmutable;
-
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
@@ -83,12 +84,12 @@ class TrainingController extends AbstractController
     public function show(training $Training ,LessonRepository $lessonRepository): Response
     {   $section =$Training->getSectionsContained();
        
-        $lesson = $lessonRepository->findBySection($section);
+        
         return $this->render('training/show.html.twig',
          [ 
             'section'=> $section,
             'training' => $Training,
-            'lessons'=>$lesson,
+          
         ]);
     }
    
@@ -165,6 +166,33 @@ class TrainingController extends AbstractController
     }
 
     }
+   
+
+
+    #[Security("is_granted('ROLE_LAERNING')", statusCode: 404)]
+    #[Route('training/progress/{id}', name: 'app_training_progress', methods: ['GET', 'POST'])]
+    public function progress (EntityManagerInterface $entityManager,Request $request,Training $training, TrainingRepository $TrainingRepository, SectionRepository $sectionRepository, LessonRepository $lessonRepository,FileUploader $FileUploader): Response
+    {
+        $user = $this->getUser();
+        $section = $sectionRepository->findSectionsByTraining($training);
+       
+       
+        
+           
+            $entityManager->persist($training);
+            $entityManager->flush();
+        
+            
+                        
+        
+        return $this->renderForm('training/progress.html.twig', [
+            'training' => $training,
+            'section' => $section,
+          
+            
+        ]);
+    }
+
 
 
 
