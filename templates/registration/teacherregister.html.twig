@@ -3,10 +3,15 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-<div class="container-fluid lg-container">
-    <div class="row vh-100 d-flex justify-content-center align-items-center">
-        <div class="col-10 col-lg-4" id="registerForm">
-    <h1>Register</h1>
+<section class="form">
+<div class="mask d-flex align-items-center h-100" >
+        <div class="container">
+            <div class="row justify-content-center">
+               <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card">
+                        <div class="card-body p-5 text-center">
+                          <img src="{{ asset('picture/teacher.png') }}" class="card-img-top" alt="...">
+                            <h1 class="fw-bold mb-0">Postuler</h1>
 {{ form_start(teacherForm) }}
 
    
@@ -41,7 +46,11 @@
         <button class="btn btn-lg btn-vine" type="submit">Postuler
     {{ form_end(teacherForm) }}
         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section >
 {% endblock %}
 

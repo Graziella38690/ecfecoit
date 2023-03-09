@@ -30,12 +30,19 @@ $Vine: rgba(14,164,122,1);
 $Sigma: rgba(239,251,245,1);
 $blue-green: rgb(47,191,176,1);
 
+.gradient-custom {
+  /* fallback for old browsers */
+  background: $Sigma;
 
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right bottom, $Sigma,$blue-green);
+  
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right bottom, $Sigma,$blue-green)
+  }
 body{
   background-color:$Sigma;
   }
-
-
 
 
 
@@ -92,8 +99,16 @@ h6 {
   color: $vert-cyan;
 }
 
-.Formlogin {
-border-style: dashed;
-border-color: $Vine;
- background-color:$blue-green ;
+.form {
+height: 100%;
+
+}
+.card{
+  border-radius: 2rem;
+ 
+ }
+ @media (min-height: 300px) and (max-height: 450px) {
+  .form {
+    height: auto;
+  }
 }

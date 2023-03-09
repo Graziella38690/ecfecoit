@@ -4,78 +4,83 @@
 
 {% block body %}
 
-  <div class="connexion">
-    <h2>Mon Compte</h2>
-  </div>
-  <section class="row justify-content-center">
-    <aside class="col-3">
-      <div class="row justify-content-center">
-               {% if app.user.photo != NULL %}
-            <div><img src="{{ asset('uploads/images/'~ app.user.Photo) }}" class="img-user" alt="..." height="200" width="200"> 
-            <div> <a href="{{ path('app_profile_edit_photo',{id : app.user.id})}}"class="btn btn-Vine" role="button">Modifier ma photo</a></div>
-            </div>
+
+
+<section class="vh-100" style="background-color: #f4f5f7;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-6 mb-4 mb-lg-0">
+        <div class="card mb-3 " style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div class="col-md-4 gradient-custom text-center "
+              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+             
+            {% if app.user.photo != NULL %}
+            <img src="{{ asset('uploads/images/'~ app.user.Photo) }}" class="img-user mt-3" alt="Avatar" height="150" width="150"> 
+              <div class ="mt-3 mb-3"><a href="{{ path('app_profile_edit_photo',{id : app.user.id})}}"class="btn btn-Vine" role="button">Modifier ma photo</a></div>
+
             {% endif %} 
             {% if app.user.photo == NULL %}
-            
-           
-            <div> <a href="{{ path('app_profile_edit_photo',{id : app.user.id})}}"class="btn btn-Vine" role="button">Ajouter une photo</a></div>
-           
+            <div class ="mt-3 mb-3"><a href="{{ path('app_profile_edit_photo',{id : app.user.id})}}"class="btn btn-Vine" role="button">Ajouter une photo</a></div>
             {% endif %} 
-
-      </div>
-    </aside>
-    <div class="col-lg-8">
-      <div class="row justify-content-center align-items-center">                  
-        <div class="col-12 ">
-          <div class="pageco">
-            <h4>Mon profil</h4>
             {% if is_granted('ROLE_TEACHER') %} 
-            <div>Nom :{{app.user.lastname}} </div>
-            <div>Prenom:{{app.user.firstname}}</div>
-            <div>Email : {{app.user.email}}</div>
-            <div>Specialitées : 
-            <p>{{app.user.specialities}} </p></div>
-            <div> Role: Instructeur </div>
+           <h5>{{app.user.lastname}} {{app.user.firstname}}</h5>
+            <p>Instructeur </p>
            {% endif %} 
             {% if is_granted('ROLE_LAERNING') %} 
-            <div>Pseudo :{{app.user.pseudo}} </div>
-            <div>Email : {{app.user.email}}</div>
-            <div> Role: Etudiant </div>
+           <h5>{{app.user.pseudo}} </h5>
+           <p>Etudiant </p>
            {% endif %} 
-           <div>Date d'inscription : {{app.user.Dateinscription|date('d-m-y')}}</div>
-            {% if app.user.isvalidated == true %} 
-            Compte:validé
+            <h6>Compte verifié</h6>
+            {% if app.user.isvalidated == true %}   
+            <img src="{{ asset('picture/Validation.png') }}" class="img-icon" alt="...">
             {% endif %}
              {% if app.user.isvalidated == false %} 
-            Compte:En attente de validation
-            {% endif %}    
-            {% if is_granted('ROLE_ADMIN') %} 
-            <div>Nom :{{app.user.lastname}} </div>
-            <div>Prenom:{{app.user.firstname}}</div>
-            <div>Email : {{app.user.email}}</div>
-            <div>Specialitées : 
-            <p>{{app.user.specialities}} </p></div>
-            <div> Role: Admin </div>
-           {% endif %} 
-
-          </div>
-          {% if is_granted('ROLE_TEACHER') %}    
-         <div> <a href="{{ path('app_profile_editt',{id : app.user.id})}}"class="btn btn-Vine" role="button">Modifier mes informations</a></div>
+            <img src="{{ asset('picture/Suprimer.png') }}" class="img-icon" alt="...">
+            {% endif %}
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <h6>Informations</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-7 mb-3">
+                    <h6>Email</h6>
+                    <p class="text-muted">{{app.user.email}}</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Date d'inscription</h6>
+                    <p class="text-muted">{{app.user.Dateinscription|date('d-m-y')}}</p>
+                  </div>
+                </div>
+                 {% if is_granted('ROLE_TEACHER') %} 
+                <h6>Spécialitées</h6>
+                <hr class="mt-0 mb-1">
+                  <div class="col-6 mb-1">
+                    <p class="text-muted">{{app.user.specialities}} </p>
+                </div>
+                  {% endif %} 
+                    {% if is_granted('ROLE_LAERNING') %} 
+                <h6>Formation en cours</h6>
+                <hr class="mt-0 mb-1">
+                  <div class="col-6 mb-1">
+                    <p class="text-muted">Fonctionnalité en attente</p>
+                
+                  {% endif %} 
+                 {% if is_granted('ROLE_TEACHER') %}    
+         <a href="{{ path('app_profile_editt',{id : app.user.id})}}"class="btn btn-Vine" role="button">Modifier mes informations</a>
          {% endif %}
         {% if is_granted('ROLE_LEARNING') %}  
-        <div> <a href="{{ path('app_profile_editl',{id : app.user.id})}}"class="btn btn-Vine" role="button">Modifier mes informations</a></div>
-        </div> {% endif %}
-       
-        
-
-
-
+        <a href="{{ path('app_profile_editl',{id : app.user.id})}}"class="btn btn-Vine" role="button">Modifier mes informations</a>
+         {% endif %}
+         </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  
-  </section>
-
-
+  </div>
+</section>
 {% endblock %}
 
