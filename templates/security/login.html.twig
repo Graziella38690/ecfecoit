@@ -2,9 +2,11 @@
 
 {% block title %}Me connecter{% endblock %} 
 {% block body %}
+
 <div class="container-fluid lg-container ">
     <div class="row vh-100 d-flex justify-content-center align-items-center">
         <div class="col-10 col-lg-4">
+        <div class = "Formlogin">
             <form method="post">
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -39,5 +41,6 @@
             </form>
         </div>
     </div>
+</div>
 </div>
 {% endblock %}

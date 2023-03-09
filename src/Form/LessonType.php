@@ -15,6 +15,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class LessonType extends AbstractType
 {
@@ -40,40 +42,6 @@ class LessonType extends AbstractType
                 'label' => 'Description'
             ])
 
-            ->add('resources', FileType::class, [
-                'label' => 'Ressources',
-                'multiple' => true,
-                'label_attr' => [
-                    'class' => 'old-rose ',
-                ],
-                'mapped' => false,
-
-                'constraints' => [
-                    new All([
-                        'constraints' => [
-                            new File([
-                                'mimeTypes' => [
-                                    'image/jpeg',
-                                    'image/png',
-                                    'application/pdf'
-                                ],
-                                'mimeTypesMessage' => 'Le fichier doit être au format pdf, jpeg, jpg ou png.',
-                            ])
-                        ]
-                    ])
-                ],
-            ])
-
-
-
-
-
-
-
-
-
-
-
             ->add('containedIn', EntityType::class, [
                 'label' => 'Attachée à la section:',
                 'class' => Section::class,
@@ -84,12 +52,41 @@ class LessonType extends AbstractType
                         ->orderBy('e.id', 'ASC');
                 },
                 'choice_label' => 'title',
-            ]);
-    }
+            ])
 
-            
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+                $Lesson= $event->getData();
+                $form = $event->getForm();
         
-    
+                if (!$Lesson || null === $Lesson->getId()) {
+                    $form
+                
+                    ->add('resources', FileType::class, [
+                        'label' => 'Ressources',
+                        'multiple' => true,
+                        'label_attr' => [
+                            'class' => 'old-rose ',
+                        ],
+                        'mapped' => false,
+        
+                        'constraints' => [
+                            new All([
+                                'constraints' => [
+                                    new File([
+                                        'mimeTypes' => [
+                                            'image/jpeg',
+                                            'image/png',
+                                            'application/pdf'
+                                        ],
+                                        'mimeTypesMessage' => 'Le fichier doit être au format pdf, jpeg, jpg ou png.',
+                                        ])
+                                        ]
+                                    ])
+                                ],
+                            ]);
+                        }
+                    });         
+    }
 
     public function configureOptions(OptionsResolver $resolver): void
     {

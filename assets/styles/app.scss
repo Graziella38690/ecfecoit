@@ -1,6 +1,29 @@
 @import "~bootstrap/scss/bootstrap";
 
 
+@font-face {
+  font-family: 'Verdana Pro Light';
+  src: 
+      url("/assets/styles/font/VerdanaProLight.ttf") format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Verdana Pro';
+  src: 
+      url("/assets/styles/font/VerdanaProBold.ttf") format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Verdana Pro';
+  src: 
+      url("/assets/styles/font/VerdanaProRegular.ttf") format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
 /* SCSS RGB */
 $vert-cyan: rgba(89,116,108,1);
 $Vine: rgba(14,164,122,1);
@@ -8,8 +31,9 @@ $Sigma: rgba(239,251,245,1);
 $blue-green: rgb(47,191,176,1);
 
 
-
-  
+body{
+  background-color:$Sigma;
+  }
 
 
 
@@ -21,7 +45,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family:  'Babylonica', cursive;
+  font-family:  "Verdana Pro";
 }
 
 .card-img-top
@@ -34,10 +58,12 @@ h6 {
   max-height: 30px;
 }
 
-.btn-Vine,.btn btn-Vine,button.btn.btn-Vine{
+.btn,.btn-Vine,button.btn.btn-Vine{
+  text-decoration:none;
   color:$Sigma;
   background-color: $Vine;
   border-color: $Vine;
+  font-family: 'Verdana Pro Light';
 }
 
 li {
@@ -50,11 +76,6 @@ a:link, a:visited,a:hover,a:active {
   color: $Sigma;
 }
 
-a.btn.btn-Vine
-{
-  text-decoration:none;
-  color: $Sigma;
-}
 
 #LegalNotice,#termsOfUse{
   text-decoration:none;
@@ -69,4 +90,10 @@ h5,
 h6 {
   
   color: $vert-cyan;
+}
+
+.Formlogin {
+border-style: dashed;
+border-color: $Vine;
+ background-color:$blue-green ;
 }

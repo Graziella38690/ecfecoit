@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Lesson;
 use App\Form\LessonType;
+use App\Form\LessondocType;
 use App\Repository\LessonRepository;
 use App\Repository\TrainingRepository;
 use App\Service\ResourcesUploader;
@@ -79,14 +80,7 @@ class LessonController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $resourcesFile = $form->get('resources')->getData();
-            $resourcesFilePath = [];
-            if ($resourcesFile) {
-                foreach ($resourcesFile as $resource) {
-                    array_push($resourcesFilePath, $ResourcesUploader->uploadFile($resource));
-                }
-                $lesson->setRessources($resourcesFilePath);
-            }
+            
 
             $lessonRepository->add($lesson);
             return $this->redirectToRoute('app_lesson_index', [], Response::HTTP_SEE_OTHER);
@@ -103,7 +97,38 @@ class LessonController extends AbstractController
         ]);
     }
 }
+#[Route('lesson/{id}/editdoc', name: 'app_lesson_editdoc', methods: ['GET', 'POST'])]
+public function editdoc(Request $request, Lesson $lesson, LessonRepository $lessonRepository,TrainingRepository $trainingRepository, ResourcesUploader $ResourcesUploader): Response
+{
+    if ($lesson->getCreatby() === $this->getUser()) {
+    $form = $this->createForm(LessondocType::class, $lesson);
+    $form->handleRequest($request);
 
+    if ($form->isSubmitted() && $form->isValid()) {
+        $resourcesFile = $form->get('resources')->getData();
+        $resourcesFilePath = [];
+        if ($resourcesFile) {
+            foreach ($resourcesFile as $resource) {
+                array_push($resourcesFilePath, $ResourcesUploader->uploadFile($resource));
+            }
+            $lesson->setRessources($resourcesFilePath);
+        }
+
+        $lessonRepository->add($lesson);
+        return $this->redirectToRoute('app_lesson_edit', ['id'=>$lesson->getId()], Response::HTTP_SEE_OTHER);
+    }
+    return $this->renderForm('lesson/editdoc.html.twig', [
+        'lesson' => $lesson,
+        'form' => $form,
+    ]);
+
+} else {
+    return $this->render('home/index.html.twig', [
+        'courses' => $trainingRepository->findLastTraining(),
+        'student' => $this->getUser()
+    ]);
+}
+}
 
     
 

@@ -72,7 +72,7 @@ class TrainingController extends AbstractController
             $TrainingRepository->add($Training);
             return $this->redirectToRoute('app_section_new', [], Response::HTTP_SEE_OTHER);
         }
-        return $this->renderForm('training/new.html.twig', [
+        return $this->renderForm('teacher/new.html.twig', [
             'training' => $Training,
             'form' => $form,
            
@@ -114,7 +114,7 @@ class TrainingController extends AbstractController
 
 
 
-        return $this->renderForm('training/edit.html.twig', [
+        return $this->renderForm('teacher/edit.html.twig', [
             'training' => $Training,
             'form' => $form,
         ]);
@@ -152,7 +152,7 @@ class TrainingController extends AbstractController
 
         
 
-        return $this->renderForm('training/editimg.html.twig', [
+        return $this->renderForm('teacher/editimg.html.twig', [
             'training' => $Training,
             'form' => $form,
         ]);
@@ -169,29 +169,8 @@ class TrainingController extends AbstractController
    
 
 
-    #[Security("is_granted('ROLE_LAERNING')", statusCode: 404)]
-    #[Route('training/progress/{id}', name: 'app_training_progress', methods: ['GET', 'POST'])]
-    public function progress (EntityManagerInterface $entityManager,Request $request,Training $training, TrainingRepository $TrainingRepository, SectionRepository $sectionRepository, LessonRepository $lessonRepository,FileUploader $FileUploader): Response
-    {
-        $user = $this->getUser();
-        $section = $sectionRepository->findSectionsByTraining($training);
-       
-       
-        
-           
-            $entityManager->persist($training);
-            $entityManager->flush();
-        
-            
-                        
-        
-        return $this->renderForm('training/progress.html.twig', [
-            'training' => $training,
-            'section' => $section,
-          
-            
-        ]);
-    }
+   
+    
 
 
 

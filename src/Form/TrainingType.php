@@ -13,7 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
-
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 
 class TrainingType extends AbstractType
@@ -38,7 +39,38 @@ class TrainingType extends AbstractType
 
                 ],
                 'label' => 'Publier'
-            ]);
+            ])
+
+
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+                $Training= $event->getData();
+                $form = $event->getForm();
+        
+                
+        
+             
+                if (!$Training || null === $Training->getId()) {
+                    $form
+                    ->add('picture', FileType::class, [
+                        'label' => 'Image',
+                        'label_attr' => [
+                            'class' => 'old-rose ',
+                        ],
+                        'mapped' => false,
+                        'constraints' => [
+                            new File([
+                                'mimeTypes' => [
+                                    'image/jpeg',
+                                    'image/png',
+                                ],
+                                'mimeTypesMessage' => 'Le fichier doit être au format jpeg, jpg ou png.',
+                            ])
+                        ],
+                    ]);
+                
+                }
+            });
+        
             
 
             
