@@ -27,6 +27,6 @@ final class Version20221112142511 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE `user` CHANGE dateinscription dateinscription DATE DEFAULT NULL');
+        $this->addSql('ALTER TABLE `user` CHANGE dateinscription dateinscription DATETIME DEFAULT NULL');
     }
 }
