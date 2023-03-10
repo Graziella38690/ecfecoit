@@ -13,7 +13,7 @@
             <tr>
                 <th>Photo</th>
                 <th>Mails</th>
-                <th>Date d'inscription</th>
+             
                 <th>Role</th>
                 <th>Validé</th>
                 <th>actions</th>
@@ -24,7 +24,7 @@
             {% for user in user %}
             <td><img src="{{ asset('uploads/images/'~ app.user.Photo) }}" class="img-user" alt="..." height="50" width="50"></td>
                 <td> {{ user.email }}</td>
-                <td> {{ user.Dateinscription|date('d/m/Y')}}</td>
+              
               
              
             

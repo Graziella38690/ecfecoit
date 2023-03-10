@@ -6,13 +6,6 @@
 
 <div class="container-fluid container-lg">
 <div class= "row text-center">
-<h1>Gestion des apprenants</h1>
-</div>
-  <table class="table">
-        <thead>
-            <tr>
-                <th>Mails</th>
-                <th>Date d'inscription</th>
                 <th>Role</th>
                 <th>Validé</th>
                 <th>actions</th>
@@ -22,7 +15,7 @@
             <tr>
             {% for user in user %}
                 <td> {{ user.email }}</td>
-                <td> {{ user.Dateinscription|date('d/m/Y')}}</td>
+                
               
              
             

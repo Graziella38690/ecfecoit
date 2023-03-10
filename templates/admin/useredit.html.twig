@@ -65,10 +65,7 @@
                     <h6>Email</h6>
                     <p class="text-muted">{{ user.Email }}</p>
                   </div>
-                  <div class="col-6 mb-3">
-                    <h6>Date d'inscription</h6>
-                    <p class="text-muted">{{app.user.Dateinscription|date('d-m-y')}}</p>
-                  </div>
+                 
                 </div>
                  {% if is_granted('ROLE_TEACHER') %} 
                 <h6>Spécialitées</h6>
