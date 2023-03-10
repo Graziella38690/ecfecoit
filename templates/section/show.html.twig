@@ -47,11 +47,12 @@
 
      <div class="row">
      <div class="col-xs-12">
-      {% if is_granted('ROLE_TEACHER') %}      
+      {% if is_granted('ROLE_TEACHER') %}  
+      {% if app.user.isvalidated == true %}     
     <a href="{{ path('app_section_edit', {'id': section.id}) }}"class="btn btn-Vine mb-3" role="button">Modifier</a>
  {{ include('section/_delete_form.html.twig') }}
   {% endif %}
-   
+    {% endif %}
       </div>
     </div>
    </div>

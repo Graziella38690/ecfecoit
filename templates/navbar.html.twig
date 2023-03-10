@@ -2,7 +2,7 @@
   
   <nav class="navbar navbar-expand-lg navbar-light bg-light ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#"><img src="{{ asset('picture/Logo_ecoit.png') }}" class="card-img-top" alt="..." height="50" width="50"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -24,6 +24,7 @@
         <a class="nav-link" href="{{path('app_admin')}}"class="btn btn-Vine" role="button">Gestion utilisateurs</a>
              {% endif %}
         </li>
+         {% if app.user.isvalidated == true %}   
         {% if is_granted('ROLE_TEACHER') %}   
         <li class="nav-item dropdown">
          <a class="nav-link dropdown-toggle" href="{{path('app_teacher_index')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,6 +39,7 @@
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
         </li>
+        {% endif %}
         {% endif %}
         {% endif %}
         </li>
