@@ -24,7 +24,7 @@ class TeacherFormType extends AbstractType
             ->add('firstname')
             ->add('lastname')
             ->add('email')
-            
+            ->add('specialities')
             ->add('photo', FileType::class, [
                 'label' => 'Photo',
                 'label_attr' => [
