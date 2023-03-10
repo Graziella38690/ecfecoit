@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 {% block title %}EcoIT{% endblock %}
-
 {% block body %}
 <div class="container-fluid container-lg">
   <div class="row">
@@ -20,7 +19,7 @@
 <div class="col-lg-3">
   <div class="card mx-4 my-5">
     <div class="tainingCard text-center">   
-                <img src="{{ asset('uploads/images/'  ~ training.picture) }}" class="card-img-top" alt="...">
+                <img src="{{ asset('uploads/images/'  ~ training.picture) }}" class="card-img-top mt-3 " alt="..." height="150" width="150">
                 <div class="card-body col courseCardText d-flex flex-column justify-content-between">
                   <h5 class="card-title text-center">{{ training.Title }}</h5>
                   <p class="card-text overflow-auto">{{ training.description }}</p>    
@@ -49,7 +48,7 @@
   <div class="card-group">
     <div class="card text-center">
       <div class="card-body">
-        <img src="{{ asset('picture/Learner.png') }}" class="card-img-top" alt="...">
+        <img src="{{ asset('picture/Learner.png') }}" class="card-img-top mt-3 " alt="..." height="200" width="200" alt="...">
         <h5 class="card-title">Devenir apprenant</h5>
         <p class="card-text">Pour suivre une formation vous devez vous enregistrer en tant qu'apprenant</p>
       </div>
@@ -59,7 +58,7 @@
   </div>
     <div class="card text-center">
       <div class="card-body">
-        <img src="{{ asset('picture/teacher.png') }}" class="card-img-top" alt="...">
+        <img src="{{ asset('picture/teacher.png') }}" class="card-img-top mt-3 " alt="..." height="200" width="200" alt="...">
         <h5 class="card-title">Devenir instructeur</h5>
         <p class="card-text">Envie de partager votre savoir .Postuler pour devenir instructeur.</p>
       </div>

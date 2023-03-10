@@ -1,16 +1,37 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello AdminController!{% endblock %}
-
+{% block title %}Gestion utilisateurs{% endblock %}
 {% block body %}
-<style>
-    
-</style>
+<div class="container-fluid container-lg">
+<div class="row d-flex justify-content-evenly align-items-center overflow-auto">
 
-<div class="example-wrapper">
-     <a href="{{ path('app_list_laerning') }}" class="btn btn-Vine" role="button">liste des etudiants</a>
-    <a href="{{ path('app_list_teacher') }}" class="btn btn-Vine" role="button">liste des formateurs</a>
-    
-    
+<div class= "row text-center">
+<h1>Gestion des utilisateurs</h1>
 </div>
+
+<div class="card-group">
+    <div class="card text-center">
+      <div class="card-body">
+        <img src="{{ asset('picture/Learner.png') }}" class="card-img-top" alt="...">
+        <h5 class="card-title">Gestion des apprenants</h5>
+        <p class="card-text">Pour suivre une formation vous devez vous enregistrer en tant qu'apprenant</p>
+      </div>
+        <div class="card-footer">
+          <a href="{{ path('app_list_laerning') }}" class="btn btn-Vine" role="button">liste des etudiants</a>
+        </div>
+  </div>
+    <div class="card text-center">
+      <div class="card-body">
+        <img src="{{ asset('picture/teacher.png') }}" class="card-img-top" alt="...">
+        <h5 class="card-title">Gestion des instructeurs</h5>
+     
+      </div>
+          <div class="card-footer">
+       <a href="{{ path('app_list_teacher') }}" class="btn btn-Vine" role="button">liste des formateurs</a>
+          </div>
+      </div>
+      </div>
+      </div>
+</div>
+</div>
+
 {% endblock %}

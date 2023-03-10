@@ -5,11 +5,12 @@
 {% block body %}
     <div class="row vh-100 d-flex justify-content-center align-items-center">
     <div class="col-10 col-lg-4" id="registerForm">
+    <a href="{{ path('app_training_index') }}" class="btn btn-Vine">retour</a>
         <h1>Nouvelle formation</h1>
 
         {{ include('teacher/_form.html.twig') }}
 
-        <a href="{{ path('app_training_index') }}" class="btn btn-Vine">retour</a>
+        
     </div>
      </div>
 {% endblock %}

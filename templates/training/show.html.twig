@@ -8,10 +8,19 @@
 
 <div class="container-fluid container-lg text-center">
 <div class="row">
+<div class="col-xs-12" >
+{% if is_granted('ROLE_TEACHER') %}
+<a href="{{ path('app_teacher_show') }}" class="btn btn-Vine">retour</a>
+{% endif %}
+{% if is_granted('ROLE_LAERNING') %}
+<a href="{{ path('app_training_show',{id:training.Id}) }}" class="btn btn-Vine">retour</a>
+{% endif %}
+</div>
       <div class="col-xs-12" id="title">
         <h1>Détail de la formation</h1>
       </div>
       </div>
+
     <div class="row">
       <div class="col-xs-12 ">
        <img src="{{ asset('uploads/images/'  ~ training.picture) }}" class="img-training" alt="..." height="250" width="250">
@@ -33,11 +42,8 @@
     <div class="row">
       <div class="col-xs-12">
       <h3>Sommaire</h3>
-     
     {% for sectionsContained in training.sectionsContained %}
     <a href="{{ path('app_section_show',{'id': sectionsContained.id})}}"> <li> {{ sectionsContained.title }}</li></a>
-      
-
     {% endfor %}
      </div>
       </div>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Section{% endblock %}
+{% block title %}liste Section{% endblock %}
 
 {% block body %}
 
@@ -9,14 +9,18 @@
 <div class="row">
       <div class="col-xs-12" id="title">
            {% if is_granted('ROLE_TEACHER') %}   
-      <a href="{{ path('app_section_index') }}"class="btn btn-Vine" role="button">Retour</a>
+      <a href="{{ path('app_section_index') }}"class="btn btn-Vine mb-3" role="button">Retour</a>
       {% endif %}
        {% if is_granted('ROLE_LAERNING') %}   
       <a href="{{ path('app_training_show',{'id': training.id}) }}"class="btn btn-Vine" role="button">Retour</a>
       {% endif %}
+      </div>
+
+      <div class="col-xs-12" id="title">
         <h1>Détail de la section n° {{ section.id }}</h1>
       </div>
       </div>
+
     <div class="row">
       <div class="col-xs-12">
        <h2> titre</h2>{{ section.Title }}</h2>
@@ -31,18 +35,20 @@
       </div>
     </div>
 
+
     <div class="row">
       <div class="col-xs-12">
       <h3>Lessons contenues dans cette section</h3>
      {% for lessonsContained in section.lessonsContained %}
-            <a href="{{ path('app_lesson_show',{'id': lessonsContained.id})}}"> <li>{{lessonsContained.title}}<li>
+            <a href="{{ path('app_lesson_show',{'id': lessonsContained.id})}}"> <li>{{lessonsContained.title}}</li>
                  {% endfor %}
-    
      </div>
+       </div>
+
      <div class="row">
      <div class="col-xs-12">
       {% if is_granted('ROLE_TEACHER') %}      
-    <a href="{{ path('app_section_edit', {'id': section.id}) }}"class="btn btn-Vine" role="button">Modifier</a>
+    <a href="{{ path('app_section_edit', {'id': section.id}) }}"class="btn btn-Vine mb-3" role="button">Modifier</a>
  {{ include('section/_delete_form.html.twig') }}
   {% endif %}
    

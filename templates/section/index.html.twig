@@ -5,6 +5,8 @@
 {% block body %}
   
 <div class="container-fluid container-lg">
+<div class="row">
+<div class="col-xs-12" >
     <h1>Mes sections</h1>
 <a href="{{ path('app_section_new') }}"class="btn btn-Vine" role="button">Ajouter une section</a>
     <table class="table">
@@ -23,8 +25,9 @@
                 <td>{{ section.Title }}</td>
                 <td>{{ section.containedIn }}</td>
                 <td>
-                    <a href="{{ path('app_section_show', {'id': section.id}) }}"class="btn btn-Vine" role="button">Voir</a>
-                    <a href="{{ path('app_section_edit', {'id': section.id}) }}"class="btn btn-Vine" role="button">Modifier</a>
+                    <a href="{{ path('app_section_show', {'id': section.id}) }}"class="btn btn-Vine mb-2" role="button">Voir</a>
+                    <a href="{{ path('app_section_edit', {'id': section.id}) }}"class="btn btn-Vine mb-2" role="button">Modifier</a>
+                  
                 </td>
             </tr>
         {% else %}

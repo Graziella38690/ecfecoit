@@ -1,16 +1,22 @@
 {% extends 'base.html.twig' %}
-{% block title %}EcoIT{% endblock %}
+{% block title %}Liste formations{% endblock %}
 
 {% block body %}
 <div class="container-fluid container-lg">
- <h1>Mes formations</h1>
+ 
+
+
+<div class= "row text-center">
+<h1>Mes formations</h1>
+<div class="col-xs-12">
 <a href="{{ path('app_training_new') }}"class="btn btn-Vine" role="button">Ajouter une formation</a>
+</div>
   <div class="row d-flex justify-content-center align-items-center" id="allCardsPage">
 {% for Training in trainings %}        
     <div class="col-xs-12 col-lg-4">
       <div class="card mx-4 my-5">
         <div class="trainingCard text-center">
-        <img src="{{ asset('uploads/images/'  ~ Training.picture) }}" class="card-img-top" alt="...">
+        <img src="{{ asset('uploads/images/'  ~ Training.picture) }}" class="card-img-top mt-3" alt="..." height="200" width="200">
         <div class="card-body col trainingCardText d-flex flex-column justify-content-between"> 
           <h5 class="card-title text-center">{{ Training.Title }}</h5>
             <p class="card-text overflow-auto">{{ Training.Description }}</p>

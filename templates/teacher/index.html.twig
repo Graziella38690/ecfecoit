@@ -1,41 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon compte{% endblock %}
+{% block title %}Gestion formation{% endblock %}
 
 {% block body %}
 <main class="container">
-  <div class="connexion">
-    <h2>Mon espace instructeur</h2>
-     <div>Nom :{{app.user.lastname}} {{app.user.firstname}}</div>
-            <div>Email : {{app.user.email}}</div>
-          </div>
-  </div>
+            <div class="container text-center">
+  <section class="row justify-content-center">
   <h4>Gestion de mes formations</h4>
-           
-           
+  <div class="card-group">
 
-<a href="{{ path('app_teacher_show') }}"class="btn btn-Vine">Mes formations</a></button>
-<a href="{{ path('app_section_index') }}"class="btn btn-Vine">Mes sections</a></button>
-<a href="{{ path('app_lesson_index') }}"class="btn btn-Vine">Mes lessons</a></button>
+    <div class="card text-center">
+      <div class="card-body">
+        <img src="{{ asset('picture/Learner.png') }}" class="card-img-top mt-3 " alt="..." height="200" width="200" alt="...">
+        <h5 class="card-title">Gestion de mes formations</h5>
+        <p class="card-text">Pour suivre une formation vous devez vous enregistrer en tant qu'apprenant</p>
+      </div>
+        <div class="card-footer">
+      <a href="{{ path('app_teacher_show') }}"class="btn btn-Vine">Voir mes formations</a></button>
+        </div>
+  </div>
 
-
+    <div class="card text-center">
+      <div class="card-body">
+        <img src="{{ asset('picture/teacher.png') }}" class="card-img-top mt-3 " alt="..." height="200" width="200" alt="...">
+        <h5 class="card-title">Gestion de mes sections</h5>
+        <p class="card-text">Envie de partager votre savoir .Postuler pour devenir instructeur.</p>
+      </div>
+          <div class="card-footer">
+        <a href="{{ path('app_section_index') }}"class="btn btn-Vine">Voir mes sections</a></button>
+          </div>
+      </div>
+        <div class="card text-center">
+      <div class="card-body">
+        <img src="{{ asset('picture/teacher.png') }}" class="card-img-top mt-3 " alt="..." height="200" width="200" alt="...">
+        <h5 class="card-title">Gestion de mes leçon</h5>
+        <p class="card-text">Envie de partager votre savoir .Postuler pour devenir instructeur.</p>
+      </div>
+          <div class="card-footer">
+      <a href="{{ path('app_lesson_index') }}"class="btn btn-Vine">Voir mes lessons</a></button>
+          </div>
+      </div>
+      </div>
+</div>
+</section>
 
 
   
-           
-    
+          
+
        
-       
-              {% if is_granted('ROLE_TEACHER')%}
-                   {% if app.user.isvalidated == true %}
               
-                   <a href="{{ path('app_training_new') }}"class="btn btn-Vine">Creer une formation</a></button>
-                   <a href="{{ path('app_section_new') }}"class="btn btn-Vine">Creer une section</a></button>
-                    <a href="{{ path('app_lesson_new') }}"class="btn btn-Vine">Creer une lesson</a></button>
-                    {% else %}
-                    <p> Votre compte n'est pas validé , vous ne pouvez pas creer de formation. </p>
-                    {% endif %}
-              {% endif %}
 
      
   

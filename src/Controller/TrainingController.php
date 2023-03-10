@@ -86,7 +86,7 @@ class TrainingController extends AbstractController
        
         
         return $this->render('training/show.html.twig',
-         [ 
+         [ 'id'=>$Training->getId(),
             'section'=> $section,
             'training' => $Training,
           

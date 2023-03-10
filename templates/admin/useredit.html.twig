@@ -4,34 +4,32 @@
 
 {% block body %}
 
-<div class="container text-center">
-
-<a href="{{ path('app_admin') }}" class="btn btn-Vine" role="button">Retour à la liste des utilisateurs</a>
 
 
-<h2>Fiche utilisateur </h2>
-
-       <img src="{{ asset('uploads/images/'~ app.user.Photo) }}" class="img-user" alt="..." height="250" width="250">
-      
-{% for roles in user.roles %}
-{% if roles == 'ROLE_TEACHER'%}        
-<p>Prénom : {{ user.Firstname }}</p>
-<p>Nom : {{ user.Lastname }}</p>
-{% endif %}
-{% if roles == 'ROLE_TEACHER' %}        
-<p>Prénom : {{ user.Firstname }}</p>
-<p>Nom : {{ user.Lastname }}</p>
-{% endif %}
-{% if roles == 'ROLE_LAERNING' %}   
-<p>Pseudo : {{ user.Pseudo }}</p>
-
-{% endif %}
-{% endfor %}
-<p>Email : {{ user.Email }}</p>
-
-Role:
-{% for roles in user.roles %}
-                
+<section class="vh-100" style="background-color: #f4f5f7;">
+  <div class="container py-5 h-100">
+  
+    <div class="row d-flex justify-content-center align-items-center h-100">
+   
+      <div class="col col-lg-6 mb-4 mb-lg-0">
+       <div class= "row text-center">
+<h1>Edition de l'utilisateur</h1>
+</div>
+        <div class="card mb-3 " style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div class="col-md-4 gradient-custom text-center "
+              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+         
+           {% if user.photo != NULL %}
+            <img src="{{ asset('uploads/images/'~ app.user.Photo) }}" class="img-user mt-3" alt="Avatar" height="150" width="150"> 
+             
+            {% endif %} 
+            {% if user.photo == NULL %}
+          <img src="{{ asset('picture/blankprofile.png') }}" class="card-img-top mt-3" alt="..." height="150" width="150">
+            {% endif %} 
+        
+           
+         {% for roles in user.roles %}
                 {% if roles == 'ROLE_TEACHER' %}
                  Instructeur
                 {% endif %}
@@ -39,11 +37,68 @@ Role:
                 Apprenant
      {% endif %}
 {% endfor %}
+            {% if is_granted('ROLE_LAERNING') %} 
+           <h5>{{app.user.pseudo}} </h5>
+           <p>Etudiant </p>
+           {% endif %} 
+           
+          {{ include('/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <h6>Informations</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                 <div class="col-6 mb-3">
+                    <h6>Nom</h6>
+                    <p class="text-muted">{{ user.Lastname }}</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Prenom</h6>
+                    <p class="text-muted">{{ user.Firstname }}</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Pseudo</h6>
+                    <p class="text-muted">{{ user.Pseudo }}</p>
+                  </div>
+                  <div class="col-7 mb-3">
+                    <h6>Email</h6>
+                    <p class="text-muted">{{ user.Email }}</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Date d'inscription</h6>
+                    <p class="text-muted">{{app.user.Dateinscription|date('d-m-y')}}</p>
+                  </div>
+                </div>
+                 {% if is_granted('ROLE_TEACHER') %} 
+                <h6>Spécialitées</h6>
+                <hr class="mt-0 mb-1">
+                  <div class="col-6 mb-1">
+                    <p class="text-muted">{{app.user.specialities}} </p>
+                </div>
+                  {% endif %} 
+                    {% if is_granted('ROLE_LAERNING') %} 
+                <h6>Formation en cours</h6>
+                <hr class="mt-0 mb-1">
+                  <div class="col-6 mb-1">
+                    <p class="text-muted">Fonctionnalité en attente</p>
+                
+                  {% endif %} 
+                 {% if is_granted('ROLE_TEACHER') %}    
+         <a href="{{ path('app_profile_editt',{id : app.user.id})}}"class="btn btn-Vine" role="button">Modifier mes informations</a>
+         {% endif %}
+        {% if is_granted('ROLE_LEARNING') %}  
+        <a href="{{ path('app_profile_editl',{id : app.user.id})}}"class="btn btn-Vine" role="button">Modifier mes informations</a>
+         {% endif %}
+         </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
-<h3>Action</h3>
-  
-
-{{ include('/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-</div>
 {% endblock %}

@@ -5,12 +5,13 @@
 {% block body %}
     <div class="row vh-100 d-flex justify-content-center align-items-center">
     <div class="col-10 col-lg-4" id="registerForm">
+    <a href="{{ path('app_section_index') }}" class="btn btn-Vine">retour</a>
         <h1>Nouvelle section</h1>
 
         {{ include('section/_form.html.twig') }}
 
 
-        <a href="{{ path('app_section_index') }}" class="btn btn-Vine">Retour</a>
+       
     </div>
      </div>
 {% endblock %}

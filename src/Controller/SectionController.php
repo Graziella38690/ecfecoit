@@ -80,14 +80,14 @@ class SectionController extends AbstractController
         ]);
 
     } else {
-        return $this->render('homepage/index.html.twig', [
-           
+        return $this->render('section/index.html.twig', [
+            'sections' => $sectionRepository->findBy(['Creatby' => $this->getuser()], ['id' => 'asc']),
             
         ]);
     }
     }
     #[Security("is_granted('ROLE_TEACHER')", statusCode: 404)]
-    #[Route('/{id}', name: 'app_section_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_section_delete', methods: ['GET','POST'])]
     public function delete(Request $request, Section $section, SectionRepository $sectionRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$section->getId(), $request->request->get('_token'))) {

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,24 +19,20 @@ class UserType extends AbstractType
        
 
 
-        ->add('isValidated', ChoiceType::class, [
-            'choices'  => [
-                'Non' => false,
-                'Oui' => true,
-
-            ],
+        ->add('isValidated', CheckboxType::class, [
+            'required' => false,
             'label' => 'Valider le compte'
         ])
         
         ->add('roles', ChoiceType::class, [
             'choices' => [
-                'Instructeur en attente' => 'ROLE_TEACHERWAIT',
+               
                 'Apprenant' => 'ROLE_LAERNING',
                 'Instructeur' => 'ROLE_TEACHER',
                 'Administrateur' => 'ROLE_ADMIN',
                
             ],
-            'expanded' => true,
+            'expanded' => false,
             'multiple' => true,
             'label' => 'Rôles' 
         ])
