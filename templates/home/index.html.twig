@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}EcoIT{% endblock %}
 {% block body %}
-<div class="container-fluid container-lg">
+<div class="container fluid container-lg">
   <div class="row">
     <div class="d-flex flex-column">
         <h1>Apprendre à coder facilement et devenir un développeur web eco-responsable !</h1>
@@ -14,12 +14,13 @@
   </div>  
 
 
-<div class="row d-flex justify-content-evenly align-items-center overflow-auto">
+
 {% for training in Trainings %}  
 <div class="col-lg-3">
+
   <div class="card mx-4 my-5">
     <div class="tainingCard text-center">   
-                <img src="{{ asset('uploads/images/'  ~ training.picture) }}" class="card-img-top mt-3 " alt="..." height="150" width="150">
+                <img src="{{ asset('public/uploads/images/'  ~ training.picture) }}" class="card-img-top mt-3 " alt="..." height="150" width="150">
                 <div class="card-body col courseCardText d-flex flex-column justify-content-between">
                   <h5 class="card-title text-center">{{ training.Title }}</h5>
                   <p class="card-text overflow-auto">{{ training.description }}</p>    
@@ -31,22 +32,25 @@
                       {% else %}
                     <h6><em>Connecter vous pour acceder au détails de la formation</em></h6>
                       {% endif %} 
-  </div>
+  
         </div>
-      </div>
-    </div>                    
-  {% endfor %}
-        </div>   
-
+    </div>
+  </div>   
+</div>                 
+{% endfor %}
+          
+<div class="row d-flex justify-content-evenly align-items-center overflow-auto">
   <div class="container text-center">
-  <section class="row justify-content-center">
     <div class="col-12 actuformation">
       <h2>S'inscrire</h2>
     </div>
-  </section>
+ </div>
 
-  <div class="card-group">
-    <div class="card text-center">
+
+
+<div class="card-group">
+<div class="card text-center">
+  <div class="col-12">
       <div class="card-body">
         <img src="{{ asset('picture/Learner.png') }}" class="card-img-top mt-3 " alt="..." height="200" width="200" alt="...">
         <h5 class="card-title">Devenir apprenant</h5>
@@ -56,7 +60,9 @@
           <a href="{{ path ('app_register') }}" class="btn btn-Vine">S'inscrire</a>
         </div>
   </div>
-    <div class="card text-center">
+   </div>
+<div class="card text-center">
+    <div class="col-12">
       <div class="card-body">
         <img src="{{ asset('picture/teacher.png') }}" class="card-img-top mt-3 " alt="..." height="200" width="200" alt="...">
         <h5 class="card-title">Devenir instructeur</h5>
@@ -65,27 +71,11 @@
           <div class="card-footer">
           <a href="{{ path ('app_teacher') }}" class="btn btn-Vine ">Postuler</a>
           </div>
-      </div>
-      </div>
+    </div>
+    </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-          
-          
-    
-
-      </main>
-
-
+</div>
+</div>
 
 
   {% endblock %}

@@ -2,15 +2,16 @@
   
   <nav class="navbar navbar-expand-lg navbar-light bg-light ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="{{ asset('picture/Logo_ecoit.png') }}" class="card-img-top" alt="..." height="50" width="50"></a>
+    <a class="navbar-brand" href="{{path('app_home')}}"><img src="{{ asset('picture/Logo_ecoit.png') }}" class="card-img-top" alt="..." height="150" width="150"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon" ></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{path('app_home')}}">Accueil</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="{{path('app_training_index')}}">Nos formations</a>
         </li>
@@ -19,12 +20,14 @@
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <a class="nav-link" href="{{ path('app_profile_index',{id : app.user.id})}}">Mon compte</a>
         </li>
+
         <li class="nav-item">
+        {% if app.user.isvalidated == true %}   
             {% if is_granted('ROLE_ADMIN') %}      
         <a class="nav-link" href="{{path('app_admin')}}"class="btn btn-Vine" role="button">Gestion utilisateurs</a>
              {% endif %}
         </li>
-         {% if app.user.isvalidated == true %}   
+
         {% if is_granted('ROLE_TEACHER') %}   
         <li class="nav-item dropdown">
          <a class="nav-link dropdown-toggle" href="{{path('app_teacher_index')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -42,27 +45,27 @@
         {% endif %}
         {% endif %}
         {% endif %}
-        </li>
-            
-         </div>
+        
+        
          {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <span class="navbar-text">
+        <li class="nav-item">
         Connecte en tant que {{app.user.pseudo}}
-                </span>
-           <span class="navbar-text"> 
+                 </li>
+           <li class="nav-item">
         <a class="nav-link" href="{{path('app_logout')}}">deconnexion</a>
-            </span>
+            </li>
                 {% else %}      
                    
-         <span class="navbar-text"> 
+        <li class="nav-item">
         <a class="nav-link" href="{{path('app_login')}}">Connexion</a>
-         </span>
-<span class="navbar-text"> 
+          </li>
+<li class="nav-item">
  <a class="nav-link" href="{{path('app_register')}}">S'inscrire</a>
- </span>
+  </li>
+  </ul>
         {% endif %}
           
-   
+   </div>
   </div>
 </nav>
 
