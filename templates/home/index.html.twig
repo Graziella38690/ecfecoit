@@ -12,70 +12,84 @@
         À terme, EcoIT désire devenir la référence française pour les développeurs soucieux de leur impact digital. Et pourquoi pas délivrer enfin un label officiel pour classer les sites web selon leur empreinte numérique. </p>
     </div>
   </div>  
-
-
-
-{% for training in Trainings %}  
-<div class="col-lg-3">
-
-  <div class="card mx-4 my-5">
-    <div class="tainingCard text-center">   
-                <img src="{{ asset('public/uploads/images/'  ~ training.picture) }}" class="card-img-top mt-3 " alt="..." height="150" width="150">
-                <div class="card-body col courseCardText d-flex flex-column justify-content-between">
-                  <h5 class="card-title text-center">{{ training.Title }}</h5>
-                  <p class="card-text overflow-auto">{{ training.description }}</p>    
-                  <p class="card-text overflow-auto">Publier par {{ training.Creatby.firstname }}{{ training.Creatby.lastname }}
-                  {{training.Datecreate|date('Y-m-d')}}  </p> 
-                           
-                      {% if app.user %}
-                      <a href="{{ path ('app_training_show',{id:training.Id})}}"class="btn btn-Vine" role="button"> Détail de la formation </a>
-                      {% else %}
-                    <h6><em>Connecter vous pour acceder au détails de la formation</em></h6>
-                      {% endif %} 
-  
+  <div class="row d-flex justify-content-evenly align-items-center overflow-auto">
+  <div class="col-12">
+    <div class="text-center">
+      <h2>Nos formations</h2>
+    </div>
+  {% for training in Trainings %}  
+    <div class="col-lg-4">
+      <div class="card mx-4 my-5">
+        <div class="trainingCard text-center">   
+            <img src="{{ asset('/uploads/images/'  ~ training.picture) }}" class="card-img-top mt-3 " alt="..." height="150" width="150">
+            <div class="card-body col TrainingCardText d-flex flex-column justify-content-between">
+              <h5 class="card-title text-center">{{ training.Title }}</h5>
+              <p class="card-text overflow-auto">{{ training.description }}</p>    
+              <p class="card-text overflow-auto">Publier par {{ training.Creatby.firstname }}{{ training.Creatby.lastname }}
+                {{training.Datecreate|date('Y-m-d')}}  </p> 
+                 <div class="card-footer">
+              {% if app.user %}
+              <a href="{{ path ('app_training_show',{id:training.Id})}}"class="btn btn-Vine"> Détail de la formation </a>
+              {% else %}
+              <h6><em>Connecter vous pour acceder au détails de la formation</em></h6>
+              {% endif %} 
+  </div>
         </div>
     </div>
   </div>   
 </div>                 
 {% endfor %}
-          
+       </div> 
+
+
 <div class="row d-flex justify-content-evenly align-items-center overflow-auto">
-  <div class="container text-center">
-    <div class="col-12 actuformation">
-      <h2>S'inscrire</h2>
-    </div>
- </div>
-
-
-
-<div class="card-group">
-<div class="card text-center">
   <div class="col-12">
-      <div class="card-body">
-        <img src="{{ asset('picture/Learner.png') }}" class="card-img-top mt-3 " alt="..." height="200" width="200" alt="...">
-        <h5 class="card-title">Devenir apprenant</h5>
-        <p class="card-text">Pour suivre une formation vous devez vous enregistrer en tant qu'apprenant</p>
-      </div>
-        <div class="card-footer">
-          <a href="{{ path ('app_register') }}" class="btn btn-Vine">S'inscrire</a>
-        </div>
+    <div class="text-center">
+      <h2>Creer un compte</h2>
+    </div>
   </div>
-   </div>
-<div class="card text-center">
-    <div class="col-12">
-      <div class="card-body">
-        <img src="{{ asset('picture/teacher.png') }}" class="card-img-top mt-3 " alt="..." height="200" width="200" alt="...">
-        <h5 class="card-title">Devenir instructeur</h5>
-        <p class="card-text">Envie de partager votre savoir .Postuler pour devenir instructeur.</p>
-      </div>
-          <div class="card-footer">
-          <a href="{{ path ('app_teacher') }}" class="btn btn-Vine ">Postuler</a>
+
+      
+      
+        <div class="card-group text-center">
+     
+        <div class="col-xl-6">
+          <div class="card mx-4 my-5">
+            <div class="card-body">
+              <img src="{{ asset('picture/Learner.png') }}" class="card-img-top mt-3 " alt="..." height="200" width="200" alt="...">
+              <h5 class="card-title">Devenir apprenant</h5>
+              <p class="card-text">Pour suivre une formation vous devez vous enregistrer en tant qu'apprenant</p>
+            </div>
+            <div class="card-footer">
+
+              <a href="{{ path ('app_register') }}" class="btn btn-Vine">S'inscrire</a>
+         
           </div>
+        </div>
+     
+         </div>
+
+
+        <div class="col-xl-6">
+          <div class="card mx-4 my-5">
+            <div class="card-body">
+              <img src="{{ asset('picture/teacher.png') }}" class="card-img-top mt-3 " alt="..." height="200" width="200" alt="...">
+              <h5 class="card-title">Devenir instructeur</h5>
+              <p class="card-text">Envie de partager votre savoir .Postuler pour devenir instructeur.</p>
+            </div>
+            <div class="card-footer">
+              <a href="{{ path ('app_teacher') }}" class="btn btn-Vine ">Postuler</a>
+            </div>
+          </div> 
+        </div>
+  
+
+
+
     </div>
-    </div>
-</div>
-</div>
-</div>
+  </div>
+
+
 
 
   {% endblock %}

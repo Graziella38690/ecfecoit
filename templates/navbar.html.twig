@@ -1,6 +1,6 @@
   
   
-  <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light ">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{path('app_home')}}"><img src="{{ asset('picture/Logo_ecoit.png') }}" class="card-img-top" alt="..." height="150" width="150"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,8 +38,8 @@
           <a class="nav-link dropdown-item" href="{{ path('app_teacher_show') }}">Gestion formations</a>
           <a class="nav-link dropdown-item" href="{{ path('app_section_index') }}">Gestion sections</a>
           <a class="nav-link dropdown-item" href="{{ path('app_lesson_index') }}">Gestion leçons</a>
-          <div class="nav-link dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+        
+         
         </div>
         </li>
         {% endif %}
@@ -48,9 +48,7 @@
         
         
          {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <li class="nav-item">
-        Connecte en tant que {{app.user.pseudo}}
-                 </li>
+       
            <li class="nav-item">
         <a class="nav-link" href="{{path('app_logout')}}">deconnexion</a>
             </li>

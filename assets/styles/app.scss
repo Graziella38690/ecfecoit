@@ -74,11 +74,13 @@ h6 {
   background-color: $Vine;
   border-color: $Vine;
   font-family: 'Verdana Pro Light';
+  font-size: xx-large;
 }
 
 li {
   text-decoration:none;
   color: $vert-cyan;
+  font-size: x-large;
 }
 
 a:link, a:visited,a:hover,a:active {
@@ -99,13 +101,14 @@ a:link, a:visited,a:hover,a:active {
   }
   #nav li {
   display: inline-block;
+  
   }
 
  .navbar-toggler{
    font-size: 3em;
     }
   
-
+  
 #LegalNotice,#termsOfUse{
   text-decoration:none;
   color: $vert-cyan;
