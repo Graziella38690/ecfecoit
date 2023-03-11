@@ -13,33 +13,31 @@
     </div>
   </div>  
   <div class="row d-flex justify-content-evenly align-items-center overflow-auto">
-  <div class="col-12">
-    <div class="text-center">
-      <h2>Nos formations</h2>
-    </div>
-  {% for training in Trainings %}  
-    <div class="col-lg-4">
+<div class="row d-flex justify-content-center align-items-center" id="allCardsPage">
+  <h1>Nos formations</h1>
+{% for training in Trainings %}        
+    <div class="col-xs-12 col-lg-4">
       <div class="card mx-4 my-5">
-        <div class="trainingCard text-center">   
-            <img src="{{ asset('picture/uploads/images/'  ~ training.picture) }}" class="card-img-top mt-3 " alt="..." height="150" width="150">
-            <div class="card-body col TrainingCardText d-flex flex-column justify-content-between">
-              <h5 class="card-title text-center">{{ training.Title }}</h5>
-              <p class="card-text overflow-auto">{{ training.description }}</p>    
-              <p class="card-text overflow-auto">Publier par {{ training.Creatby.firstname }}{{ training.Creatby.lastname }}
-                {{training.Datecreate|date('Y-m-d')}}  </p> 
-                 <div class="card-footer">
-              {% if app.user %}
-              <a href="{{ path ('app_training_show',{id:training.Id})}}"class="btn btn-Vine"> Détail de la formation </a>
-              {% else %}
-              <h6><em>Connecter vous pour acceder au détails de la formation</em></h6>
-              {% endif %} 
-  </div>
+        <div class="trainingCard text-center">
+        <img src="{{ asset('uploads/images/'  ~ training.picture) }}" class="card-img-top mt-3" alt="..."height="150" width="150" >
+        <div class="card-body col trainingCardText d-flex flex-column justify-content-between"> 
+          <h5 class="card-title text-center">{{ training.Title }}</h5>
+            <p class="card-text overflow-auto">{{ training.Description }}</p>
+            Publier par {{ training.Creatby.firstname }}  {{ training.Creatby.lastname }}                
+            le : {{training.Datecreate|date('Y-m-d')}}             
+    {% if app.user %}
+      <a href="{{ path ('app_training_show',{id:training.Id})}}"class="btn btn-Vine" role="button"> Détail de la formation </a>
+    {% else %}
+      <h6><em>Connecter vous pour acceder au détails de la formation</em></h6>
+    {% endif %}                   
+          </div>
         </div>
-    </div>
-  </div>   
-</div>                 
-{% endfor %}
-       </div> 
+      </div>
+        </div>
+            
+    {% endfor %}                
+
+  </div> 
 
 
 <div class="row d-flex justify-content-evenly align-items-center overflow-auto">
