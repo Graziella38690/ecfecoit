@@ -37,7 +37,7 @@ class Training
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
-    #[ORM\OneToMany(mappedBy: 'containedIn', targetEntity: Section::class)]
+    #[ORM\OneToMany(mappedBy: 'containedIn', targetEntity: Section::class,orphanRemoval:true)]
     private $sectionsContained;
 
     public function __construct()
