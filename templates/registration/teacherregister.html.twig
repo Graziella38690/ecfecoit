@@ -34,16 +34,13 @@
         {{ form_row(teacherForm.plainPassword, {
             label: 'Mot de passe'
         }) }}
-
+ <p><h6> 6 caractères minimum , au moins une minuscule, une majuscule et un chiffre</h6></p>
         {{ form_row(teacherForm.photo, {
             label: 'Photo'
         }) }}
 
 
-        {{ form_row(teacherForm.agreeTerms, {
-            
-        label:'En m\'inscrivany à ce site j\'accepte...'
-        }) }}
+        {{ form_row(teacherForm.agreeTerms) }}
 
  
         <button class="btn btn-lg btn-vine" type="submit">Postuler

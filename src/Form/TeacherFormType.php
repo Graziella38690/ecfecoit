@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
-
+use Symfony\Component\Validator\Constraints\Regex;
 class TeacherFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -49,6 +49,7 @@ class TeacherFormType extends AbstractType
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
+                'label' => 'En m\'inscrivant à ce site j\'accepte...'
             ])
 
             ->add('plainPassword', PasswordType::class, [
@@ -65,6 +66,12 @@ class TeacherFormType extends AbstractType
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
+                    ]),
+
+                    new Regex([
+                        // password must have a lower case letter, an upper case letter and a number. Minimum length is 6.
+                        'pattern' => '/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$/',
+                        'message' => 'Le mot de passe ne doit pas être inférieur à 6 caractères et il doit contenir au moins une minuscule, une majuscule et un chiffre'
                     ]),
                 ],
             ])

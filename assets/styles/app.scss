@@ -101,8 +101,12 @@ a:link, a:visited,a:hover,a:active {
   }
   #nav li {
   display: inline-block;
-  
+  font-size: x-large;
   }
+  .nav-link.dropdown-item {
+    font-size: x-large;
+    
+    }
 
  .navbar-toggler{
    font-size: 3em;

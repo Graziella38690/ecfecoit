@@ -183,6 +183,6 @@ class TrainingController extends AbstractController
             $TrainingRepository->remove($Training);
         }
 
-        return $this->redirectToRoute('app_teacher_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_teacher_show', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -18,6 +18,7 @@
                             {{ form_row(registrationForm.email) }}
                             {{ form_row(registrationForm.plainPassword, {
                             label: 'Mot de passe'}) }}
+                            <p><h6> 6 caractères minimum , au moins une minuscule, une majuscule et un chiffre</h6></p>
                             {{ form_row(registrationForm.agreeTerms) }}
                             <button type="submit" class="btn btn-Vine">M'inscrire</button>
                             {{ form_end(registrationForm) }}

@@ -7,17 +7,17 @@
 
 
 <section class="vh-100" style="background-color: #f4f5f7;">
-  <div class="container py-5 h-100">
+  <div class="container py-5 mb-1 h-100">
   
     <div class="row d-flex justify-content-center align-items-center h-100">
    
-      <div class="col col-lg-6 mb-4 mb-lg-0">
+      <div class="col-3 col-12 mb-4 mb-lg-0">
        <div class= "row text-center">
 <h1>Edition de l'utilisateur</h1>
 </div>
-        <div class="card mb-3 " style="border-radius: .5rem;">
+        <div class="card mb-4 " style="border-radius: .5rem;">
           <div class="row g-0">
-            <div class="col-md-4 gradient-custom text-center "
+            <div class="col-12 col-lg-3  gradient-custom text-center "
               style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
          
            {% if user.photo != NULL %}
@@ -34,20 +34,25 @@
                  Instructeur
                 {% endif %}
                 {% if roles == 'ROLE_LAERNING' %}
-                Apprenant
+                Etudiants
      {% endif %}
 {% endfor %}
             {% if is_granted('ROLE_LAERNING') %} 
            <h5>{{app.user.pseudo}} </h5>
            <p>Etudiant </p>
            {% endif %} 
+         
+         <div class="col-4 offset-4 col-lg-12  offset-lg-0">
+         <h6>{{ include('/_form.html.twig', {'button_label': 'Mettre à jour'}) }}</h6>
            
-          {{ include('/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+           </div>
             </div>
-            <div class="col-md-8">
+
+            <div class="col-12 col-lg-8">
               <div class="card-body p-4">
                 <h6>Informations</h6>
                 <hr class="mt-0 mb-4">
+                {% if is_granted('ROLE_TEACHER') %} 
                 <div class="row pt-1">
                  <div class="col-6 mb-3">
                     <h6>Nom</h6>
@@ -57,11 +62,13 @@
                     <h6>Prenom</h6>
                     <p class="text-muted">{{ user.Firstname }}</p>
                   </div>
+                  {% endif %} 
+                  
                   <div class="col-6 mb-3">
                     <h6>Pseudo</h6>
                     <p class="text-muted">{{ user.Pseudo }}</p>
                   </div>
-                  <div class="col-7 mb-3">
+                  <div class="col-8 mb-3">
                     <h6>Email</h6>
                     <p class="text-muted">{{ user.Email }}</p>
                   </div>

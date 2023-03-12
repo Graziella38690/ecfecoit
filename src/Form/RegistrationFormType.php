@@ -13,8 +13,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-
-
+use Symfony\Component\Validator\Constraints\Regex;
 
 class RegistrationFormType extends AbstractType
 {
@@ -60,6 +59,12 @@ class RegistrationFormType extends AbstractType
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
+                    new Regex([
+                        'pattern' => '/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$/',
+                        'message' => 'Le mot de passe ne doit pas être inférieur à 6 caractères et il doit contenir au moins une minuscule, une majuscule et un chiffre'
+                    ]
+
+                    ),
                 ],
                 'label' => 'Mot de passe'
             ])

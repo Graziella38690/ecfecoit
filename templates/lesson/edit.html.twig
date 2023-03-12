@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Leçon{% endblock %}
+{% block title %}Modif Leçon{% endblock %}
 
 {% block body %}
  <div class="container-fluid container-lg ">
  <div class="col-xs-12 text-center ">
     <a href="{{ path('app_lesson_index') }}"class="btn btn-Vine">Retour</a>
-    <h1>Modifier la lesson </h1>
+    <h1>Modifier la leçon </h1>
      <h4>{{ lesson.ressources ? lesson.ressources|join(', ') : '' }}</h4>
    <a href="{{ path('app_lesson_editdoc',{'id': lesson.id}) }}" class="btn btn-Vine">Modifier les documents</a>
  

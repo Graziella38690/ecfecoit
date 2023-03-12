@@ -1,11 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des apprenants!{% endblock %}
+{% block title %}Liste des etudiants!{% endblock %}
 
 {% block body %}
 
 <div class="container-fluid container-lg">
 <div class= "row text-center">
+<h1>Gestion des instructeurs</h1>
+</div>
+
+  <table class="table">
+        <thead>
+            <tr>
+                
+                <th>Mails</th>
                 <th>Role</th>
                 <th>Validé</th>
                 <th>actions</th>
@@ -15,10 +23,6 @@
             <tr>
             {% for user in user %}
                 <td> {{ user.email }}</td>
-                
-              
-             
-            
                    <td>{% for roles in user.roles %}
                    
                    {% if roles == 'ROLE_ADMIN' %}
@@ -28,7 +32,7 @@
                 Instructeur
                         {% endif %}
                         {% if roles == 'ROLE_LAERNING' %}
-                Apprenant
+                Etudiants
                         {% endif %}
                 {% endfor %}
                     </td>
@@ -40,13 +44,13 @@
             <img src="{{ asset('picture/Suprimer.png') }}" class="img-icon" alt="...">
                {% endif %}
                   </td>  
-                 <td> <a href="{{ path('app_edit_user', {id:user.Id}) }}" class="btn btn-Vine" role="button">Modifier</a></td>
+                <td> <a href="{{ path('app_edit_user', {id:user.Id}) }}" class="btn btn-Vine" role="button">Modifier</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-</div>
 
+</div>
 
  {% endblock %}
 

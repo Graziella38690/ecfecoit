@@ -4,9 +4,13 @@
 
 {% block body %}
   
-<div class="container-fluid container-lg">
-<div class="row">
-<div class="col-xs-12" >
+<div class="container-fluid container-lg vh-100">
+<div class= "row text-center">
+<div class="col-12">
+<a href="{{ path('app_teacher_index') }}"class="btn btn-Vine" role="button">retour</a>
+</div>
+</div>
+<div class="col-12" >
     <h1>Mes sections</h1>
 <a href="{{ path('app_section_new') }}"class="btn btn-Vine" role="button">Ajouter une section</a>
     <table class="table">
@@ -21,7 +25,7 @@
         <tbody>
         {% for section in sections %}
             <tr>
-                <td>{{ section.id }}</td>
+                <td><h2>{{ section.id }}</h2></td>
                 <td>{{ section.Title }}</td>
                 <td>{{ section.containedIn }}</td>
                 <td>
