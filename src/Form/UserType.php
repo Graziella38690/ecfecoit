@@ -28,7 +28,7 @@ class UserType extends AbstractType
             'choices' => [
                
                 'Etudiant' => 'ROLE_LAERNING',
-                'Instructeur' => 'ROLE_TEACHER',
+                'formateur' => 'ROLE_TEACHER',
                 'Administrateur' => 'ROLE_ADMIN',
                
             ],

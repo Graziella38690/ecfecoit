@@ -2,7 +2,7 @@
   
   <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{{path('app_home')}}"><img src="{{ asset('picture/Logo_ecoit.png') }}" class="card-img-top" alt="..." height="150" width="150"></a>
+    <a class="navbar-brand" href="{{path('app_home')}}"><img src="{{ asset('picture/Logo_ecoit.png') }}" class="logo" alt="imglogo" height="100" width="100"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon" ></span>
     </button>
@@ -33,7 +33,7 @@
         </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
       
-          <a class="nav-link dropdown-item" href="{{ path('app_list_laerning') }}">Gestion instructeur</a>
+          <a class="nav-link dropdown-item" href="{{ path('app_list_laerning') }}">Gestion formateur</a>
           <a class="nav-link dropdown-item" href="{{ path('app_list_teacher') }}">Gestion etudiants</a>
         </div>
         </li>
@@ -43,7 +43,7 @@
         {% if is_granted('ROLE_TEACHER') %}   
         <li class="nav-item dropdown">
          <a class="nav-link dropdown-toggle" href="{{path('app_teacher_index')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Espace instructeur
+          Espace formateur
         </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
       

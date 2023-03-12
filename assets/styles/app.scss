@@ -1,5 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
 
+/* font */
 
 @font-face {
   font-family: 'Verdana Pro Light';
@@ -30,6 +31,9 @@ $Vine: rgba(14,164,122,1);
 $Sigma: rgba(239,251,245,1);
 $blue-green: rgb(47,191,176,1);
 
+
+/* custom */
+
 .gradient-custom {
   /* fallback for old browsers */
   background: $Sigma;
@@ -40,53 +44,21 @@ $blue-green: rgb(47,191,176,1);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to right bottom, $Sigma,$blue-green)
   }
+
+
+/* body */
+
 body{
   background-color:$Sigma;
   
     font-size: xx-large;
-  
   }
-
-
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1,h2,h3,h4,h5,h6 {
   font-family:  "Verdana Pro";
+  color: $vert-cyan
 }
 
-.card-img-top
-{
-  max-width: 200px;
-  max-height: 200px;
-}
-.img-icon{
-  max-width:  30px;
-  max-height: 30px;
-}
-
-.btn,.btn-Vine,button.btn.btn-Vine{
-  text-decoration:none;
-  color:$Sigma;
-  background-color: $Vine;
-  border-color: $Vine;
-  font-family: 'Verdana Pro Light';
-  font-size: xx-large;
-}
-
-li {
-  text-decoration:none;
-  color: $vert-cyan;
-  font-size: x-large;
-}
-
-a:link, a:visited,a:hover,a:active {
-  text-decoration:none;
-  color: $Sigma;
-}
+/* nav */
 
 #nav {
   width: 100%;
@@ -107,31 +79,55 @@ a:link, a:visited,a:hover,a:active {
     font-size: x-large;
     
     }
-
  .navbar-toggler{
    font-size: 3em;
     }
-  
-  
-#LegalNotice,#termsOfUse{
+
+/* btn */
+.btn,.btn-Vine{
+  text-decoration:none;
+  color:$Sigma;
+  background-color: $Vine;
+  border-color: $Vine;
+  font-family: 'Verdana Pro Light';
+  font-size: xx-large;
+}
+
+
+
+/* link */
+
+li {
   text-decoration:none;
   color: $vert-cyan;
+  font-size: x-large;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+a:link, a:visited,a:hover,a:active {
+  text-decoration:none;
+  color: $Sigma;
+}
+
+/* img */
   
-  color: $vert-cyan;
+
+.img-icon{
+  max-width:  30px;
+  max-height: 30px;
 }
 
+
+
+/* form */
 .form {
 height: 100%;
 
 }
+
+
+
+/* card */
+
 .card{
   border-radius: 2rem;
  
@@ -140,7 +136,44 @@ height: 100%;
 
 
 
+ .card-img-avatar
+ {
+   
+   max-width:  250px;
+   max-height: 250px;
+  }
+  .card-img-training
+  {
+
+    max-width:  600px;
+    max-height: 200px;
+   }
+ 
+
+   @media only screen and (min-width: 992px) {
+   /* card */
+    .card-img-training
+    {
+  
+      max-width:  1000px;
+      max-height: 250px;
+     }
+
+     /* Body */
+     body{
+      background-color:$Sigma;
+      
+        font-size: medium;
+      }
 
 
+      /* btn */
 
 
+      .btn,.btn-Vine{
+       
+        font-size: medium;
+      }
+
+      
+  }

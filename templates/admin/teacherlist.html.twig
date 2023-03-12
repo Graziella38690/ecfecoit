@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des instructeurs!{% endblock %}
+{% block title %}Liste des formateurs!{% endblock %}
 
 {% block body %}
 <div class="container-fluid container-lg">
 <div class= "row text-center">
-<h1>Gestion des instructeurs</h1>
+<h1>Gestion des formateurs</h1>
 </div>
 
   <table class="table">
@@ -22,7 +22,7 @@
         <tbody>
             <tr>
             {% for user in user %}
-            <td><img src="{{ asset('uploads/images/'~ app.user.Photo) }}" class="img-user" alt="..." height="50" width="50"></td>
+            <td><img src="{{ asset('uploads/images/'~ app.user.Photo) }}" class="card-img-avatar" alt="avatar" height="50" width="50"></td>
                 <td> {{ user.email }}</td>
               
               
@@ -34,7 +34,7 @@
                 Administrateur
                         {% endif %}
                         {% if roles == 'ROLE_TEACHER' %}
-                Instructeur
+                formateur
                         {% endif %}
                         {% if roles == 'ROLE_LAERNING' %}
                 Etudiants
@@ -43,10 +43,10 @@
                     </td>
                 <td>
              {% if user.isValidated == true %}
-                <img src="{{ asset('picture/Validation.png') }}" class="img-icon" alt="...">
+                <img src="{{ asset('picture/Validation.png') }}" class="img-icon" alt="valider">
                 {% endif %}
               {% if user.isValidated == false %}
-            <img src="{{ asset('picture/Suprimer.png') }}" class="img-icon" alt="...">
+            <img src="{{ asset('picture/Suprimer.png') }}" class="img-icon" alt="suprimer">
                {% endif %}
                   </td>  
                 <td> <a href="{{ path('app_edit_user', {id:user.Id}) }}" class="btn btn-Vine" role="button">Modifier</a></td>

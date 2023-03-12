@@ -21,17 +21,17 @@
               style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
          
            {% if user.photo != NULL %}
-            <img src="{{ asset('uploads/images/'~ app.user.Photo) }}" class="img-user mt-3" alt="Avatar" height="150" width="150"> 
+            <img src="{{ asset('uploads/images/'~ app.user.Photo) }}" class="card-img-avatar mt-3" alt="Avatar" height="150" width="150"> 
              
             {% endif %} 
             {% if user.photo == NULL %}
-          <img src="{{ asset('picture/blankprofile.png') }}" class="card-img-top mt-3" alt="..." height="150" width="150">
+          <img src="{{ asset('picture/blankprofile.png') }}" class="card-img-avatar mt-3" alt="Avatar blanc" height="150" width="150">
             {% endif %} 
         
            
          {% for roles in user.roles %}
                 {% if roles == 'ROLE_TEACHER' %}
-                 Instructeur
+                 formateur
                 {% endif %}
                 {% if roles == 'ROLE_LAERNING' %}
                 Etudiants

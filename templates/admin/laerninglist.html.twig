@@ -6,7 +6,7 @@
 
 <div class="container-fluid container-lg">
 <div class= "row text-center">
-<h1>Gestion des instructeurs</h1>
+<h1>Gestion des formateurs</h1>
 </div>
 
   <table class="table">
@@ -29,7 +29,7 @@
                 Administrateur
                         {% endif %}
                         {% if roles == 'ROLE_TEACHER' %}
-                Instructeur
+                formateur
                         {% endif %}
                         {% if roles == 'ROLE_LAERNING' %}
                 Etudiants
@@ -38,10 +38,10 @@
                     </td>
                 <td>
              {% if user.isValidated == true %}
-                <img src="{{ asset('picture/Validation.png') }}" class="img-icon" alt="...">
+                <img src="{{ asset('picture/Validation.png') }}" class="img-icon" alt="valitation">
                 {% endif %}
               {% if user.isValidated == false %}
-            <img src="{{ asset('picture/Suprimer.png') }}" class="img-icon" alt="...">
+            <img src="{{ asset('picture/Suprimer.png') }}" class="img-icon" alt="supprimer">
                {% endif %}
                   </td>  
                 <td> <a href="{{ path('app_edit_user', {id:user.Id}) }}" class="btn btn-Vine" role="button">Modifier</a></td>

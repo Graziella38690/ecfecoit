@@ -39,14 +39,14 @@
                 <tr>
                 <th> Rôles </th>
                 <td> {% for roles in user.roles %}
-                {% if roles == 'ROLE_TEACHERWAIT' %}
-                 Instructeur en attente
-                 {% endif %}
+                 {% if roles == 'ROLE_ADMIN' %}
+                Administrateur
+                {% endif %}
                 {% if roles == 'ROLE_TEACHER' %}
-                 Instructeur
+                 formateur
                 {% endif %}
                 {% if roles == 'ROLE_LAERNING' %}
-                Etudiants
+                Etudiant
      {% endif %}
 {% endfor %}</td>
     {% endfor %}     

@@ -2,13 +2,16 @@
 {% block title %}EcoIT{% endblock %}
 {% block body %}
 <div class="container fluid container-lg">
+<div class="row justify-content-center">
+ <img src="{{ asset('picture/logoecoit.png') }}" class="card-img-avatar mt-3 " alt="avatar" height="200" width="200" >
+ </div>
   <div class="row">
     <div class="d-flex flex-column">
         <h1>Apprendre à coder facilement et devenir un développeur web eco-responsable !</h1>
         <p >C’est un fait, la crise écologique est devenue une urgence majeure. La sixième extinction massive a déjà commencé et le changement climatique se fait de plus en plus ressentir au fil des années. 
         Mais qu’en est-il d’internet ?<br>
         En matière d’émissions de CO2, il pollue 1.5 fois plus que le transport aérien. D’ailleurs, en 20 ans, le poids d’une page web a été multiplié par 115 (source : https://www.greenit.fr/)<br> 
-        Face à ce constat, ECOIT un organisme de formation a été fondé en 2017. Notre objectif est d’être une plateforme d’éducation permettant à tout instructeur expert en accessibilité et en éco-conception web de présenter des modules de cours. <br>
+        Face à ce constat, ECOIT un organisme de formation a été fondé en 2017. Notre objectif est d’être une plateforme d’éducation permettant à tout formateur expert en accessibilité et en éco-conception web de présenter des modules de cours. <br>
         À terme, EcoIT désire devenir la référence française pour les développeurs soucieux de leur impact digital. Et pourquoi pas délivrer enfin un label officiel pour classer les sites web selon leur empreinte numérique. </p>
     </div>
   </div>  
@@ -19,7 +22,7 @@
     <div class="col-xs-12 col-lg-4">
       <div class="card mx-4 my-5">
         <div class="trainingCard text-center">
-        <img src="{{ asset('uploads/images/'  ~ training.picture) }}" class="card-img-top mt-3" alt="..."height="150" width="150" >
+        <img src="{{ asset('uploads/images/'  ~ training.picture) }}" class="card-img-training mt-3" alt="imageformation"height="200" width="200" >
         <div class="card-body col trainingCardText d-flex flex-column justify-content-between"> 
           <h5 class="card-title text-center">{{ training.Title }}</h5>
             <p class="card-text overflow-auto">{{ training.Description }}</p>
@@ -48,10 +51,10 @@
   </div>
         <div class="card-group text-center">
      
-        <div class="col-xl-6">
+        <div class="col-12 col-lg-6">
           <div class="card mx-4 my-5">
             <div class="card-body">
-              <img src="{{ asset('picture/Learner.png') }}" class="card-img-top mt-3 " alt="..." height="200" width="200" alt="...">
+              <img src="{{ asset('picture/Learner.png') }}" class="card-img-avatar mt-3 " alt="avatar" height="200" width="200" >
               <h5 class="card-title">Devenir etudiants</h5>
               <p class="card-text">Pour suivre une formation vous devez vous enregistrer en tant qu'etudiants</p>
             </div>
@@ -63,12 +66,12 @@
 
 
          
-        <div class="col-xl-6">
+        <div class="col-12 col-lg-6 ">
           <div class="card mx-4 my-5">
             <div class="card-body">
-              <img src="{{ asset('picture/teacher.png') }}" class="card-img-top mt-3 " alt="..." height="200" width="200" alt="...">
-              <h5 class="card-title">Devenir instructeur</h5>
-              <p class="card-text">Envie de partager votre savoir .Postuler pour devenir instructeur.</p>
+              <img src="{{ asset('picture/teacher.png') }}" class="card-img-avatar mt-3 " alt="avatar" height="200" width="200" >
+              <h5 class="card-title">Devenir formateur</h5>
+              <p class="card-text">Envie de partager votre savoir .Postuler pour devenir formateur.</p>
             </div>
             <div class="card-footer">
               <a href="{{ path ('app_teacher') }}" class="btn btn-Vine ">Postuler</a>
