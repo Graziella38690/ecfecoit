@@ -27,28 +27,21 @@
             {% if user.photo == NULL %}
           <img src="{{ asset('picture/blankprofile.png') }}" class="card-img-avatar mt-3" alt="Avatar blanc" height="150" width="150">
             {% endif %} 
-        
+          {{ include('admin/_form.html.twig') }}
            
          {% for roles in user.roles %}
-                {% if roles == 'ROLE_TEACHER' %}
-                 formateur
-                {% endif %}
-                {% if roles == 'ROLE_LAERNING' %}
-                Etudiants
-                {% endif %}
+               
              
-           
+            
          
          <div class="col-4 offset-4 col-lg-12  offset-lg-0">
-         <h6>{{ include('/_form.html.twig', {'button_label': 'Mettre à jour'}) }}</h6>
            
            </div>
             </div>
 
             <div class="col-12 col-lg-8">
               <div class="card-body p-4">
-                <h6>Informations</h6>
-                <hr class="mt-0 mb-4">
+               
                  {% if roles == 'ROLE_TEACHER' %}
                 <div class="row pt-1">
                  <div class="col-6 mb-3">
