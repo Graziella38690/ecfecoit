@@ -91,7 +91,7 @@
                  {% if is_granted('ROLE_TEACHER') %}    
          <a href="{{ path('app_profile_editt',{id : app.user.id})}}"class="btn btn-Vine" role="button">Modifier mes informations</a>
          {% endif %}
-        {% if is_granted('ROLE_LEARNING') %}  
+        {% if is_granted('ROLE_LAERNING') %}  
         <a href="{{ path('app_profile_editl',{id : app.user.id})}}"class="btn btn-Vine" role="button">Modifier mes informations</a>
          {% endif %}
          </div>
