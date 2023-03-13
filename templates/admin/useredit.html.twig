@@ -35,12 +35,9 @@
                 {% endif %}
                 {% if roles == 'ROLE_LAERNING' %}
                 Etudiants
-     {% endif %}
-{% endfor %}
-            {% if is_granted('ROLE_LAERNING') %} 
-           <h5>{{app.user.pseudo}} </h5>
-           <p>Etudiant </p>
-           {% endif %} 
+                {% endif %}
+              {% endfor %}
+           
          
          <div class="col-4 offset-4 col-lg-12  offset-lg-0">
          <h6>{{ include('/_form.html.twig', {'button_label': 'Mettre à jour'}) }}</h6>
@@ -62,38 +59,30 @@
                     <h6>Prenom</h6>
                     <p class="text-muted">{{ user.Firstname }}</p>
                   </div>
+                   <div class="col-8 mb-3">
+                    <h6>Email</h6>
+                    <p class="text-muted">{{ user.Email }}</p>
+                  </div>
+                
+                  <div class="col-6 mb-1">
+                  <h6>Spécialitées</h6>
+                    <p class="text-muted">{{app.user.specialities}} </p>
+                </div>
+
                   {% endif %} 
-                  
+
+                    {% if is_granted('ROLE_LAERNING') %} 
                   <div class="col-6 mb-3">
                     <h6>Pseudo</h6>
                     <p class="text-muted">{{ user.Pseudo }}</p>
                   </div>
-                  <div class="col-8 mb-3">
+                 <div class="col-8 mb-3">
                     <h6>Email</h6>
                     <p class="text-muted">{{ user.Email }}</p>
                   </div>
-                 
-                </div>
-                 {% if is_granted('ROLE_TEACHER') %} 
-                <h6>Spécialitées</h6>
-                <hr class="mt-0 mb-1">
-                  <div class="col-6 mb-1">
-                    <p class="text-muted">{{app.user.specialities}} </p>
                 </div>
                   {% endif %} 
-                    {% if is_granted('ROLE_LAERNING') %} 
-                <h6>Formation en cours</h6>
-                <hr class="mt-0 mb-1">
-                  <div class="col-6 mb-1">
-                    <p class="text-muted">Fonctionnalité en attente</p>
                 
-                  {% endif %} 
-                 {% if is_granted('ROLE_TEACHER') %}    
-         <a href="{{ path('app_profile_editt',{id : app.user.id})}}"class="btn btn-Vine" role="button">Modifier mes informations</a>
-         {% endif %}
-        {% if is_granted('ROLE_LAERNING') %}  
-        <a href="{{ path('app_profile_editl',{id : app.user.id})}}"class="btn btn-Vine" role="button">Modifier mes informations</a>
-         {% endif %}
          </div>
               </div>
             </div>
