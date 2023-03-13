@@ -22,7 +22,7 @@
         <tbody>
             <tr>
             {% for user in user %}
-            <td><img src="{{ asset('uploads/images/'~ app.user.Photo) }}" class="card-img-avatar" alt="avatar" height="50" width="50"></td>
+            <td><img src="{{ asset('uploads/images/'~ user.Photo) }}" class="card-img-avatar" alt="avatar" height="50" width="50"></td>
                 <td> {{ user.email }}</td>
               
               

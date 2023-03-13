@@ -21,7 +21,7 @@
               style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
          
            {% if user.photo != NULL %}
-            <img src="{{ asset('uploads/images/'~ app.user.Photo) }}" class="card-img-avatar mt-3" alt="Avatar" height="150" width="150"> 
+            <img src="{{ asset('uploads/images/'~ user.Photo) }}" class="card-img-avatar mt-3" alt="Avatar" height="150" width="150"> 
              
             {% endif %} 
             {% if user.photo == NULL %}
