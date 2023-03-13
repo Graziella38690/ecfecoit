@@ -18,7 +18,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class TeacherController extends AbstractController
 {
-   
+    #[Security("is_granted('ROLE_TEACHER')", statusCode: 404)]   
 #[Route('/teacher', name: 'app_teacher_index', methods: ['GET'])]
  
 public function details(TrainingRepository $TrainingRepository): Response
@@ -30,7 +30,7 @@ public function details(TrainingRepository $TrainingRepository): Response
     
 }
 
-
+    #[Security("is_granted('ROLE_TEACHER')", statusCode: 404)]
     #[Route('/teacher/show/training', name: 'app_teacher_show', methods: ['GET'])]
 
     public function index(TrainingRepository $TrainingRepository): Response

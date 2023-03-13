@@ -10,9 +10,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 class AdminController extends AbstractController
-{
+{   #[Security("is_granted('ROLE_ADMIN')", statusCode: 404)]
     #[Route('/admin', name: 'app_admin')]
     public function index(): Response
     {
@@ -20,7 +22,7 @@ class AdminController extends AbstractController
             'controller_name' => 'AdminController',
         ]);
     }
-
+    #[Security("is_granted('ROLE_ADMIN')", statusCode: 404)]
     #[Route("/admin/list/teacher", name:"app_list_teacher")]
  
     public function listteacher(UserRepository $repository): Response
@@ -31,7 +33,7 @@ class AdminController extends AbstractController
         'user'=> $user
     ]);
 }
-
+#[Security("is_granted('ROLE_ADMIN')", statusCode: 404)]
 #[Route("/admin/list/laerning", name:"app_list_laerning")]
  
     public function listlaerning(UserRepository $repository): Response

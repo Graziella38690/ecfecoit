@@ -3,10 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-
         <meta name="description" content="Plateforme d’éducation éco-responsable dont les cours sont dispensés par des experts en accessibilité et en éco-conception web." />
         <link rel="shortcut icon" type="image/ico" href="/picture/favicon.ico"/>
-       
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
@@ -18,18 +16,8 @@
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
     </head>
-
-
-
-
-
     {{include('navbar.html.twig') }}
-
-
         {% block body %}
-         
-
-  
         {% endblock %}
        <div class="mt-auto ">
     {{include('footer.html.twig') }}
