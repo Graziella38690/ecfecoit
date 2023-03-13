@@ -36,7 +36,7 @@
                 {% if roles == 'ROLE_LAERNING' %}
                 Etudiants
                 {% endif %}
-              {% endfor %}
+             
            
          
          <div class="col-4 offset-4 col-lg-12  offset-lg-0">
@@ -49,7 +49,7 @@
               <div class="card-body p-4">
                 <h6>Informations</h6>
                 <hr class="mt-0 mb-4">
-                {% if is_granted('ROLE_TEACHER') %} 
+                 {% if roles == 'ROLE_TEACHER' %}
                 <div class="row pt-1">
                  <div class="col-6 mb-3">
                     <h6>Nom</h6>
@@ -71,7 +71,7 @@
 
                   {% endif %} 
 
-                    {% if is_granted('ROLE_LAERNING') %} 
+                  {% if roles == 'ROLE_LAERNING' %}
                   <div class="col-6 mb-3">
                     <h6>Pseudo</h6>
                     <p class="text-muted">{{ user.Pseudo }}</p>
@@ -82,7 +82,7 @@
                   </div>
                 </div>
                   {% endif %} 
-                
+                 {% endfor %}
          </div>
               </div>
             </div>
