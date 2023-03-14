@@ -73,10 +73,10 @@ h1,h2,h3,h4,h5,h6 {
   }
   #nav li {
   display: inline-block;
-  font-size: x-large;
+  font-size: xx-large;
   }
   .nav-link.dropdown-item {
-    font-size: x-large;
+    font-size: xx-large;
     
     }
  .navbar-toggler{
@@ -93,14 +93,16 @@ h1,h2,h3,h4,h5,h6 {
   font-size: xx-large;
 }
 
-
+.container {
+  max-width:900px ;
+}
 
 /* link */
 
 li {
   text-decoration:none;
   color: $vert-cyan;
-  font-size: x-large;
+  font-size: xx-large;
 }
 
 a:link, a:visited,a:hover,a:active {
@@ -124,7 +126,10 @@ height: 100%;
 
 }
 
-
+.form-control {
+  font-size: xx-large ;
+  
+  }
 
 /* card */
 
@@ -148,23 +153,57 @@ height: 100%;
     max-width:  600px;
     max-height: 200px;
    }
- 
+   td {
+      
+    font-size: xx-large;
+  }
+
+   @media only screen and (min-width: 768px) {
+    .container {
+      max-width:1000px ;
+    }
+     
+   }
+
+
 
    @media only screen and (min-width: 992px) {
-   /* card */
+  
+   body{
+   
+    
+      font-size: medium;
+    }
+    .form-control {
+      font-size: large ;
+      
+      }
+    
+    #nav li {
+     
+      font-size: medium;
+      }
+
+    .nav-link.dropdown-item{
+   
+    
+      font-size: medium;
+    }
+
+    li{
+      
+      font-size: large;
+    }
+    .btn,.btn-Vine{
+  
+      font-size: medium;
+    }
     .card-img-training
     {
       max-width:  1000px;
       max-height: 250px;
      }
-     /* Body */
-     body{
-      background-color:$Sigma;
+ 
+    
       
-        font-size: medium;
-      }
-      /* btn */
-      .btn,.btn-Vine{
-        font-size: medium;
-      }
   }
