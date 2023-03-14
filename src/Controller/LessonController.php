@@ -41,13 +41,14 @@ class LessonController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $lesson->setCreatby($this->getUser());
             $resourcesFile = $form->get('resources')->getData();
-            $resourcesFilePath = [];
+      
             if ($resourcesFile) {
-                foreach ($resourcesFile as $resource) {
-                    array_push($resourcesFilePath, $ResourcesUploader->uploadFile($resource));
-                }
-                $lesson->setRessources($resourcesFilePath);
-            }  
+                $resourcesFileName = $ResourcesUploader->UploadFile($resourcesFile);
+                $lesson->setRessources($resourcesFileName);
+            }
+            
+            
+            
             $lessonRepository->add($lesson);
             return $this->redirectToRoute('app_lesson_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -67,6 +68,7 @@ class LessonController extends AbstractController
         return $this->render('lesson/show.html.twig', [
             'lesson' => $lesson,
             'section' => $section
+            
         ]);
     }
 
@@ -105,15 +107,13 @@ public function editdoc(Request $request, Lesson $lesson, LessonRepository $less
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
+            
+            
         $resourcesFile = $form->get('resources')->getData();
-        $resourcesFilePath = [];
         if ($resourcesFile) {
-            foreach ($resourcesFile as $resource) {
-                array_push($resourcesFilePath, $ResourcesUploader->uploadFile($resource));
-            }
-            $lesson->setRessources($resourcesFilePath);
+            $resourcesFileName = $ResourcesUploader->UploadFile($resourcesFile);
+            $lesson->setRessources($resourcesFileName);
         }
-
         $lessonRepository->add($lesson);
         return $this->redirectToRoute('app_lesson_edit', ['id'=>$lesson->getId()], Response::HTTP_SEE_OTHER);
     }
@@ -124,8 +124,8 @@ public function editdoc(Request $request, Lesson $lesson, LessonRepository $less
 
 } else {
     return $this->render('home/index.html.twig', [
-        'courses' => $trainingRepository->findLastTraining(),
-        'student' => $this->getUser()
+        'training' => $trainingRepository->findLastTraining(),
+        'users' => $this->getUser()
     ]);
 }
 }

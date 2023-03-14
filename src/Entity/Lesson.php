@@ -29,8 +29,8 @@ class Lesson
     #[ORM\JoinColumn(nullable:false)]
     private $Creatby;
 
-    #[ORM\Column( type:'array', nullable: true)]
-    private $ressources = [];
+    #[ORM\Column( type:'string', nullable: true)]
+    private $ressources;
 
    
 
@@ -87,12 +87,12 @@ class Lesson
         return $this;
     }
 
-    public function getRessources(): array
+    public function getRessources()
     {
         return $this->ressources;
     }
 
-    public function setRessources(?array $ressources): self
+    public function setRessources( $ressources)
     {
         $this->ressources = $ressources;
 

@@ -63,14 +63,11 @@ class LessonType extends AbstractType
                 
                     ->add('resources', FileType::class, [
                         'label' => 'Ressources',
-                        'multiple' => true,
-                        'label_attr' => [
-                            'class' => 'old-rose ',
-                        ],
+                        'multiple' => false,
+                        
                         'mapped' => false,
         
-                        'constraints' => [
-                            new All([
+                           
                                 'constraints' => [
                                     new File([
                                         'mimeTypes' => [
@@ -81,8 +78,8 @@ class LessonType extends AbstractType
                                         'mimeTypesMessage' => 'Le fichier doit être au format pdf, jpeg, jpg ou png.',
                                         ])
                                         ]
-                                    ])
-                                ],
+                                    
+                                
                             ]);
                         }
                     });         

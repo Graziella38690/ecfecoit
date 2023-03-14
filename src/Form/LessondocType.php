@@ -36,14 +36,12 @@ class LessondocType extends AbstractType
 
             ->add('resources', FileType::class, [
                 'label' => 'Document(s)',
-                'multiple' => true,
-                'label_attr' => [
-                    'class' => 'old-rose ',
-                ],
+                'multiple' => false,
+                
                 'mapped' => false,
 
-                'constraints' => [
-                    new All([
+               
+                   
                         'constraints' => [
                             new File([
                                 'mimeTypes' => [
@@ -54,18 +52,9 @@ class LessondocType extends AbstractType
                                 'mimeTypesMessage' => 'Le fichier doit être au format pdf, jpeg, jpg ou png.',
                             ])
                         ]
-                    ])
-                ],
+                    
+                ,
             ]);
-
-
-
-
-
-
-
-
-
 
 
             
