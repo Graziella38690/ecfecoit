@@ -4,17 +4,15 @@
 
 {% block body %}
 
-
+ 
 
 <div class="container-fluid container-lg text-center">
 <div class="row">
 <div class="col-xs-12" >
-{% if is_granted('ROLE_TEACHER') %}
-<a href="{{ path('app_teacher_show') }}" class="btn btn-Vine">retour</a>
-{% endif %}
-{% if is_granted('ROLE_LAERNING') %}
-<a href="{{ path('app_training_show',{id:training.Id}) }}" class="btn btn-Vine">retour</a>
-{% endif %}
+
+
+<a href="{{ path('app_training_index',{id:training.Id}) }}" class="btn btn-Vine">retour</a>
+
 </div>
       <div class="col-xs-12" id="title">
         <h1>Détail de la formation</h1>
@@ -64,7 +62,7 @@
       </div>
 
     </div>
-    
+      
    
 
     

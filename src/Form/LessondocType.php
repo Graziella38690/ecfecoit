@@ -35,7 +35,7 @@ class LessondocType extends AbstractType
       
 
             ->add('resources', FileType::class, [
-                'label' => 'Document(s)',
+                'label' => 'Ressources',
                 'multiple' => false,
                 
                 'mapped' => false,
